@@ -11,10 +11,7 @@ const { db } = require("../model/db_conn.js");
 // 최우선 할일: 깃으로 푸시 - 댓글 삭제, 
 // 할 일: !! 댓글 삭제 기능, 게시판 게시글 마다 맞는 댓글 가져오기 현재 게시판 상관없이 가져오고 있음. 노드 페이지네이션 구현
 
-router.use("/board", function (req, res, next) {
-  console.log("board come in");
-  next();
-})
+
 //댓글 삭제
 router.post("/delete/:id", function (req, res) {
   const body = req.body;
@@ -102,25 +99,39 @@ router.post("/write/:pn", function (req, res) {
   }
 });
 
+router.use("/board/:pn", function (req, res, next) {
+  let boardNum = req.params.pn;
+  res.locals.boardNum = boardNum;
+  db.query("select * from board" + req.params.pn + ";", function (err, rows1, fields) {
+    console.log("전체 게시글 개수: ");
+    res.locals.rows1 = rows1;
+    res.locals.totalcount = rows1.length - 1;
+    console.log(rows1.length - 1);
+    res.locals.countlist = 5;
+  });
+  next();
+});
+
 // 게시글 읽기
 router.get("/board/:pn/:id", function (req, res) {
-  console.log("Access to Private read");
-  db.query("select * from board" + req.params.pn + ";", function (err, rows1, fields) {
-    db.query('select * from board' + req.params.pn + ' where id = ?', [req.params.id], function (err, show, fields) {
-      console.log(show);
-      db.query("select * from comment" + req.params.pn + " where boardid = ?;", [req.params.id], function (err, rows, fields) {
-        //console.log(rows);
-        res.render("wprivate", {
-          list4: "/",
-          list5: "/work",
-          list6: "#post",
-          post: rows1, // 해당 게시판 리스트 정보
-          postshow: show, //해당 게시글 정보
-          boardnum: req.params.pn, // 현재 게시판
-          postnum: req.params.id, //게시글 메뉴 - 현재 페이지
-          //postnum: 3, //게시글 메뉴 - 현재 페이지
-          comment: rows // 댓글 리스트 정보
-        });
+  console.log("b2");
+  console.log(res.locals.a);
+
+  db.query('select * from board' + req.params.pn + ' where id = ?', [req.params.id], function (err, show, fields) {
+    console.log(show);
+    db.query("select * from comment" + req.params.pn + " where boardid = ?;", [req.params.id], function (err, rows, fields) {
+      //console.log(rows);
+      res.render("wprivate", {
+        list4: "/",
+        list5: "/work",
+        list6: "#post",
+        post: res.locals.rows1, // 해당 게시판 목록 정보
+        postshow: show, //해당 게시글 내용
+        boardnum: req.params.pn, // 현재 게시판
+        postnum: req.params.id, //게시글 메뉴 - 현재 페이지
+        //postnum: 3, //게시글 메뉴 - 현재 페이지
+        comment: rows // 댓글 리스트 정보
+
       });
     });
   });
@@ -128,23 +139,25 @@ router.get("/board/:pn/:id", function (req, res) {
 
 // 게시판 선택 -> 게시글 목록 갱신 ,첫번째 게시글 출력
 router.get("/board/:pn", function (req, res) {
-  console.log("Access to Private board");
-  db.query("select * from board" + req.params.pn + ";", function (err, rows1, fields) {
-    console.log(rows1);
-    db.query("select * from comment1;", function (err, rows, fields) {
-      console.log(rows);
-      res.render("wprivate", {
-        list4: "/",
-        list5: "/work",
-        list6: "#post",
-        post: rows1,
-        postshow: rows1,
-        postnum: 1,
-        boardnum: req.params.pn,
-        comment: rows
-      });
+  console.log("b3");
+  console.log(res.locals.a);
+
+  db.query("select * from comment1;", function (err, rows, fields) {
+    console.log(rows);
+    res.render("wprivate", {
+      list4: "/",
+      list5: "/work",
+      list6: "#post",
+      post: res.locals.rows1,
+      postshow: res.locals.rows1,
+      postnum: 1,
+      boardnum: req.params.pn,
+      comment: rows
+
     });
   });
+  console.log("Access to Private board2");
+
 });
 
 /* GET work page. */
