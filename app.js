@@ -28,7 +28,19 @@ app.set("view engine", "ejs");
 //app.use(express.json());
 
 app.use(logger('dev'));
-app.use(helmet());
+
+//Http 헤더 설정을 자동으로 바꾸어주어 잘 알려진 몇가지 앱의 취약성으로 부터 앱을 보호 할 수 있는 패키지
+// 외부 자바스크립트, 이미지 등을 막아서 주석처리함. csp-설정하면 될 듯
+// app.use(helmet());
+// app.use(
+//   csp({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       styleSrc: ["'self'"],
+//       scriptSrc: ["'self'"],
+//     },
+//   })
+// );
 // 정적 리소스 사용하기
 app.use(express.static("public"));
 // 미들웨어: 남들이 만들어 놓은거 갖다 씀 / Third-Party: official 하지 않음

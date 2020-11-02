@@ -6,6 +6,7 @@ window.onload = function () {
         if (guestDeleteConfirm.value === "true")
             alert("비밀번호를 확인하세요.");
     }
+
     const guestDel = document.getElementsByName("guestDel");
     if (guestDel) {
         for (let i = 0; i < guestDel.length; i++) {
@@ -21,23 +22,7 @@ window.onload = function () {
     }
 }
 
-// 단순 submit
-function post(URL, PARAMS) {
-    let temp = document.createElement("form");
-    temp.action = URL;
-    temp.method = "post";
-    temp.style.display = "none";
-    for (let x in PARAMS) {
-        let opt = document.createElement("textarea");
-        opt.name = x;
-        opt.value = PARAMS[x];
-        temp.appendChild(opt);
-    }
-    document.body.appendChild(temp);
-    temp.submit();
-    //return temp;
-}
-
+//방명록 modal open
 function guestPwModalOpen() {
     let value = this.value;
     console.log(value);
@@ -76,6 +61,7 @@ function guestPwModalOpen() {
     }, false);
 }
 
+// 방명록 삭제
 function guestModalDel() {
 
     let xhr = new XMLHttpRequest();
@@ -97,7 +83,7 @@ function guestModalDel() {
             window.location.reload();
         }
     };
-    xhr.open("POST", "/work/delete/" + value);
+    xhr.open("delete", "/work/delete/" + value);
     xhr.setRequestHeader("Content-Type", "application/json"); // 컨텐츠타입을 json으로
     xhr.send(data);
     console.log(guestPw.value);

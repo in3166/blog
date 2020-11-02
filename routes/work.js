@@ -21,7 +21,7 @@ router.post("/create", function (req, res) {
   });
 });
 
-router.post("/delete/:id", function (req, res) {
+router.delete("/delete/:id", function (req, res) {
   const body = req.body;
   //console.log(body);
   let pw = body.pw;

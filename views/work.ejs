@@ -4,8 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+
   <title>Work Space</title>
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
 
@@ -21,7 +20,7 @@
 
 <body id="home">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: black">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="/"><img src="/img/navbar-logo.svg" alt="123" /></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -62,8 +61,8 @@
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="/img/header-bg1.jpg" class="d-block w-100 header-bg" />
-          <div class="carousel-caption d-none d-md-block">
-            <div class="masthead-subheading text-uppercase">
+          <div class="carousel-caption d-none d-block">
+            <div class="masthead-subheading text-uppercase msh">
               Welcome To My Blog!
             </div>
             <div class="masthead-heading">Cup Of coding Box</div>
@@ -72,16 +71,16 @@
         </div>
         <div class="carousel-item">
           <img src="/img/header-bg2.jpg" class="d-block w-100 header-bg" />
-          <div class="carousel-caption d-none d-md-block">
-            <div class="masthead-subheading text-uppercase">What I do!</div>
+          <div class="carousel-caption d-none d-block">
+            <div class="masthead-subheading text-uppercase msh">What I do!</div>
             <div class="masthead-heading">Work Space</div>
             <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="<%= list5 %>">Enter</a>
           </div>
         </div>
         <div class="carousel-item">
           <img src="/img/header-bg3.jpg" class="d-block w-100 header-bg" />
-          <div class="carousel-caption d-none d-md-block">
-            <div class="masthead-subheading text-uppercase">Private Room</div>
+          <div class="carousel-caption d-none d-block">
+            <div class="masthead-subheading text-uppercase msh">Private Room</div>
             <div class="masthead-heading">Daily Life</div>
             <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="<%= list6 %>">Enter</a>
           </div>
@@ -279,30 +278,31 @@
       <div class="table-responsive mb-3">
         <table class="table table-hover table-condensed bg-light">
           <colgroup>
-            <col width="57px" />
-            <col width="20%" />
+            <col class="col1" width="56px" />
+            <col width="22%" />
             <col width="*" />
-            <col width="11%" />
-            <col width="8%" />
+            <col class="col1" width="17%" />
+            <col width="5%" />
           </colgroup>
           <thead>
             <tr>
-              <th>번호</th>
+              <th class="col1">번호</th>
               <th>이름</th>
               <th>내용</th>
-              <th>날짜</th>
+              <th class="col1">날짜</th>
               <th></th>
             </tr>
           </thead>
           <% for (let i = 0; i < guest.length ; i++) { %>
           <% if (i==5) break; %>
           <tr>
-            <td><%= i+1 %></td>
+            <td class="text-center col1"><%= i+1 %></td>
             <td><%= guest[i].userid %></td>
             <td><%= guest[i].content %></td>
-            <td><%= guest[i].date %></td>
+            <td class="col1"><%= guest[i].date %></td>
             <!-- <th><a href="/work/delete/<%= i+1 %>">삭제</a></th> -->
-            <th><button id="guestDel" class="btn2" value="<%=guest[i].id %>" name="guestDel">삭제</button></th>
+            <th><button id="guestDel" class="btn2" value="<%=guest[i].id %>" name="guestDel"><i
+                  class="fas fa-trash-alt"></i></button></th>
             <!-- <a class="portfolio-link" data-toggle="modal" href="#guestDelModal" id="guestDel"
                 value="<%= i+1 %>">삭제</a></th> -->
           </tr>
@@ -357,7 +357,7 @@
 
   <!-- Guset Delete Modal-->
   <div class="modal2" id="guestDelModal" tabindex="0">
-    <div class="modal-content2 col-3">
+    <div class="modal-content2 col-5">
       <div class="close2">
         <i class="fas fa-times mr-1" id="guestClose"></i>
       </div>
@@ -367,7 +367,7 @@
           <input type="password" id="guestPw" name="guestPw" data-backdrop="false" placeholder="Enter Your Password"
             required class="mr-md-3 col-lg-auto" />
           <!-- <input type="hidden" id="guestModalId"> -->
-          <button class="btn btn-primary col-lg-auto" id="guestModalDelBtn" type="button" value="">
+          <button class="btn btn-primary col-lg-auto mt-1" id="guestModalDelBtn" type="button" value="">
             Delete
           </button>
         </form>
@@ -396,30 +396,31 @@
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
                     style="table-layout: fixed;" id="products">
                     <colgroup>
-                      <col width="57px" />
-                      <col width="18%" />
+                      <col class="col1" width="56px" />
+                      <col width="23%" />
                       <col width="*" />
-                      <col width="11%" />
-                      <col width="8%" />
+                      <col class="col1" width="13%" />
+                      <col width="13%" />
                     </colgroup>
                     <thead>
                       <tr>
-                        <th>번호</th>
+                        <th class="col1">번호</th>
                         <th>이름</th>
                         <th>내용</th>
-                        <th>날짜</th>
+                        <th class="col1">날짜</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody class="tb">
                       <% for (let i = 0; i < guest.length ; i++) { %>
                       <tr>
-                        <td><%= i+1 %></td>
+                        <td class="col1"><%= i+1 %></td>
                         <td><%= guest[i].userid %></td>
                         <td><%= guest[i].content %></td>
-                        <td><%= guest[i].date %></td>
+                        <td class="col1"><%= guest[i].date %></td>
                         <!-- <th><a href="/work/delete/<%= i+1 %>">삭제</a></th> -->
-                        <th><button id="guestDel" class="btn2" value="<%= guest[i].id %>" name="guestDel">삭제</button>
+                        <th><button id="guestDel" class="btn2" value="<%= guest[i].id %>" name="guestDel"><i
+                              class="fas fa-trash-alt"></i></button>
                         </th>
                         <!-- <a class="portfolio-link" data-toggle="modal" href="#guestDelModal" id="guestDel"
               value="<%= i+1 %>">삭제</a></th> -->

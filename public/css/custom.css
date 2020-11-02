@@ -1,161 +1,231 @@
 .textborder {
-    border: solid gray 1px;
-    padding: 15px;
+  border: solid gray 1px;
+  padding: 15px;
 }
 
 html,
 body,
 .grid-container {
-    height: 100%;
-    margin: 0;
+  height: 100%;
+  margin: 0;
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: 0.7fr 1.3fr 1fr 1fr;
-    grid-template-rows: 1fr 1.6fr 0.4fr;
-    gap: 1px 1px;
-    grid-template-areas: "sidebar main-content main-content main-content" "sidebar main-content main-content main-content" "sidebar pagination pagination pagination";
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr 1fr 1fr;
+  grid-template-rows: 1fr 1.6fr 0.4fr;
+  gap: 1px 1px;
+  grid-template-areas: "sidebar main-content main-content main-content""sidebar main-content main-content main-content""sidebar pagination pagination pagination";
 }
 
 .sidebar {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 1px 1px;
-    grid-template-areas: "main-menu main-menu main-menu" "sub-menu sub-menu sub-menu";
-    grid-area: sidebar;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "main-menu main-menu main-menu""sub-menu sub-menu sub-menu";
+  grid-area: sidebar;
 }
 
 .main-menu {
-    grid-area: main-menu;
+  grid-area: main-menu;
 }
 
 .sub-menu {
-    grid-area: sub-menu;
+  grid-area: sub-menu;
 }
 
 .pagination {
-    grid-area: pagination;
+  grid-area: pagination;
 }
 
 .main-content {
-    grid-area: main-content;
+  grid-area: main-content;
 }
 
 
 /* For presentation only, no need to copy the code below */
 
 .grid-container * {
-    border: 1px solid red;
-    position: relative;
+  border: 1px solid red;
+  position: relative;
 }
 
 .grid-container *:after {
-    content: attr(class);
-    position: absolute;
-    top: 0;
-    left: 0;
+  content: attr(class);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
+/* 메뉴 화면의 상단 텍스트 처리 */
+.msh {
+  display: none;
+}
+
+@media (min-width: 535px) {
+  .msh {
+    display: block;
+  }
+}
+
+/* 테이블 컬럼 숨기기 */
+@media (max-width: 575px) {
+  .col1 {
+    display: none;
+    visibility: hidden;
+    width: 0%;
+  }
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4f3361;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(238, 222, 150);
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+  width: 16px;
+  height: 16px;
+  background: #4f3361;
+}
+
+
+.current {
+  color: rgb(163, 163, 163);
+}
 
 /* Guest Delete Modal */
 /* The Modal (background) */
 .modal2 {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 11053; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content/Box */
-  .modal-content2 {
-    background-color: #fefefe;
-    width: 50px;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-  }
-  
-  /* The Close Button */
-  .close2 {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close2:hover,
-  .close2:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-/* 방명록 삭제 버튼 */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 10000;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
 
+/* Modal Content/Box */
+.modal-content2 {
+  background-color: #fefefe;
+  width: 50px;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close2 {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close2:hover,
+.close2:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.text-gray {
+  color: #aaa;
+}
+
+.bg-gray {
+  color: rgba(79, 14, 85, 0.685);
+  background-color: rgba(199, 199, 199, 0.425);
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* 삭제 버튼 */
 .btn2 {
-    display: inline-block;
-    font-weight: 400;
-    color: #212529;
-    text-align: center;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-color: transparent;
-    border: 1px solid transparent;
-   
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
-  
-  @media (prefers-reduced-motion: reduce) {
-    .btn2 {
-      transition: none;
-    }
-  }
-  
-  .btn2:hover {
-    background-color: #faef8d;
-    border: #212529 solid 2px;
-    text-decoration: none;
-  }
-  
-  .btn:focus,
-  .btn.focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(189, 169, 97, 0.25);
-  }
-  
-  .btn2.disabled,
-  .btn2:disabled {
-    opacity: 0.65;
-  }
-  
-  .btn2:not(:disabled):not(.disabled) {
-    cursor: pointer;
-  }
+  display: inline-block;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
 
-  /* pagination1 */
-  .pagination1 {
-    display: flex;
-    padding-left: 0;
-    list-style: none;
-    border-radius: 0.25rem;
-  }
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
-  
+@media (prefers-reduced-motion: reduce) {
+  .btn2 {
+    transition: none;
+  }
+}
+
+.btn2:hover {
+  background-color: #faef8d;
+  border: #212529 solid 1px;
+  text-decoration: none;
+}
+
+.btn:focus,
+.btn.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(189, 169, 97, 0.25);
+}
+
+.btn2.disabled,
+.btn2:disabled {
+  opacity: 0.65;
+}
+
+.btn2:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+/* pagination1 */
+.pagination1 {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+}
+
+
 .pagination1-lg .page-link {
   padding: 0.75rem 1.5rem;
   font-size: 1.25rem;
@@ -189,6 +259,6 @@ body,
 }
 
 /* 포트폴리오 이미지 새로 고정 */
-.pf-img{
+.pf-img {
   height: 330px;
 }

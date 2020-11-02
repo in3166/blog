@@ -69,12 +69,13 @@
         var form = event.target;
         var formData = getFormData(form);
         var data = formData.data;
-        console.log("data: ", data);
+        console.log("data: ", formData.honeypot);
         // If a honeypot field is filled, assume it was done so by a spam bot.
-        // if (formData.honeypot) {
-        //     return false;
-        // }
-        //disableAllButtons(form);
+        if (formData.honeypot) {
+            alert("Robot Detected!")
+            return false;
+        }
+        disableAllButtons(form);
 
         var url = form.action;
         console.log("url: " + url);
@@ -84,12 +85,17 @@
         // xhr.withCredentials = true;
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded", "Access-Control-Allow-Origin: *");
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                console.log(xhr.status);
                 alert("전송 완료!");
                 window.location.reload();
-            } else {
+            } else if (xhr.status === 500) {
+                console.log(xhr.status);
                 alert("전송 실패");
+            } else {
+                console.log(xhr.status);
+                alert("오류");
             }
         };
         // url encode form data for sending as post data
