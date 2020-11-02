@@ -158,7 +158,8 @@
                 <textarea class="form-control" rows="2" id="commentContent"></textarea>
               </div>
               <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
-              <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw">
+              <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
+                autocomplete="on">
               <button type="submit" class="btn btn-primary float-right" id="commentSubmit"
                 value="<%= boardnum%>/<%= postnum%>">Submit</button>
             </form>
@@ -318,7 +319,7 @@
               </div>
               <br>
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" id="postPw">
+                <input type="password" class="form-control" placeholder="Password" id="postPw" autocomplete="on">
               </div>
               <div class="form-group">
                 <button class="btn btn-primary" id="priPostSubmit" value="<%= boardnum%>">Post</button>
@@ -340,8 +341,8 @@
 
       <div class="container text-center">
         <form id="commentDelForm">
-          <input type="password" id="commentPw" name="commentPw" data-backdrop="false" placeholder="Password" required
-            class="mr-md-3 col-lg-auto" />
+          <input type="password" id="commentDelPw" name="commentDelPw" data-backdrop="false" placeholder="Password"
+            autocomplete="on" required class="mr-md-3 col-lg-auto" />
           <!-- <input type="hidden" id="guestModalId"> -->
           <button class="btn btn-primary col-lg-auto mt-1" id="commentModalDelBtn" type="button" value="">
             Delete

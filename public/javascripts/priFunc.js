@@ -84,9 +84,9 @@ function commentPwModalOpen() {
 
 function commentModalDel() {
     let xhr = new XMLHttpRequest();
-    let guestPw = document.getElementById("guestPw").value;
-    let value = document.getElementById("guestModalDelBtn").value;
-    let data = { 'pw': guestPw };
+    let commentDelPw = document.getElementById("commentDelPw").value;
+    let value = document.getElementById("commentModalDelBtn").value;
+    let data = { 'pw': commentDelPw };
     data = JSON.stringify(data);
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
@@ -102,7 +102,7 @@ function commentModalDel() {
             window.location.reload();
         }
     };
-    xhr.open("POST", "/work/delete/" + value);
+    xhr.open("POST", "/private/delete/" + value);
     xhr.setRequestHeader("Content-Type", "application/json"); // 컨텐츠타입을 json으로
     xhr.send(data);
     console.log(guestPw.value);

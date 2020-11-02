@@ -43,8 +43,8 @@ router.post("/delete/:id", function (req, res) {
 router.post("/write/:pn/:id", function (req, res) {
   console.log("댓글 작성 입장");
   const body = req.body; //req name으로 보내짐
-  let board = "comment" + req.params.pn;
-  console.log("테이블명: " + board);
+  let comment = "comment" + req.params.pn;
+  console.log("테이블명: " + comment);
   console.log("------");
   console.log(body.name);
   console.log(body.pw);
@@ -55,7 +55,7 @@ router.post("/write/:pn/:id", function (req, res) {
   let date = momnet().format("YYYY-MM-DD");
   console.log(date);
 
-  db.query('insert into ' + board + '(userid, userpw, content, date, boardid) values (?, ?, ?, ?, ?);', [body.name, body.pw, body.content, date, req.params.id], function (err, result) {
+  db.query('insert into ' + comment + '(userid, userpw, content, date, boardid) values (?, ?, ?, ?, ?);', [body.name, body.pw, body.content, date, req.params.id], function (err, result) {
     if (err) {
       console.log('\ninsert error!\n', err);
       res.send(501);
@@ -100,26 +100,37 @@ router.post("/write/:pn", function (req, res) {
 });
 
 router.use("/board/:pn", function (req, res, next) {
+  console.log("엥?");
   let boardNum = req.params.pn;
   res.locals.boardNum = boardNum;
   db.query("select * from board" + req.params.pn + ";", function (err, rows1, fields) {
-    console.log("전체 게시글 개수: ");
+    if (err) {
+      throw err;
+    }
     res.locals.rows1 = rows1;
+    console.log("전체 게시글: ");
+    //console.log(rows1);
+    console.log("길이: " + rows1.length);
     res.locals.totalcount = rows1.length - 1;
-    console.log(rows1.length - 1);
     res.locals.countlist = 5;
+    next();
   });
-  next();
 });
 
 // 게시글 읽기
 router.get("/board/:pn/:id", function (req, res) {
   console.log("b2");
-  console.log(res.locals.a);
+  console.log(res.locals.boardNum);
 
   db.query('select * from board' + req.params.pn + ' where id = ?', [req.params.id], function (err, show, fields) {
+    if (err) {
+      throw err;
+    }
     console.log(show);
-    db.query("select * from comment" + req.params.pn + " where boardid = ?;", [req.params.id], function (err, rows, fields) {
+    db.query("select * from comment" + req.params.pn + " where boardid = ?;", [req.params.id], function (err, comment, fields) {
+      if (err) {
+        throw err;
+      }
       //console.log(rows);
       res.render("wprivate", {
         list4: "/",
@@ -130,7 +141,7 @@ router.get("/board/:pn/:id", function (req, res) {
         boardnum: req.params.pn, // 현재 게시판
         postnum: req.params.id, //게시글 메뉴 - 현재 페이지
         //postnum: 3, //게시글 메뉴 - 현재 페이지
-        comment: rows // 댓글 리스트 정보
+        comment: comment // 댓글 리스트 정보
 
       });
     });
@@ -140,10 +151,13 @@ router.get("/board/:pn/:id", function (req, res) {
 // 게시판 선택 -> 게시글 목록 갱신 ,첫번째 게시글 출력
 router.get("/board/:pn", function (req, res) {
   console.log("b3");
-  console.log(res.locals.a);
+  console.log("게시판 번호: " + res.locals.boardNum);
 
-  db.query("select * from comment1;", function (err, rows, fields) {
-    console.log(rows);
+  db.query("select * from comment" + req.params.pn + " where boardid = 1;", function (err, comment, fields) {
+    if (err) {
+      throw err;
+    }
+    console.log(comment);
     res.render("wprivate", {
       list4: "/",
       list5: "/work",
@@ -152,12 +166,11 @@ router.get("/board/:pn", function (req, res) {
       postshow: res.locals.rows1,
       postnum: 1,
       boardnum: req.params.pn,
-      comment: rows
+      comment: comment,
 
     });
   });
   console.log("Access to Private board2");
-
 });
 
 /* GET work page. */
