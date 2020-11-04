@@ -47,6 +47,11 @@ router.delete("/delete/:id", function (req, res) {
   });
 });
 
+router.use("/", function (request, res, next) {
+  console.log(0);
+  next();
+});
+
 /* GET work page. */
 router.get("/", function (request, res) {
   console.log("Access to Work");

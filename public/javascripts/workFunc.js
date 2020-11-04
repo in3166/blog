@@ -69,6 +69,7 @@ function guestModalDel() {
     let value = document.getElementById("guestModalDelBtn").value;
     let data = { 'pw': guestPw };
     data = JSON.stringify(data);
+
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
             //console.log(xhr.responseText);

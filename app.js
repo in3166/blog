@@ -41,14 +41,16 @@ app.use(logger('dev'));
 //     },
 //   })
 // );
+console.log("!:", __dirname);
 // 정적 리소스 사용하기
 app.use(express.static("public"));
+
 // 미들웨어: 남들이 만들어 놓은거 갖다 씀 / Third-Party: official 하지 않음
 // main.js가 실행될 때마다 use안의 코드로 bodyparser 미들웨어가 생성되고 실행됨 -> 사용자가 작성한 post 데이터를 내부적 분석 후 기존의 create_process 시행 후 반환한 것을 request의 body프로퍼티에 들어감
 
 //route의 callback함수의 req.body에 form으로 입력받은 데이터 사용 가능: 웹브라우저 폼에 입력한 데이터가 bodyParser를 통해 req.body로 생성
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(compression());
 
 // // DB schema: DB에서 사용할 스키마 설정-정보 어떤식으로 저장할 지 지정 - contact라는 형태의 데이터 저장 시 3개의 항목 지님

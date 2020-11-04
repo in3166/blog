@@ -39,9 +39,46 @@ window.onload = function () {
     let commentModalDelBtn = document.getElementById("commentModalDelBtn");
     if (commentModalDelBtn) {
         commentModalDelBtn.addEventListener("click", commentModalDel, false);
-
     }
+
+    //페이지네이션 번호 클릭 AJAX 중단
+    // let listNumBtn = document.getElementsByName("listNum");
+    // //let listNumBtn = document.getElementsByClassName("listNum1");
+    // if (listNumBtn) {
+    //     for (let i = 0; i < listNumBtn.length; i++) {
+    //         listNumBtn[i].addEventListener("click", listNumPagination, false);
+    //     }
+    // }
+
 }
+
+// function listNumPagination() {
+//     console.log("come")
+//     let xhr = new XMLHttpRequest();
+
+//     let value = this.value;
+//     console.log(value);
+//     let url = document.getElementById("priPostSubmit").value;
+//     console.log(url);
+
+//     let data = { 'value': value };
+//     data = JSON.stringify(data);
+//     console.log(data);
+
+//     xhr.onload = function () {
+//         if (xhr.status === 200 || xhr.status === 201) {
+//             //console.log(xhr.responseText);
+//         } else if (500) {
+//             //console.error(xhr.responseText);
+//             //window.location.reload();
+//         } else {
+//             // window.location.reload();
+//         }
+//     };
+//     xhr.open("post", "/private/board/" + url + "/list", true);
+//     xhr.setRequestHeader("Content-Type", "application/json");  // 컨텐츠타입을 json으로
+//     xhr.send(data);
+// }
 
 //댓글 삭제 비밀번호 입력창
 function commentPwModalOpen() {

@@ -96,7 +96,6 @@
   </header>
 
 
-
   <div class="container">
     <div class="row mb-6 col-xl-12">
       <!-- <div class="w-100 mb-5"><button class="btn-dark float-right mr-4">삭제</button><button
@@ -207,7 +206,6 @@
         </div>
       </div>
 
-
       <!-- Sidebar Widgets Column -->
       <div class="col-xl-4 pl-lg-5">
         <!-- Categories Widget -->
@@ -217,17 +215,17 @@
             <div class="">
               <ul class="list-unstyled mb-0">
                 <div class="text-gray small">Study</div>
-                <li class="list-item list-group-item-action active ml-2 mt-1"><a class="" href="/private/board/1">
+                <li class="list-item list-group-item-action active ml-2 mt-1"><a class="" href="/private/board/1/1">
                     <h5>Javascript</h5>
                   </a></li>
                 <hr>
                 <div class="text-gray small">Daily</div>
-                <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/2">
+                <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/2/1">
                     <h5>Food</h5>
                   </a></li>
                 <hr>
                 <div class="text-gray small">Hobbies</div>
-                <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/3">
+                <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/3/1">
                     <h5>Music</h5>
                   </a></li>
               </ul>
@@ -243,63 +241,87 @@
           <div class="card-body">
             <div class="pl-lg-3">
               <ul class="list-unstyled">
-                <% for (let i = 0; i < post.length ; i++) { %>
-
+                <% for (let i = (page *countList)-countList; i < (page * countList) ; i++) { %>
+                <% if(i >= totalCount){ %>
+                <% i++; %>
+                <% }else{ %>
+                <% let data = post[i]; %>
                 <% if (i+1 == postnum){ %>
                 <li class="list-item list-group-item-action"><a class="bg-gray current"
-                    href="/private/board/<%= boardnum%>/<%= post[i].id%>"><%= post[i].title%></a></li>
-                <% } else{%>
+                    href="/private/board/<%= boardnum%>/<%= currentPage%>/<%= post[i].id%>"><%= post[i].title %></a>
+                </li>
+                <% } else {%>
                 <li class=" list-item list-group-item-action"><a
-                    href="/private/board/<%= boardnum%>/<%= post[i].id%>"><%= post[i].title%></a></li>
+                    href="/private/board/<%= boardnum%>/<%= currentPage%>/<%= post[i].id%>"><%= post[i].title %></a>
+                </li>
+                <% } %>
                 <% } %>
                 <% }; %>
               </ul>
               <div class="page-s">
               </div>
             </div>
-            <nav aria-label="Page navigation example">
-              <ul class="pagination1 justify-content-center" id="pagination1">
-              </ul>
-            </nav>
           </div>
-
-
           <!-- li태그의 클래스에 active를 넣으면 색이 반전되고 클릭도 되지 않는다. -->
           <!-- active의 의미는 현재 페이지의 의미이다. -->
-          <!-- <div class=" align-self-center">
+          <div class=" align-self-center">
             <ul class="pagination-sm pagination">
+
+              <% if (page == 1){ %>
               <li class="page-item disabled">
                 <a class="page-link" href="#">&laquo;</a>
               </li>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">&lt;</a>
+              </li>
+              <% } else{%>
+              <% let page1 = page - 1 %>
+              <li class="page-item">
+                <a class="page-link" href="/private/board/<%= boardnum %>/<%= 1 %>/<%= postnum %>">&laquo;</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="/private/board/<%= boardnum %>/<%= page1 %>/<%= postnum %>">&lt;</a>
+              </li>
+              <% } %>
+              <% for (let i = startPage; i <= endPage ; i++) { %>
+
+              <% if (i == page){ %>
               <li class="page-item active">
-                <a class="page-link" href="#">1</a>
+                <a class="page-link" href="/private/board/<%= boardnum %>/<%= i %>/<%= postnum %>"><%= i %></a>
               </li>
+              <% } else{%>
               <li class="page-item">
-                <a class="page-link" href="#">2</a>
+                <a class="page-link" href="/private/board/<%= boardnum %>/<%= i %>/<%= postnum %>"><%= i %></a>
+                <!-- <button class="page-link listNum" id="listNum<%= i %>" name="listNum" value="<%= i %>"><%= i %></button> -->
               </li>
-              <li class="page-item">
-                <a class="page-link" href="#">3</a>
+              <% } %>
+              <% }; %>
+              <% if (page == totalPage){ %>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">&gt;</a>
               </li>
-              <li class="page-item">
-                <a class="page-link" href="#">4</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">5</a>
-              </li>
-              <li class="page-item">
+              <li class="page-item disabled">
                 <a class="page-link" href="#">&raquo;</a>
               </li>
+              <% } else{%>
+              <%  page1 = ++page %>
+              <li class="page-item">
+                <a class="page-link" href="/private/board/<%= boardnum %>/<%= page1 %>/<%= postnum %>">&gt;</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="/private/board/<%= boardnum %>/<%= totalPage %>/<%= postnum %>">&raquo;</a>
+              </li>
+              <% }%>
             </ul>
-          </div> -->
-
+          </div>
         </div>
-
       </div>
       <!-- /.row -->
     </div>
   </div>
   </div>
   <!-- /.container -->
+
 
   <!-- Post Modal-->
   <div class="modal2" id="postModal">
@@ -328,9 +350,10 @@
           </div>
         </div>
       </div>
-      </style>
+
     </div>
   </div>
+
 
   <!-- Comment Delete Modal-->
   <div class="modal2" id="commentDelModal" tabindex="0">
