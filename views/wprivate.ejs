@@ -133,19 +133,23 @@
         <!-- 댓글 -->
         <!-- Single Comment -->
         <% for (let i = 0; i < comment.length ; i++) { %>
-        <div class="media mb-4">
-          <div class="media-body">
-            <div class="mb-1">
-              <h5 class="mt-0 d-inline"><%= comment[i].userid %></h5>
-              <span class="float-right small text-gray">
-                <%= comment[i].date %><button id="commentDel" class="btn2 ml-2"
-                  value="<%= boardnum%>/<%= comment[i].id%>" name="commentDel"><i class="fas fa-trash-alt"></i></button>
-              </span>
+        <div id="comment<%= boardnum%>/<%= comment[i].id%>">
+          <div class="media mb-4">
+            <div class="media-body">
+              <div class="mb-1">
+                <h5 class="mt-0 d-inline"><%= comment[i].userid %></h5>
+                <span class="float-right small text-gray">
+                  <%= comment[i].date %><button id="commentDel" class="btn2 ml-2"
+                    value="<%= boardnum%>/<%= comment[i].id%>" name="commentDel"><i
+                      class="fas fa-trash-alt"></i></button>
+                </span>
+              </div>
+              <%= comment[i].content %>
             </div>
-            <%= comment[i].content %>
           </div>
+          <hr>
         </div>
-        <hr>
+
         <% } %>
 
         <!-- Comments Form -->

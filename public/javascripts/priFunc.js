@@ -119,17 +119,26 @@ function commentPwModalOpen() {
     }, false);
 }
 
+// 댓글 삭제
 function commentModalDel() {
     let xhr = new XMLHttpRequest();
     let commentDelPw = document.getElementById("commentDelPw").value;
     let value = document.getElementById("commentModalDelBtn").value;
+    let commentDelModal = document.getElementById("commentDelModal");
+    let div = "comment" + value; //삭제할 댓글 div
+
+    let commentDiv = document.getElementById(div); //삭제할 댓글 div
     let data = { 'pw': commentDelPw };
     data = JSON.stringify(data);
+    //console.log("비밀번호: " + data);
+
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
             //console.log(xhr.responseText);
             alert("삭제 완료!");
-            window.location.reload();
+            commentDiv.parentNode.removeChild(commentDiv);
+            commentDelModal.style.display = "none";
+            //window.location.reload();
         } else if (500) {
             //console.error(xhr.responseText);
             alert("비밀번호를 확인하세요.");
@@ -142,7 +151,7 @@ function commentModalDel() {
     xhr.open("POST", "/private/delete/" + value);
     xhr.setRequestHeader("Content-Type", "application/json"); // 컨텐츠타입을 json으로
     xhr.send(data);
-    console.log(guestPw.value);
+    //console.log(guestPw.value);
 }
 
 function postModalOpen() {

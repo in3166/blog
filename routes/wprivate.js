@@ -5,22 +5,24 @@ var router = express.Router();
 //var template = require("../views/template.js");
 const { db } = require("../model/db_conn.js");
 
-//여러개 디비 쿼리 적용, 페이지네이션, 댓글 작성, 댓글 삭제, 게시글 작성, 게시글 삭제
+//여러개 디비 쿼리 적용, 페이지네이션, 댓글 삭제, 게시글 삭제
 // bn: 어떤 게시판인지
 
 // 최우선 할일: 깃으로 푸시 - 댓글 삭제, 
-// 할 일: !! 댓글 삭제 기능, 게시판 게시글 마다 맞는 댓글 가져오기 현재 게시판 상관없이 가져오고 있음. 노드 페이지네이션 구현
 
 //댓글 삭제
-router.post("/delete/:id", function (req, res) {
+router.post("/delete/:bn/:id", function (req, res) {
+  console.log("delete 들옴")
+
   const body = req.body;
+
   //console.log(body);
   let pw = body.pw;
   console.log(pw);
-  db.query('select * from guest where id = ?', [req.params.id], function (err1, result) {
+  db.query('select * from comment' + req.params.bn + ' where id = ?', [req.params.id], function (err1, result) {
     console.log(result[0].userpw);
     if (pw === result[0].userpw) {
-      db.query('delete from guest where id = ?', [req.params.id], function (err, result) {
+      db.query('delete from comment' + req.params.bn + ' where id = ?', [req.params.id], function (err, result) {
         if (err) {
           console.log('delete error', err);
           //res.redirect('/work');
