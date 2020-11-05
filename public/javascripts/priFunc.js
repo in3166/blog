@@ -1,10 +1,15 @@
 //private
 window.onload = function () {
-    const guestDeleteConfirm = document.getElementById("guestDeleteConfirm");
-    if (guestDeleteConfirm) {
-        if (guestDeleteConfirm.value === "true")
-            alert("비밀번호를 확인하세요.");
-    }
+    // 현재 페이지, 게시글 표시
+    let currentPageNumber = document.getElementById("currentPageNumber").value;
+    let listClass = "cp" + currentPageNumber;
+    let currentList = document.getElementById(listClass);
+    currentList.classList.add('current');
+    //let boardNum = document.getElementById("priPostSubmit").value;
+    let currentBoard = document.getElementById(document.getElementById("priPostSubmit").value);
+    currentBoard.classList.add('current');
+
+
 
     //게시글 작성 모달 열기
     const priPostBtn = document.getElementById("priPostBtn");
@@ -44,10 +49,10 @@ window.onload = function () {
         postDelBtn.addEventListener("click", commentPwModalOpen, false);
     }
 
-    //게시글 삭제
-    // let commentModalDelBtn = document.getElementById("");
-    // if (commentModalDelBtn) {
-    //     commentModalDelBtn.addEventListener("click", commentModalDel, false);
+    // //게시글 삭제
+    // let commentModalDelBtn2 = document.getElementById("");
+    // if (commentModalDelBtn2) {
+    //     commentModalDelBtn2.addEventListener("click", postModalDel, false);
     // }
 
     //페이지네이션 번호 클릭 AJAX 보류
@@ -91,24 +96,23 @@ window.onload = function () {
 
 //댓글 삭제 비밀번호 입력창
 function commentPwModalOpen() {
-    let value = this.value;
+    let value = this.value; // 삭제 아이콘의 값 가져옴
     console.log(value);
     $(document).off('focusin.modal'); //삭제 모달 오픈 시 텍스트 선택 불가 해결 - 모달에 포커스가 있어서
-    let commentDelModal = document.getElementById("commentDelModal");
-    // let guestModalId = document.getElementById("guestModalId");
-    let span = document.getElementById("commentClose");
-    //let modal = document.getElementById("modal-window-4");
 
-    //location.href = '#guestDelModal'
+    let span = document.getElementById("commentClose");
+
+    //비밀번호 입력창 오픈
+    let commentDelModal = document.getElementById("commentDelModal");
     commentDelModal.style.display = "block";
-    // guestModalId.value = value;
+
     document.getElementById("commentModalDelBtn").value = value;
 
     // When the user clicks on <span> (x), close the modal
     if (span) {
         span.addEventListener("click", function () {
             commentDelModal.style.display = "none";
-            let input = document.getElementById("commentPw");
+            let input = document.getElementById("commentDelPw");
             input.value = "";
 
         }, false);
@@ -118,10 +122,9 @@ function commentPwModalOpen() {
     window.addEventListener("click", function () {
         if (event.target == commentDelModal) {
             commentDelModal.style.display = "none";
-            let input = document.getElementById("commentPw");
-            input.value = "";
+
             let fm = document.getElementById("commentDelForm");
-            console.log("reset!")
+            //console.log("reset!")
             fm.reset();
             $('#commentPw').removeAttr("disabled");
         }
@@ -134,24 +137,27 @@ function commentModalDel() {
     let commentDelPw = document.getElementById("commentDelPw").value;
     let value = document.getElementById("commentModalDelBtn").value;
     let commentDelModal = document.getElementById("commentDelModal");
-    let div = value; //삭제할 댓글 div
 
+    let div = value; //삭제할 댓글 div
     let commentDiv = document.getElementById(div); //삭제할 댓글 div
     let data = { 'pw': commentDelPw };
     data = JSON.stringify(data);
     //console.log("비밀번호: " + data);
 
     xhr.onload = function () {
+        let input = document.getElementById("commentDelPw");
+        input.value = "";
         if (xhr.status === 200 || xhr.status === 201) {
             //console.log(xhr.responseText);
             alert("삭제 완료!");
-            commentDiv.parentNode.removeChild(commentDiv);
+            if (commentDiv)
+                commentDiv.parentNode.removeChild(commentDiv);
             commentDelModal.style.display = "none";
+            if (value.indexOf("board") !== -1) // 게시글 삭제일 경우 새로고침
+                window.location.href = '/private';
             //window.location.reload();
         } else if (500) {
-            //console.error(xhr.responseText);
             alert("비밀번호를 확인하세요.");
-
         } else {
             alert("삭제 오류!");
             window.location.reload();

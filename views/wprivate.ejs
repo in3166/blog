@@ -25,26 +25,21 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="/"><img src="/img/navbar-logo.svg" alt="123" /></a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-        aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars ml-1"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <!--다른부분-->
-        <ul class="navbar-nav text-uppercase ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#home">TOP</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#post">post</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#comment">comment</a>
-          </li>
-        </ul>
-      </div>
+
+
+      <!--다른부분-->
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#home">TOP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#post">post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#comment">comment</a>
+        </li>
+      </ul>
+
     </div>
   </nav>
 
@@ -199,11 +194,29 @@
         <div>
           <nav>
             <ul class="pager list-unstyled">
-              <li class="previous" style="float: left;"><a href="#"><i
-                    class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
+              <% if(postnum == 1){ %>
+              <li class="previousArrow" style="float: left;">
+                <a class="disabled">
+                  <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
               </li>
-              <li class="next" style="float: right;"><a href="#"><i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
+              <% } else { %>
+              <li class="previousArrow" style="float: left;">
+                <a href="/private/board/<%= boardnum %>/<%= page %>/<%= --postnum %>">
+                  <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
               </li>
+              <% } %>
+              <% if(postnum == totalCount){ %>
+              <li class="nextArrow" style="float: right;">
+                <a class="disabled">
+                  <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
+              </li>
+              <% } else { %>
+              <% let pnum = ++postnum %>
+              <li class="nextArrow" style="float: right;">
+                <a href="/private/board/<%= boardnum %>/<%= page %>/<%= pnum %>">
+                  <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
+              </li>
+              <% } %>
             </ul>
           </nav>
         </div>
@@ -218,17 +231,18 @@
             <div class="">
               <ul class="list-unstyled mb-0">
                 <div class="text-gray small">Study</div>
-                <li class="list-item list-group-item-action active ml-2 mt-1"><a class="" href="/private/board/1/1">
+                <li class="list-item list-group-item-action active ml-2 mt-1"><a class="" href="/private/board/1/1"
+                    id="1">
                     <h5>Javascript</h5>
                   </a></li>
                 <hr>
                 <div class="text-gray small">Daily</div>
-                <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/2/1">
+                <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/2/1" id="2">
                     <h5>Food</h5>
                   </a></li>
                 <hr>
                 <div class="text-gray small">Hobbies</div>
-                <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/3/1">
+                <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/3/1" id="3">
                     <h5>Music</h5>
                   </a></li>
               </ul>
@@ -249,15 +263,11 @@
                 <% i++; %>
                 <% }else{ %>
                 <% let data = post[i]; %>
-                <% if (i+1 == postnum){ %>
-                <li class="list-item list-group-item-action"><a class="bg-gray current"
+
+                <li class=" list-item list-group-item-action"><a id="cp<%=  post[i].id%>" class=""
                     href="/private/board/<%= boardnum%>/<%= currentPage%>/<%= post[i].id%>"><%= post[i].title %></a>
                 </li>
-                <% } else {%>
-                <li class=" list-item list-group-item-action"><a
-                    href="/private/board/<%= boardnum%>/<%= currentPage%>/<%= post[i].id%>"><%= post[i].title %></a>
-                </li>
-                <% } %>
+
                 <% } %>
                 <% }; %>
               </ul>
@@ -421,6 +431,7 @@
       </div>
     </div>
   </footer>
+  <input type="hidden" id="currentPageNumber" value="<%= postnum %>" />
   <!-- Font Awesome icons (free version)-->
   <script src="/javascripts/all.js"></script>
   <!-- Bootstrap core JS-->

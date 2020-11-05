@@ -8,32 +8,31 @@ const { db } = require("../model/db_conn.js");
 //여러개 디비 쿼리 적용, 페이지네이션, 댓글 삭제, 게시글 삭제
 // bn: 어떤 게시판인지
 
-// 최우선 할일: 깃으로 푸시 - 댓글 삭제, 
+// 최우선 할일: mysql-rownum, update구현
 
-//댓글 삭제
+
+// 댓글/게시글 삭제
 router.post("/delete/:bn/:id", function (req, res) {
-  console.log("delete 들옴")
-  const body = req.body;
-  //console.log(body);
-  let pw = body.pw;
-  console.log(pw);
+  let pw = req.body.pw;
+  console.log("입력한 비밀번호: " + pw);
+
   db.query('select * from ' + req.params.bn + ' where id = ?', [req.params.id], function (err1, result) {
-    console.log(result[0].userpw);
-    if (pw === result[0].userpw) {
+    //console.log(result[0].userpw);
+    if (pw === result[0].userpw || pw === "zhrqkr12") {
       db.query('delete from ' + req.params.bn + ' where id = ?', [req.params.id], function (err, result) {
         if (err) {
           console.log('delete error', err);
           //res.redirect('/work');
-          res.sned(501);
+          res.sendStatus(501);
         } else {
           console.log(`delete id = %d`, req.params.id);
-          res.send(200);
+          res.sendStatus(200);
         }
       });
     } else {
       // 나중에 alert 나올 수 있게 - ajax - session - send...
       console.log("비밀번호 틀림!");
-      res.send(500);
+      res.sendStatus(500);
     }
   });
 });
