@@ -1,8 +1,8 @@
 # Blog
-blog with nodejs(express)
+Blog with nodejs(express)
 
 # Theme
-using Bootstrap
+Using Bootstrap
 
 # PAGES
 1. HOME
@@ -17,4 +17,4 @@ using Bootstrap
   - daily post
   
 # Database
-  - use AWS RDS MySQL
+  - Use AWS RDS MySQL
