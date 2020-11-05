@@ -212,7 +212,6 @@ router.get("/board/:bn/:pn", function (req, res) {
   console.log("게시판 번호: " + res.locals.boardNum);
   console.log("현재 페이지: 넘겨 받은 값 " + res.locals.page);
 
-
   db.query("select * from comment" + req.params.bn + " where boardid = 1;", function (err, comment, fields) {
     if (err) {
       throw err;
@@ -245,23 +244,15 @@ router.get("/board/:bn/:pn", function (req, res) {
 /* GET work page. */
 router.get("/", function (req, res) {
   res.redirect('/private/board/1/1');
-  // console.log("Access to Private");
-  // db.query("select * from board1;", function (err, rows1, fields) {
-  //   console.log(rows1);
-  //   db.query("select * from comment1;", function (err, rows, fields) {
-  //     console.log(rows);
-  //     res.render("wprivate", {
-  //       list4: "/",
-  //       list5: "/work",
-  //       list6: "#post",
-  //       post: rows1,
-  //       postshow: rows1,
-  //       postnum: 1,
-  //       boardnum: 1,
-  //       comment: rows
-  //     });
-  //   });
-  // });
 });
+
+router.get("/board", function (req, res) {
+  res.redirect('/private/board/1/1');
+});
+
+router.get("/board/1", function (req, res) {
+  res.redirect('/private/board/1/1');
+});
+
 
 module.exports = router;
