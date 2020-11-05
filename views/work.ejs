@@ -276,7 +276,7 @@
       <div class="float-right mb-md-1"> <a class="portfolio-link" data-toggle="modal" href="#guestAllModal">전체보기</a>
       </div>
       <div class="table-responsive mb-3">
-        <table class="table table-hover table-condensed bg-light">
+        <table class="table table-hover table-condensed bg-light" id="dataTable0">
           <colgroup>
             <col class="col1" width="56px" />
             <col width="22%" />
@@ -293,20 +293,22 @@
               <th></th>
             </tr>
           </thead>
-          <% for (let i = 0; i < guest.length ; i++) { %>
-          <% if (i==5) break; %>
-          <tr>
-            <td class="text-center col1"><%= i+1 %></td>
-            <td><%= guest[i].userid %></td>
-            <td><%= guest[i].content %></td>
-            <td class="col1"><%= guest[i].date %></td>
-            <!-- <th><a href="/work/delete/<%= i+1 %>">삭제</a></th> -->
-            <th><button id="guestDel" class="btn2" value="<%=guest[i].id %>" name="guestDel"><i
-                  class="fas fa-trash-alt"></i></button></th>
-            <!-- <a class="portfolio-link" data-toggle="modal" href="#guestDelModal" id="guestDel"
-                value="<%= i+1 %>">삭제</a></th> -->
-          </tr>
-          <% }; %>
+          <tbody>
+            <% for (let i = 0; i < guest.length ; i++) { %>
+            <% if (i==5) break; %>
+            <tr id="guest0<%= guest[i].id %>">
+              <td class="text-center col1"><%= i+1 %></td>
+              <td><%= guest[i].userid %></td>
+              <td><%= guest[i].content %></td>
+              <td class="col1"><%= guest[i].date %></td>
+              <!-- <th><a href="/work/delete/<%= i+1 %>">삭제</a></th> -->
+              <th><button id="guestDel" class="btn2" value="<%=guest[i].id %>" name="guestDel"><i
+                    class="fas fa-trash-alt"></i></button></th>
+              <!-- <a class="portfolio-link" data-toggle="modal" href="#guestDelModal" id="guestDel"
+                    value="<%= i+1 %>">삭제</a></th> -->
+            </tr>
+            <% }; %>
+          </tbody>
           <input type="hidden" value="" id="guestIdHidden">
         </table>
         <div ID="passDIV" style="DISPLAY: none; position: absolute">
@@ -345,11 +347,9 @@
             </div>
           </div>
         </div>
-
         <div class="text-center">
           <div id="success"></div>
           <input class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit" value="send">
-
         </div>
       </form>
     </div>
@@ -413,7 +413,7 @@
                     </thead>
                     <tbody class="tb">
                       <% for (let i = 0; i < guest.length ; i++) { %>
-                      <tr>
+                      <tr id="guest<%= guest[i].id %>" class="guest<%= guest[i].id %>">
                         <td class="col1"><%= i+1 %></td>
                         <td><%= guest[i].userid %></td>
                         <td><%= guest[i].content %></td>

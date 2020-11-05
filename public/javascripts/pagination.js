@@ -2,7 +2,7 @@ function pagination(a) {
     var req_num_row = 6; //한 페이지에 출력할 행 개수
     var $tr = jQuery('.tb tr');
     var total_num_row = $tr.length - a; //테이블 총 행
-    console.log($tr.length);
+    //console.log($tr.length);
     var num_pages = 0; //페이지 번호 개수
     var current_page = 0;
     var visiblePages = 5;

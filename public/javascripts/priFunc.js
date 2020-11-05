@@ -1,7 +1,5 @@
 //private
 window.onload = function () {
-    //메뉴 - 사용자 이메일 리스트
-
     const guestDeleteConfirm = document.getElementById("guestDeleteConfirm");
     if (guestDeleteConfirm) {
         if (guestDeleteConfirm.value === "true")
@@ -31,7 +29,6 @@ window.onload = function () {
     if (commentDel) {
         for (let i = 0; i < commentDel.length; i++) {
             commentDel[i].addEventListener("click", commentPwModalOpen, false);
-
         }
     }
 
@@ -41,7 +38,19 @@ window.onload = function () {
         commentModalDelBtn.addEventListener("click", commentModalDel, false);
     }
 
-    //페이지네이션 번호 클릭 AJAX 중단
+    //게시글 삭제 비밀번호 입력창 열기
+    const postDelBtn = document.getElementById("postDelBtn");
+    if (postDelBtn) {
+        postDelBtn.addEventListener("click", commentPwModalOpen, false);
+    }
+
+    //게시글 삭제
+    // let commentModalDelBtn = document.getElementById("");
+    // if (commentModalDelBtn) {
+    //     commentModalDelBtn.addEventListener("click", commentModalDel, false);
+    // }
+
+    //페이지네이션 번호 클릭 AJAX 보류
     // let listNumBtn = document.getElementsByName("listNum");
     // //let listNumBtn = document.getElementsByClassName("listNum1");
     // if (listNumBtn) {
@@ -125,7 +134,7 @@ function commentModalDel() {
     let commentDelPw = document.getElementById("commentDelPw").value;
     let value = document.getElementById("commentModalDelBtn").value;
     let commentDelModal = document.getElementById("commentDelModal");
-    let div = "comment" + value; //삭제할 댓글 div
+    let div = value; //삭제할 댓글 div
 
     let commentDiv = document.getElementById(div); //삭제할 댓글 div
     let data = { 'pw': commentDelPw };
@@ -142,7 +151,7 @@ function commentModalDel() {
         } else if (500) {
             //console.error(xhr.responseText);
             alert("비밀번호를 확인하세요.");
-            window.location.reload();
+
         } else {
             alert("삭제 오류!");
             window.location.reload();
@@ -189,7 +198,6 @@ function postModalOpen() {
 function postSubmit() {
 
     let xhr = new XMLHttpRequest();
-
     let title = document.getElementById("postTitle").value;
     let content = CKEDITOR.instances.p_content.getData();
     let boardNum = this.value;
@@ -203,14 +211,15 @@ function postSubmit() {
         if (xhr.status === 200 || xhr.status === 201) {
             //console.log(xhr.responseText);
             alert("게시글 작성 완료!");
-            window.location.reload();
-        } else if (503) {
+            let postModal = document.getElementById("postModal");
+            postModal.style.display = "none";
+            $('body').css("overflow", "scroll");
+        } else if (500) {
             //console.error(xhr.responseText);
+            console.log("오잉?")
             alert("비밀번호를 확인하세요.");
-            window.location.reload();
         } else {
             alert("게시글 작성 오류!");
-            window.location.reload();
         }
     }
 
@@ -238,7 +247,7 @@ function commentSubmit() {
         if (xhr.status === 200 || xhr.status === 201) {
             //console.log(xhr.responseText);
             alert("댓글 작성 완료!");
-            window.location.reload();
+
         } else {
             alert("댓글 작성 오류!");
             window.location.reload();

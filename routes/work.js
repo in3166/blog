@@ -27,6 +27,9 @@ router.delete("/delete/:id", function (req, res) {
   let pw = body.pw;
   console.log(pw);
   db.query('select * from guest where id = ?', [req.params.id], function (err1, result) {
+    if (err1) {
+      throw err1;
+    }
     console.log(result[0].userpw);
     if (pw === result[0].userpw) {
       db.query('delete from guest where id = ?', [req.params.id], function (err, result) {
@@ -56,7 +59,7 @@ router.use("/", function (request, res, next) {
 router.get("/", function (request, res) {
   console.log("Access to Work");
   db.query("SELECT * FROM guest;", function (err, rows, fields) {
-    //console.log(rows[0].userpw);
+
     // render 확인, 여기 말고 rows 값만 밖으로 내보낼 수 없는지 확인!
     res.render("work", {
       list4: "/",
