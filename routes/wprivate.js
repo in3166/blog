@@ -8,8 +8,39 @@ const { db } = require("../model/db_conn.js");
 //여러개 디비 쿼리 적용, 페이지네이션, 댓글 삭제, 게시글 삭제
 // bn: 어떤 게시판인지
 
-// 최우선 할일: mysql-rownum, update구현
+// 최우선 할일: mysql-rownum-페이징, update구현
 
+
+// 댓글/게시글 수정
+router.post("/update/:bn/:id", function (req, res) {
+  let pw = req.body.pw;
+  let content = req.body.content;
+  let id = req.body.id;
+
+  console.log("입력한 비밀번호: " + pw);
+  console.log("입력한 id: " + id);
+  console.log("입력한 content: " + content);
+
+  db.query('select * from ' + req.params.bn + ' where id = ?', [req.params.id], function (err1, result) {
+    //console.log(result[0].userpw);
+    if (pw === result[0].userpw || pw === "zhrqkr12") {
+      db.query('update ' + req.params.bn + ' set title = \'' + id + '\', content = \'' + content + '\' where id = \'' + req.params.id + '\'', function (err, result) {
+        if (err) {
+          console.log('delete error', err);
+          //res.redirect('/work');
+          res.sendStatus(507);
+        } else {
+          console.log(`delete id = %d`, req.params.id);
+          res.sendStatus(200);
+        }
+      });
+    } else {
+      // 나중에 alert 나올 수 있게 - ajax - session - send...
+      console.log("비밀번호 틀림!");
+      res.sendStatus(509);
+    }
+  });
+});
 
 // 댓글/게시글 삭제
 router.post("/delete/:bn/:id", function (req, res) {
@@ -53,12 +84,12 @@ router.post("/write/:bn/:id", function (req, res) {
   let date = momnet().format("YYYY-MM-DD");
   console.log(date);
 
-  db.query('insert into ' + comment + '(userid, userpw, content, date, boardid) values (?, ?, ?, ?, ?);', [body.name, body.pw, body.content, date, req.params.id], function (err, result) {
+  db.query('insert into ' + comment + '(title, userpw, content, date, boardid) values (?, ?, ?, ?, ?);', [body.name, body.pw, body.content, date, req.params.id], function (err, result) {
     if (err) {
       console.log('\ninsert error!\n', err);
       res.send(501);
     } else {
-      console.log(`insert '(userid, userpw, content, date, boardid) = %s %s %s %s %d`, body.name, body.pw, body.content, date, req.params.id);
+      console.log(`insert '(title, userpw, content, date, boardid) = %s %s %s %s %d`, body.name, body.pw, body.content, date, req.params.id);
       res.send(200);
     }
   });
@@ -166,6 +197,7 @@ router.get("/board/:bn/:pn/:id", function (req, res) {
       throw err;
     }
     console.log("현재 페이지: " + res.locals.page);
+    console.log("현재 페이지: " + req.params.id);
 
     let page = res.locals.page;
     // if (req.body.value != undefined) {

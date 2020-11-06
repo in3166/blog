@@ -91,16 +91,17 @@
   </header>
 
 
-  <div class="container">
+  <div class="container" id="post">
     <div class="row mb-6 col-xl-12">
       <!-- <div class="w-100 mb-5"><button class="btn-dark float-right mr-4">삭제</button><button
           class="btn-dark float-right mr-2" id="priPostBtn">글쓰기</button>
       </div> -->
+
       <!-- Post Content Column -->
       <div class="col-xl-8">
         <!-- Title -->
         <div>
-          <h1 class="mt-4" id="post"><%= postshow[0].title %></h1>
+          <h1 class="mt-4" id="postTitle0"><%= postshow[0].title %></h1>
           <hr>
         </div>
 
@@ -118,8 +119,8 @@
 
         <!-- Post Content -->
         <!-- class for iframe responsive -->
-        <div class="embed-responsive">
-          <p class="lead w-100"><%- postshow[0].content %></p>
+        <div class="embed-responsive" id="postCotent0">
+          <%- postshow[0].content %>
         </div>
 
         <br>
@@ -133,14 +134,27 @@
           <div class="media mb-4">
             <div class="media-body">
               <div class="mb-1">
-                <h5 class="mt-0 d-inline"><%= comment[i].userid %></h5>
+                <span id="commentId" name="commentId">
+                  <h5 class="mt-0 d-inline"><%= comment[i].title %></h5>
+                </span>
                 <span class="float-right small text-gray">
-                  <%= comment[i].date %><button id="commentDel" class="btn2 ml-2"
-                    value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentDel"><i
-                      class="fas fa-trash-alt"></i></button>
+                  <%= comment[i].date %>
                 </span>
               </div>
-              <%= comment[i].content %>
+              <span id="commentContent" name="commentContent">
+                <%= comment[i].content %>
+              </span>
+              <span class="float-right small text-gray">
+                <button id="commentUpdate" class="btn2 ml-2" value="comment<%= boardnum%>/<%= comment[i].id%>"
+                  name="commentUpdate"><i class="fas fa-pen"></i></button>
+                <button id="commentDel" class="btn2 ml-2" value="comment<%= boardnum%>/<%= comment[i].id%>"
+                  name="commentDel"><i class="fas fa-trash-alt"></i></button>
+              </span>
+              <div class="card-group mt-3">
+                <input type="password" name="commentUpdatePw" class="" hidden utocomplete="on" placeholder="Password">
+                <button id="commentUpdateComplete" class="btn2 ml-2 border-dark" hidden
+                  value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentUpdateComplete">완료</button>
+              </div>
             </div>
           </div>
           <hr>
@@ -153,7 +167,7 @@
           <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
             <div class="form-group">
-              <textarea class="form-control" rows="2" id="commentContent"></textarea>
+              <textarea class="form-control" rows="2" id="commentSubmitContent"></textarea>
             </div>
             <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
             <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
@@ -204,6 +218,7 @@
                 <a href="/private/board/<%= boardnum %>/<%= page %>/<%= --postnum %>">
                   <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
               </li>
+              <% ++postnum %>
               <% } %>
               <% if(postnum == totalCount){ %>
               <li class="nextArrow" style="float: right;">
@@ -216,6 +231,7 @@
                 <a href="/private/board/<%= boardnum %>/<%= page %>/<%= pnum %>">
                   <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
               </li>
+              <% --postnum %>
               <% } %>
             </ul>
           </nav>
@@ -357,6 +373,8 @@
             </div>
             <div class="form-group">
               <button class="btn btn-primary" id="priPostSubmit" value="<%= boardnum%>">Post</button>
+              <button class="btn btn-primary" hidden id="postUpdate"
+                value="board<%= boardnum%>/<%= postnum %>">Update</button>
             </div>
           </div>
         </div>
@@ -433,7 +451,7 @@
   </footer>
   <input type="hidden" id="currentPageNumber" value="<%= postnum %>" />
   <!-- Font Awesome icons (free version)-->
-  <script src="/javascripts/all.js"></script>
+  <script src="/javascripts/fontawesome.js"></script>
   <!-- Bootstrap core JS-->
   <script src="/javascripts/jquery.min.js"></script>
   <script src="/javascripts/bootstrap.bundle.min.js"></script>
@@ -445,7 +463,7 @@
   <!-- Core theme JS-->
   <script src="/javascripts/scripts.js"></script>
   <script src="/javascripts/priFunc.js"></script>
-  <script src="/javascripts/pagination.js"></script>
+
 
   <!-- you need to include the shieldui css and js assets in order for the charts to work 게시글 작성 버튼들 동작-->
   <!-- <link rel="stylesheet" type="text/css" href="/public/css/shield.css" />

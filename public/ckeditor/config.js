@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function (config) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	config.heightt = '600px';
-
+	config.removePlugins = 'easyimage, cloudservices';
 };
 
 CKEDITOR.config.allowedContent = true;

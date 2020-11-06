@@ -1,8 +1,11 @@
+//const { post } = require("../../app");
+
 //private
 window.onload = function () {
-    // 현재 페이지, 게시글 표시
+    // 현재 페이지, 게시글 목록에서 표시
     let currentPageNumber = document.getElementById("currentPageNumber").value;
     let listClass = "cp" + currentPageNumber;
+    console.log(listClass)
     let currentList = document.getElementById(listClass);
     currentList.classList.add('current');
     //let boardNum = document.getElementById("priPostSubmit").value;
@@ -37,6 +40,21 @@ window.onload = function () {
         }
     }
 
+    //댓글 수정
+    const commentUpdate = document.getElementsByName("commentUpdate");
+    if (commentUpdate) {
+        for (let i = 0; i < commentUpdate.length; i++) {
+            commentUpdate[i].addEventListener("click", event => commentUpdateOpen(i), false);
+        }
+    }
+
+    let commentUpdateComplete = document.getElementsByName("commentUpdateComplete");
+    if (commentUpdateComplete) {
+        for (let i = 0; i < commentUpdateComplete.length; i++) {
+            commentUpdateComplete[i].addEventListener("click", event => upComFunc(0, i, commentUpdateComplete[i].value), false);
+        }
+    }
+
     //댓글 삭제
     let commentModalDelBtn = document.getElementById("commentModalDelBtn");
     if (commentModalDelBtn) {
@@ -47,6 +65,18 @@ window.onload = function () {
     const postDelBtn = document.getElementById("postDelBtn");
     if (postDelBtn) {
         postDelBtn.addEventListener("click", commentPwModalOpen, false);
+    }
+
+    //게시글 수정 버튼
+    const postModBtn = document.getElementById("postModBtn");
+    if (postModBtn) {
+        postModBtn.addEventListener("click", postModModalOpen, false);
+    }
+
+    //게시글 수정 확인 버튼
+    const postUpdate = document.getElementById("postUpdate");
+    if (postUpdate) {
+        postUpdate.addEventListener("click", e => upComFunc(1, 0, postUpdate.value), false);
     }
 
     // //게시글 삭제
@@ -63,7 +93,6 @@ window.onload = function () {
     //         listNumBtn[i].addEventListener("click", listNumPagination, false);
     //     }
     // }
-
 }
 
 // function listNumPagination() {
@@ -94,6 +123,160 @@ window.onload = function () {
 //     xhr.send(data);
 // }
 
+// 게시글 등록과 같은 모달이지만 내용 다르게 오픈
+function postModModalOpen() {
+    $('body').css("overflow", "hidden");
+    let postModal = document.getElementById("postModal");
+    let span = document.getElementById("postClose");
+    let postPw = document.getElementById("postPw");
+    let postTitle = document.getElementById("postTitle0").innerText;
+    let postCotent = document.getElementById("postCotent0").innerHTML;
+    console.log(postCotent)
+
+    let postModalTitle = document.getElementById("postTitle");
+    let postUpdate = document.getElementById("postUpdate");
+    let priPostSubmit = document.getElementById("priPostSubmit");
+
+    //모달에 게시글 내용 표시
+    postModalTitle.value = postTitle;
+    CKEDITOR.instances['p_content'].setData(postCotent);
+    postUpdate.removeAttribute('hidden');
+    priPostSubmit.style.display = "none";
+    //게시글 작성 모달 오픈
+    postModal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    if (span) {
+        span.addEventListener("click", function () {
+            postModal.style.display = "none";
+            $('body').css("overflow", "scroll");
+            postModalTitle.value = "";
+            postPw.value = "";
+            CKEDITOR.instances['p_content'].setData("");
+            postUpdate.setAttribute('hidden', 'true');
+            priPostSubmit.style.display = "block";
+        }, false);
+    }
+
+    // 모달 영역 밖 선택 시 창 닫기
+    window.addEventListener("click", function () {
+        if (event.target == postModal) {
+            postModal.style.display = "none";
+            $('body').css("overflow", "scroll");
+            postModalTitle.value = "";
+            postPw.value = "";
+            CKEDITOR.instances['p_content'].setData("");
+            postUpdate.setAttribute('hidden', 'true');
+            priPostSubmit.style.display = "block";
+        }
+    }, false);
+}
+
+function commentUpdateOpen(i1) {
+    //길이 제한 추가
+    let i = i1;
+    let upPw = document.getElementsByName("commentUpdatePw");
+    let up = document.getElementsByName("commentUpdate");
+    let upCom = document.getElementsByName("commentUpdateComplete");
+    let upDel = document.getElementsByName("commentDel");
+    let upId = document.getElementsByName("commentId");
+    let upContent = document.getElementsByName("commentContent");
+
+    upId[i].setAttribute('contenteditable', "true");
+    upId[i].classList.add("border", "mb-2", "p-2")
+    upContent[i].setAttribute('contenteditable', "true");
+    upContent[i].classList.add("border", "mt-3", "p-2", "d-block")
+
+    upPw[i].removeAttribute('hidden');
+    upCom[i].removeAttribute('hidden');
+
+    up[i].style.display = "none";
+    upDel[i].style.display = "none";
+}
+
+//댓글, 게시글 수정
+function upComFunc(op, i, val) {
+    let data;
+    let input
+    let xhr = new XMLHttpRequest();
+    let url = val;
+
+    if (op === 0) {
+        // let upPw = document.getElementsByName("commentUpdatePw");
+        let comUpPw = document.getElementsByName("commentUpdatePw");
+        let upId = document.getElementsByName("commentId");
+        let upContent = document.getElementsByName("commentContent");
+
+        data = { 'pw': comUpPw[i].value, 'id': upId[i].innerText, 'content': upContent[i].innerHTML };
+        input = comUpPw[i];
+
+    } else {
+        let content = CKEDITOR.instances['p_content'].getData();
+        let postModalTitle = document.getElementById("postTitle").value;
+        input = document.getElementById("postPw");
+
+        data = { 'pw': input.value, 'id': postModalTitle, 'content': content };
+    }
+
+    console.log(url)
+    let title = data.id;
+    let content = data.content;
+    data = JSON.stringify(data);
+    console.log(data);
+
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            //console.log(xhr.responseText);
+            alert("수정 완료!");
+            if (op === 0) {
+                let upPw = document.getElementsByName("commentUpdatePw");
+                let up = document.getElementsByName("commentUpdate");
+                let upCom = document.getElementsByName("commentUpdateComplete");
+                let upDel = document.getElementsByName("commentDel");
+                let upId = document.getElementsByName("commentId");
+                let upContent = document.getElementsByName("commentContent");
+
+                upId[i].setAttribute('contenteditable', "false");
+                upId[i].classList.remove("border", "mb-2", "p-2")
+                upContent[i].setAttribute('contenteditable', "false");
+                upContent[i].classList.remove("border", "mt-3", "p-2", "d-block")
+
+                upPw[i].setAttribute('hidden', "true");
+                upCom[i].setAttribute('hidden', "true");
+
+                up[i].style.display = "inline";
+                upDel[i].style.display = "inline";
+                input.value = "";
+            } else {
+                document.getElementById("postTitle0").innerText = title;
+                document.getElementById("postCotent0").innerHTML = content;
+
+                let postModalTitle = document.getElementById("postTitle");
+                let postUpdate = document.getElementById("postUpdate");
+                let priPostSubmit = document.getElementById("priPostSubmit");
+
+                postModal.style.display = "none";
+                $('body').css("overflow", "scroll");
+                postModalTitle.value = "";
+                input.value = "";
+                CKEDITOR.instances['p_content'].setData("");
+                postUpdate.setAttribute('hidden', 'true');
+                priPostSubmit.style.display = "block";
+            }
+        } else if (509) {
+            alert("비밀번호를 확인하세요.");
+            input.value = "";
+        } else {
+            alert("삭제 오류!");
+            window.location.reload();
+        }
+    };
+    //코멘트 아이디랑 보드넘버bn id / comment1/12
+    xhr.open("POST", "/private/update/" + url);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(data);
+}
+
 //댓글 삭제 비밀번호 입력창
 function commentPwModalOpen() {
     let value = this.value; // 삭제 아이콘의 값 가져옴
@@ -114,7 +297,6 @@ function commentPwModalOpen() {
             commentDelModal.style.display = "none";
             let input = document.getElementById("commentDelPw");
             input.value = "";
-
         }, false);
     }
 
@@ -240,7 +422,7 @@ function commentSubmit() {
     let xhr = new XMLHttpRequest();
 
     let name = document.getElementById("commentName").value;
-    let content = document.getElementById("commentContent").value;
+    let content = document.getElementById("commentSubmitContent").value;
     let pw = document.getElementById("commentPw").value;
     let num = this.value;
     console.log(num);
@@ -273,5 +455,6 @@ function commentSubmit() {
 //게시글 작성 버튼들
 CKEDITOR.replace('p_content'
     , {
-        height: 450
+        height: 450,
+
     });
