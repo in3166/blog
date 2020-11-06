@@ -5,7 +5,7 @@ window.onload = function () {
     // 현재 페이지, 게시글 목록에서 표시
     let currentPageNumber = document.getElementById("currentPageNumber").value;
     let listClass = "cp" + currentPageNumber;
-    console.log(listClass)
+    //console.log(listClass)
     let currentList = document.getElementById(listClass);
     currentList.classList.add('current');
     //let boardNum = document.getElementById("priPostSubmit").value;

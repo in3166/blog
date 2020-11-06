@@ -131,32 +131,35 @@
 
         <% for (let i = 0; i < comment.length ; i++) { %>
         <div id="comment<%= boardnum%>/<%= comment[i].id%>">
-          <div class="media mb-4">
-            <div class="media-body">
-              <div class="mb-1">
-                <span id="commentId" name="commentId">
-                  <h5 class="mt-0 d-inline"><%= comment[i].title %></h5>
+          <form>
+            <div class="media mb-4">
+              <div class="media-body">
+                <div class="mb-1">
+                  <span id="commentId" name="commentId">
+                    <h5 class="mt-0 d-inline"><%= comment[i].title %></h5>
+                  </span>
+                  <span class="float-right small text-gray">
+                    <%= comment[i].date %>
+                  </span>
+                </div>
+                <span id="commentContent" name="commentContent">
+                  <%= comment[i].content %>
                 </span>
                 <span class="float-right small text-gray">
-                  <%= comment[i].date %>
+                  <button class="btn2 ml-2" value="comment<%= boardnum%>/<%= comment[i].id%>" type="button"
+                    name="commentUpdate"><i class="fas fa-pen"></i></button>
+                  <button class="btn2 ml-2" value="comment<%= boardnum%>/<%= comment[i].id%>" type="button"
+                    name="commentDel"><i class="fas fa-trash-alt"></i></button>
                 </span>
-              </div>
-              <span id="commentContent" name="commentContent">
-                <%= comment[i].content %>
-              </span>
-              <span class="float-right small text-gray">
-                <button id="commentUpdate" class="btn2 ml-2" value="comment<%= boardnum%>/<%= comment[i].id%>"
-                  name="commentUpdate"><i class="fas fa-pen"></i></button>
-                <button id="commentDel" class="btn2 ml-2" value="comment<%= boardnum%>/<%= comment[i].id%>"
-                  name="commentDel"><i class="fas fa-trash-alt"></i></button>
-              </span>
-              <div class="card-group mt-3">
-                <input type="password" name="commentUpdatePw" class="" hidden utocomplete="on" placeholder="Password">
-                <button id="commentUpdateComplete" class="btn2 ml-2 border-dark" hidden
-                  value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentUpdateComplete">완료</button>
+                <div class="card-group mt-3">
+                  <input type="password" name="commentUpdatePw" class="" hidden autocomplete="on"
+                    placeholder="Password">
+                  <button class="btn2 ml-2 border-dark" hidden type="button"
+                    value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentUpdateComplete">완료</button>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
           <hr>
         </div>
         <% } %>
@@ -165,16 +168,19 @@
         <!-- Comments Form -->
         <div class="card my-4" id="comment">
           <h5 class="card-header">Leave a Comment:</h5>
-          <div class="card-body">
-            <div class="form-group">
-              <textarea class="form-control" rows="2" id="commentSubmitContent"></textarea>
+          <form>
+            <div class="card-body">
+
+              <div class="form-group">
+                <textarea class="form-control" rows="2" id="commentSubmitContent"></textarea>
+              </div>
+              <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
+              <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
+                type="button" autocomplete="on">
+              <button type="button" class="btn btn-primary float-right" id="commentSubmit"
+                value="<%= boardnum%>/<%= postnum%>">Submit</button>
             </div>
-            <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
-            <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
-              autocomplete="on">
-            <button type="submit" class="btn btn-primary float-right" id="commentSubmit"
-              value="<%= boardnum%>/<%= postnum%>">Submit</button>
-          </div>
+          </form>
         </div>
         <!-- Comment with nested comments -->
         <!-- <div class="media mb-4">
@@ -359,25 +365,28 @@
         <i class="fas fa-times mr-2" id="postClose"></i>
       </div>
       <div class="container">
-        <div class="row" id="row_style">
-          <div class="col-md-10  offset-md-1">
-            <div class="form-group">
-              <input type="text" class="form-control mt-5" placeholder="Title" id="postTitle">
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" id="p_content"></textarea>
-            </div>
-            <br>
-            <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password" id="postPw" autocomplete="on">
-            </div>
-            <div class="form-group">
-              <button class="btn btn-primary" id="priPostSubmit" value="<%= boardnum%>">Post</button>
-              <button class="btn btn-primary" hidden id="postUpdate"
-                value="board<%= boardnum%>/<%= postnum %>">Update</button>
+        <form>
+
+          <div class="row" id="row_style">
+            <div class="col-md-10  offset-md-1">
+              <div class="form-group">
+                <input type="text" class="form-control mt-5" placeholder="Title" id="postTitle">
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" id="p_content"></textarea>
+              </div>
+              <br>
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" id="postPw" autocomplete="on">
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary" id="priPostSubmit" value="<%= boardnum%>">Post</button>
+                <button class="btn btn-primary" hidden id="postUpdate" type="button"
+                  value="board<%= boardnum%>/<%= postnum %>">Update</button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
 
     </div>
@@ -386,7 +395,7 @@
 
   <!-- Comment Delete Modal-->
   <div class="modal2" id="commentDelModal" tabindex="0">
-    <div class="modal-content2 col-5">
+    <div class="modal-content2 col-7">
       <div class="close2">
         <i class="fas fa-times mr-1" id="commentClose"></i>
       </div>
@@ -396,7 +405,7 @@
           <input type="password" id="commentDelPw" name="commentDelPw" data-backdrop="false" placeholder="Password"
             autocomplete="on" required class="mr-md-3 col-lg-auto" />
           <!-- <input type="hidden" id="guestModalId"> -->
-          <button class="btn btn-primary col-lg-auto mt-1" id="commentModalDelBtn" type="button" value="">
+          <button class="btn btn-primary col-lg-auto mt-2" id="commentModalDelBtn" type="button" value="">
             Delete
           </button>
         </form>
@@ -441,10 +450,10 @@
           <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="col-lg-4 text-lg-right">
+          <button class="float-sm-right btn-outline-light btn-light btn btn-sm p-1" id="priPostBtn">글쓰기</button>
+          <button class="float-sm-right btn-outline-light btn-light btn btn-sm p-1" id="postModBtn">수정</button>
           <button class="float-sm-right btn-outline-light border-white btn-light btn btn-sm p-1" id="postDelBtn"
             value="board<%= boardnum%>/<%= postnum%>">삭제</button>
-          <button class="float-sm-right btn-outline-light btn-light btn btn-sm p-1" id="postModBtn">수정</button>
-          <button class="float-sm-right btn-outline-light btn-light btn btn-sm p-1" id="priPostBtn">글쓰기</button>
         </div>
       </div>
     </div>
