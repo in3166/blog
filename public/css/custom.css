@@ -103,6 +103,11 @@ body,
   background: #4f3361;
 }
 
+@media (max-width: 450px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 .current {
   color: rgba(84, 113, 156, 0.767);

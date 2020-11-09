@@ -177,7 +177,7 @@
               <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
               <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
                 type="button" autocomplete="on">
-              <button type="button" class="btn btn-primary float-right" id="commentSubmit"
+              <button class="btn btn-primary float-right" id="commentSubmit" type="button"
                 value="<%= boardnum%>/<%= postnum%>">Submit</button>
             </div>
           </form>
@@ -405,7 +405,7 @@
           <input type="password" id="commentDelPw" name="commentDelPw" data-backdrop="false" placeholder="Password"
             autocomplete="on" required class="mr-md-3 col-lg-auto" />
           <!-- <input type="hidden" id="guestModalId"> -->
-          <button class="btn btn-primary col-lg-auto mt-2" id="commentModalDelBtn" type="button" value="">
+          <button class="btn btn-primary col-lg-auto mt-2" id="commentModalDelBtn" type="submit" value="">
             Delete
           </button>
         </form>

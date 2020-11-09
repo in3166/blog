@@ -8,7 +8,7 @@ const { db } = require("../model/db_conn.js");
 //여러개 디비 쿼리 적용, 페이지네이션, 댓글 삭제, 게시글 삭제
 // bn: 어떤 게시판인지
 
-// 최우선 할일: mysql-rownum-페이징, update구현
+// 최우선 할일: mysql-rownum-페이징, update구현 in work, required구현, 
 
 
 // 댓글/게시글 수정

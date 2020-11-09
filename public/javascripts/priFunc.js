@@ -58,7 +58,7 @@ window.onload = function () {
     //댓글 삭제
     let commentModalDelBtn = document.getElementById("commentModalDelBtn");
     if (commentModalDelBtn) {
-        commentModalDelBtn.addEventListener("click", commentModalDel, false);
+        commentModalDelBtn.addEventListener("click", e => commentModalDel(e), false);
     }
 
     //게시글 삭제 비밀번호 입력창 열기
@@ -126,6 +126,7 @@ window.onload = function () {
 // 게시글 등록과 같은 모달이지만 내용 다르게 오픈
 function postModModalOpen() {
     $('body').css("overflow", "hidden");
+
     let postModal = document.getElementById("postModal");
     let span = document.getElementById("postClose");
     let postPw = document.getElementById("postPw");
@@ -144,7 +145,7 @@ function postModModalOpen() {
     priPostSubmit.style.display = "none";
     //게시글 작성 모달 오픈
     postModal.style.display = "block";
-
+    document.getElementById("postTitle").focus();
     // When the user clicks on <span> (x), close the modal
     if (span) {
         span.addEventListener("click", function () {
@@ -212,10 +213,10 @@ function upComFunc(op, i, val) {
 
     } else {
         let content = CKEDITOR.instances['p_content'].getData();
-        let postModalTitle = document.getElementById("postTitle").value;
+        let postModalTitle = document.getElementById("postTitle");
         input = document.getElementById("postPw");
 
-        data = { 'pw': input.value, 'id': postModalTitle, 'content': content };
+        data = { 'pw': input.value, 'id': postModalTitle.value, 'content': content };
     }
 
     console.log(url)
@@ -257,7 +258,7 @@ function upComFunc(op, i, val) {
 
                 postModal.style.display = "none";
                 $('body').css("overflow", "scroll");
-                postModalTitle.value = "";
+                postModalTitle = "";
                 input.value = "";
                 CKEDITOR.instances['p_content'].setData("");
                 postUpdate.setAttribute('hidden', 'true');
@@ -288,7 +289,7 @@ function commentPwModalOpen() {
     //비밀번호 입력창 오픈
     let commentDelModal = document.getElementById("commentDelModal");
     commentDelModal.style.display = "block";
-
+    document.getElementById("commentDelPw").focus();
     document.getElementById("commentModalDelBtn").value = value;
 
     // When the user clicks on <span> (x), close the modal
@@ -314,7 +315,8 @@ function commentPwModalOpen() {
 }
 
 // 댓글 삭제
-function commentModalDel() {
+function commentModalDel(e) {
+    e.preventDefault();
     let xhr = new XMLHttpRequest();
     let commentDelPw = document.getElementById("commentDelPw").value;
     let value = document.getElementById("commentModalDelBtn").value;
@@ -351,18 +353,20 @@ function commentModalDel() {
     //console.log(guestPw.value);
 }
 
+//게시글 작성 모달 오픈
 function postModalOpen() {
     $('body').css("overflow", "hidden");
+
     let postModal = document.getElementById("postModal");
     // let guestModalId = document.getElementById("guestModalId");
     let span = document.getElementById("postClose");
-
     // let postModalBtn = document.getElementById("postModalBtn");
     //let modal = document.getElementById("modal-window-4");
 
     //게시글 작성 모달 오픈
     //location.href = '#guestDelModal'
     postModal.style.display = "block";
+    document.getElementById("postTitle").focus();
     // guestModalId.value = value;
 
     // When the user clicks on <span> (x), close the modal
@@ -435,7 +439,7 @@ function commentSubmit() {
         if (xhr.status === 200 || xhr.status === 201) {
             //console.log(xhr.responseText);
             alert("댓글 작성 완료!");
-
+            window.location.reload();
         } else {
             alert("댓글 작성 오류!");
             window.location.reload();
