@@ -1,24 +1,24 @@
 
 
-// 첫 번째 방법 : exports에 직접 프로퍼티를 설정
-exports.add = function (a, b) {
-    return a + b;
-}
+// // 첫 번째 방법 : exports에 직접 프로퍼티를 설정
+// exports.add = function (a, b) {
+//     return a + b;
+// }
 
-exports.multiply = function (a, b) {
-    return a * b;
-}
+// exports.multiply = function (a, b) {
+//     return a * b;
+// }
 
 // 두 번째 방법 : 새로운 객체에 프로퍼티를 설정 후 module.export에 할당하기
-var calc = {};
+var calc = "";
 
-calc.add = function (a, b) {
-    return a + b;
-}
+// calc.add = function (a, b) {
+//     return a + b;
+// }
 
-calc.multiply = function (a, b) {
-    return a * b;
-}
+// calc.multiply = function (a, b) {
+//     return a * b;
+// }
 
 module.exports = calc;
 

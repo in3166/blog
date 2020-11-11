@@ -1,11 +1,12 @@
 var express = require("express");
 var momnet = require("moment");
 var router = express.Router();
-
+//var footer1 = require("./footer");
 var db = require("../model/db_conn").db;
 //var conn = require("../model/db_conn").conn; // connect 안해도 사용?
 
 const app = require("../app.js");
+
 
 router.post("/create", function (req, res) {
   const body = req.body; //req name으로 보내짐
@@ -64,11 +65,16 @@ router.get("/", function (request, res) {
 
     // render 확인, 여기 말고 rows 값만 밖으로 내보낼 수 없는지 확인!
     res.render("work", {
+      title: "Work Space",
+      list1: "top",
+      list2: "portfolio",
+      list3: "guest",
       list4: "/",
       list5: "#portfolio",
       list6: "/private",
       guest: rows,
-      data: false
+      data: false,
+      //     footer: footer1,
     });
   });
 });

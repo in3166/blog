@@ -5,6 +5,7 @@ var router = express.Router();
 //var template = require("../views/template.js");
 const { db } = require("../model/db_conn.js");
 
+
 //여러개 디비 쿼리 적용, 페이지네이션, 댓글 삭제, 게시글 삭제
 // bn: 어떤 게시판인지
 
@@ -212,6 +213,10 @@ router.get("/board/:bn/:pn/:id", function (req, res) {
 
       //console.log(rows);
       res.render("wprivate", {
+        title: "Private Room",
+        list1: "top",
+        list2: "post",
+        list3: "comment",
         list4: "/",
         list5: "/work",
         list6: "#post",
@@ -249,6 +254,10 @@ router.get("/board/:bn/:pn", function (req, res) {
     }
 
     res.render("wprivate", {
+      title: "Private Room",
+      list1: "top",
+      list2: "post",
+      list3: "comment",
       list4: "/",
       list5: "/work",
       list6: "#post",

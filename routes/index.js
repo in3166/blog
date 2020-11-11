@@ -10,6 +10,10 @@ router.get("/index", function (request, res) {
 router.get("/", function (request, res, next) {
   console.log("Access to Home");
   res.render("index", {
+    title: "Cup of Coding Box",
+    list1: "top",
+    list2: "introduce",
+    list3: "me",
     list4: "#introduce",
     list5: "/work",
     list6: "/private",
