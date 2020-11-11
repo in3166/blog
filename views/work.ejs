@@ -289,10 +289,11 @@
             </tr>
           </thead>
           <tbody>
-            <% for (let i = 0; i < guest.length ; i++) { %>
-            <% if (i==5) break; %>
+            <% let j = 1 %>
+            <% for (let i = guest.length-1; i >= 0 ; i--) { %>
+            <% if (i==(guest.length-6)) break; %>
             <tr id="guest0<%= guest[i].id %>">
-              <td class="text-center col1"><%= i+1 %></td>
+              <td class="text-center col1"><%= j++ %></td>
               <td><%= guest[i].userid %></td>
               <td><%= guest[i].content %></td>
               <td class="col1"><%= guest[i].date %></td>
@@ -407,9 +408,10 @@
                       </tr>
                     </thead>
                     <tbody class="tb">
-                      <% for (let i = 0; i < guest.length ; i++) { %>
+                      <% let k = 1 %>
+                      <% for (let i = guest.length-1; i >= 0 ; i--) { %>
                       <tr id="guest<%= guest[i].id %>" class="guest<%= guest[i].id %>">
-                        <td class="col1"><%= i+1 %></td>
+                        <td class="col1"><%= k++ %></td>
                         <td><%= guest[i].userid %></td>
                         <td><%= guest[i].content %></td>
                         <td class="col1"><%= guest[i].date %></td>
