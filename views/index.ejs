@@ -71,8 +71,10 @@
       <h3 class="section-subheading text-muted">
         블로그 작업 일지
       </h3>
+      <span id="toc-toggle">펼치기 <i class="fas fa-caret-down"></i></span>
     </div>
-    <ul class="timeline">
+    <br>
+    <ul class="timeline" style="display: none;" id="toc-content">
       <li>
         <div class="timeline-image">
           <img class="rounded-circle img-fluid" src="/img/about/1.jpg" alt="" />
@@ -159,12 +161,31 @@
           </div>
           <div class="timeline-body">
             <p class="text-muted">
-              Work Page를 어느 정도 작업했다. 방명록과 DB를 연동하여 CRUD 기능 추가했고(사실 Update는 미뤄뒀다..;) Javascript로
+              Work Page를 어느 정도 작업했다. 방명록과 DB를 연동하여 CRUD 기능 추가했고(Update는 미뤄뒀지만..;) Javascript로
               페이지네이션 기능을 구현해봤다. 모듈로 간편히 할 수 있다는 것을 중간에 알았지만.. 되돌리기엔 너무 늦어
               직접 구현해 봤다. 작동은 되는데.. 과연 제대로 한건지 의문이다.(너무 어려웠다;)
               PortFolio 부분도 DB와 연동하고 직접 글을 쓸 수 있도록 하려고 했지만
-              아직 올릴 글도 많이 없고(올릴 포트폴리오가 없다니.. 한심ㅠ) 직접 div 틀에 작성하여 넣었다.
+              아직 올릴 글도 많이 없고(올릴 포트폴리오가 없다니..) 직접 div 틀에 작성하여 넣었다.
               이제 Private 페이지를 작업해야겠다.
+            </p>
+          </div>
+        </div>
+      </li>
+      <li class="timeline-inverted">
+        <div class="timeline-image">
+          <img class="rounded-circle img-fluid" src="/img/about/4.jpg" alt="" />
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <h4>2020-11-11</h4>
+            <h4 class="subheading">오랜만에 진행 과정 작성</h4>
+          </div>
+          <div class="timeline-body">
+            <p class="text-muted">
+              그 동안 틈틈이 블로그 개발을 해왔다.
+              Private, work 페이지에 게시판 CRUD 기능, Client/Server side Pagination,
+              header, footer 파일 나누기, UI 수정, DB 연동 등등...
+              앞으로 Ajax 입력창에 required 기능, 앞 뒤 페이지이동, 날씨api 연동 등을 추가할 계획이다.
             </p>
           </div>
         </div>
@@ -223,21 +244,16 @@
     </div>
   </div>
 </section>
-<!-- Clients-->
-<div class="py-5">
+
+<!-- GitHub Graph-->
+<div class="py-3">
   <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-sm-6 my-3">
-        <a href="#!"><img class="img-fluid d-block mx-auto" src="/img/logos/envato.jpg" alt="" /></a>
-      </div>
-      <div class="col-md-3 col-sm-6 my-3">
-        <a href="#!"><img class="img-fluid d-block mx-auto" src="/img/logos/designmodo.jpg" alt="" /></a>
-      </div>
-      <div class="col-md-3 col-sm-6 my-3">
-        <a href="#!"><img class="img-fluid d-block mx-auto" src="/img/logos/themeforest.jpg" alt="" /></a>
-      </div>
-      <div class="col-md-3 col-sm-6 my-3">
-        <a href="#!"><img class="img-fluid d-block mx-auto" src="/img/logos/creative-market.jpg" alt="" /></a>
+    <div>
+      <!-- Prepare a container for your calendar. -->
+      <div class="text-center mb-2"><strong>My GitHub Contribution Graph</strong></div>
+      <div class="calendar">
+        <!-- Loading stuff -->
+        Loading data ...
       </div>
     </div>
   </div>
@@ -299,6 +315,18 @@
 <!-- Footer-->
 <%- include('./includes/footer'); %>
 
+<!-- github contribution graph -->
+<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+<!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
+<script>
+  GitHubCalendar(".calendar", "in3166", { responsive: true, tooltips: false, global_stats: false }).then(function () {
+    // delete the space underneath the module bar which is caused by minheight 
+    document.getElementsByClassName('calendar')[0].style.minHeight = "100px";
+    // hide more and less legen below the contribution graph
+    document.getElementsByClassName('contrib-legend')[0].style.display = "none";
+  });
+</script>
 <!-- Font Awesome icons (free version)-->
 <!-- <script data-cfasync="false" type="text/javascript" src="/javascripts/index_mail.js"></script> -->
 <script data-cfasync="false" type="text/javascript" src="/javascripts/form-submission-handler.js"></script>

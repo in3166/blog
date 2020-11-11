@@ -121,4 +121,19 @@
             buttons[i].disabled = true;
         }
     }
+
+    let openBtn = document.getElementById('toc-toggle');
+    if (openBtn) {
+        openBtn.addEventListener('click', openCloseToc, false);
+    }
 })();
+
+function openCloseToc() {
+    if (document.getElementById('toc-content').style.display === 'block') {
+        document.getElementById('toc-content').style.display = 'none';
+        document.getElementById('toc-toggle').innerHTML = '펼치기 <i class="fas fa-caret-down"></i>';
+    } else {
+        document.getElementById('toc-content').style.display = 'block';
+        document.getElementById('toc-toggle').innerHTML = '접기 <i class="fas fa-caret-up"></i>';
+    }
+}

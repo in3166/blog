@@ -109,6 +109,20 @@ body,
   }
 }
 
+/* 펼치고 접기 */
+#toc-toggle {
+  cursor: pointer;
+  color: #2c2c2c;
+  margin: 3%;
+}
+
+#toc-toggle:hover {
+  color: #ffe600;
+  border: black 1px solid;
+  padding: 2px;
+  border-radius: 0.25rem;
+}
+
 .current {
   color: rgba(84, 113, 156, 0.767);
   font-size: 1.3em;
