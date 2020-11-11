@@ -1,38 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Cup Of Coding Box-${title}</title>
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
 
-    <!-- Google fonts-->
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/custom.css" rel="stylesheet" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Cup Of Coding Box-${title}</title>
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
 
-  <body id="home">
-    Error!
-  </body>
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet"
+    type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="css/styles.css" rel="stylesheet" />
+  <link href="css/custom.css" rel="stylesheet" />
+  <style>
+    .layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+
+    .layer .content {
+      padding: 3%;
+      display: inline-block;
+      border: rgba(94, 94, 94, 0.822);
+      background: rgba(235, 126, 126, 0.822);
+      vertical-align: middle
+    }
+
+    .layer .blank {
+      display: inline-block;
+      width: 0;
+      height: 100%;
+      vertical-align: middle
+    }
+
+    a {
+      color: rgb(56, 135, 255);
+    }
+
+    a:hover {
+      color: rgb(48, 36, 68);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layer">
+    <span class="content">
+      <H1>Error Page!</H1>
+      <a href="javascript:history.back();" class="">돌아가기</a>
+    </span>
+    <span class="blank"></span>
+  </div>
+
+</body>
+
 </html>

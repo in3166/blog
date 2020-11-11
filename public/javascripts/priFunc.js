@@ -55,6 +55,13 @@ window.onload = function () {
         }
     }
 
+    let commentUpCancel = document.getElementsByName("commentUpCancel");
+    if (commentUpCancel) {
+        for (let i = 0; i < commentUpCancel.length; i++) {
+            commentUpCancel[i].addEventListener("click", event => commentUpCancelFunc(i), false);
+        }
+    }
+
     //댓글 삭제
     let commentModalDelBtn = document.getElementById("commentModalDelBtn");
     if (commentModalDelBtn) {
@@ -182,6 +189,7 @@ function commentUpdateOpen(i1) {
     let upDel = document.getElementsByName("commentDel");
     let upId = document.getElementsByName("commentId");
     let upContent = document.getElementsByName("commentContent");
+    let commentUpCancel = document.getElementsByName("commentUpCancel");
 
     upId[i].setAttribute('contenteditable', "true");
     upId[i].classList.add("border", "mb-2", "p-2")
@@ -190,12 +198,37 @@ function commentUpdateOpen(i1) {
 
     upPw[i].removeAttribute('hidden');
     upCom[i].removeAttribute('hidden');
+    commentUpCancel[i].removeAttribute('hidden');
 
     up[i].style.display = "none";
     upDel[i].style.display = "none";
 }
 
-//댓글, 게시글 수정
+// 댓글 수정 취소
+function commentUpCancelFunc(i) {
+    let upPw = document.getElementsByName("commentUpdatePw");
+    let up = document.getElementsByName("commentUpdate");
+    let upCom = document.getElementsByName("commentUpdateComplete");
+    let upDel = document.getElementsByName("commentDel");
+    let upId = document.getElementsByName("commentId");
+    let upContent = document.getElementsByName("commentContent");
+    let commentUpCancel = document.getElementsByName("commentUpCancel");
+    let comUpPw = document.getElementsByName("commentUpdatePw");
+
+    upId[i].setAttribute('contenteditable', "false");
+    upId[i].classList.remove("border", "mb-2", "p-2")
+    upContent[i].setAttribute('contenteditable', "false");
+    upContent[i].classList.remove("border", "mt-3", "p-2", "d-block")
+
+    upPw[i].setAttribute('hidden', "true");
+    upCom[i].setAttribute('hidden', "true");
+    commentUpCancel[i].setAttribute('hidden', "true");
+
+    up[i].style.display = "inline";
+    upDel[i].style.display = "inline";
+    comUpPw[i].value = "";
+}
+//댓글, 게시글 수정 op로 구별, i: 몇번째 버튼, valu: url
 function upComFunc(op, i, val) {
     let data;
     let input
@@ -229,13 +262,14 @@ function upComFunc(op, i, val) {
         if (xhr.status === 200 || xhr.status === 201) {
             //console.log(xhr.responseText);
             alert("수정 완료!");
-            if (op === 0) {
+            if (op === 0) { //댓글 수정일 때
                 let upPw = document.getElementsByName("commentUpdatePw");
                 let up = document.getElementsByName("commentUpdate");
                 let upCom = document.getElementsByName("commentUpdateComplete");
                 let upDel = document.getElementsByName("commentDel");
                 let upId = document.getElementsByName("commentId");
                 let upContent = document.getElementsByName("commentContent");
+                let commentUpCancel = document.getElementsByName("commentUpCancel");
 
                 upId[i].setAttribute('contenteditable', "false");
                 upId[i].classList.remove("border", "mb-2", "p-2")
@@ -244,11 +278,12 @@ function upComFunc(op, i, val) {
 
                 upPw[i].setAttribute('hidden', "true");
                 upCom[i].setAttribute('hidden', "true");
+                commentUpCancel[i].setAttribute('hidden', "true");
 
                 up[i].style.display = "inline";
                 upDel[i].style.display = "inline";
                 input.value = "";
-            } else {
+            } else { // 게시글 수정일 때
                 document.getElementById("postTitle0").innerText = title;
                 document.getElementById("postCotent0").innerHTML = content;
 

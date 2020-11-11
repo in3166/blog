@@ -92,6 +92,12 @@
 
 
   <div class="container" id="post">
+
+    <button class="float-sm-right border-white btn-light btn btn-sm p-1 mr-5" id="postDelBtn"
+      value="board<%= boardnum%>/<%= postnum%>">삭제</button>
+    <button class="float-sm-right border-white btn-light btn btn-sm p-1" id="postModBtn">수정</button>
+    <button class="float-sm-right border-white btn-light btn btn-sm p-1" id="priPostBtn">글쓰기</button>
+
     <div class="row mb-6 col-xl-12">
       <!-- <div class="w-100 mb-5"><button class="btn-dark float-right mr-4">삭제</button><button
           class="btn-dark float-right mr-2" id="priPostBtn">글쓰기</button>
@@ -156,6 +162,8 @@
                     placeholder="Password">
                   <button class="btn2 ml-2 border-dark" hidden type="button"
                     value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentUpdateComplete">완료</button>
+                  <button class="btn2 ml-2" hidden value="comment<%= boardnum%>/<%= comment[i].id%>" type="button"
+                    name="commentUpCancel"> <i class="fas fa-times" id="commentUpClose"></i></button>
                 </div>
               </div>
             </div>
@@ -248,6 +256,7 @@
       <div class="col-xl-4 pl-lg-5">
         <!-- Categories Widget -->
         <div class="card my-3">
+
           <h5 class="card-header">MENU</h5>
           <div class="card-body">
             <div class="">
@@ -449,12 +458,7 @@
           <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
           <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <div class="col-lg-4 text-lg-right">
-          <button class="float-sm-right btn-outline-light btn-light btn btn-sm p-1" id="priPostBtn">글쓰기</button>
-          <button class="float-sm-right btn-outline-light btn-light btn btn-sm p-1" id="postModBtn">수정</button>
-          <button class="float-sm-right btn-outline-light border-white btn-light btn btn-sm p-1" id="postDelBtn"
-            value="board<%= boardnum%>/<%= postnum%>">삭제</button>
-        </div>
+
       </div>
     </div>
   </footer>
