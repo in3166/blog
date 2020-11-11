@@ -1,5 +1,5 @@
 function pagination(a) {
-    var req_num_row = 6; //한 페이지에 출력할 행 개수
+    var req_num_row = 10; //한 페이지에 출력할 행 개수
     var $tr = jQuery('.tb tr');
     var total_num_row = $tr.length - a; //테이블 총 행
     //console.log($tr.length);

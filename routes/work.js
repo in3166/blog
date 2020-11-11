@@ -11,6 +11,8 @@ router.post("/create", function (req, res) {
   const body = req.body; //req name으로 보내짐
   let date = momnet().format("YYYY-MM-DD");
   db.query('insert into guest(userid, userpw, content, date) values (?, ?, ?, ?);', [body.id, body.pw, body.content, date], function (err, result) {
+    //50개 이상의 방명록 삭제
+    db.query('DELETE FROM guest WHERE id IN (SELECT id FROM (select @ROWNUM := @ROWNUM + 1 AS ROWNUM, T.* from guest T, (SELECT @ROWNUM := 0) TMP ORDER BY ID DESC) AS A where A.ROWNUM > 50)');
     if (err) {
       console.log('insert error', err);
       res.redirect('/work');
