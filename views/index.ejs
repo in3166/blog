@@ -244,20 +244,41 @@
     </div>
   </div>
 </section>
-
 <!-- GitHub Graph-->
-<div class="py-3">
-  <div class="container">
-    <div>
-      <!-- Prepare a container for your calendar. -->
-      <div class="text-center mb-2"><strong>My GitHub Contribution Graph</strong></div>
-      <div class="calendar">
-        <!-- Loading stuff -->
-        Loading data ...
+
+<div class="container">
+  <div class="col-12 row p-lg-3">
+    <div class="col-sm-3 my-auto"><img src="" alt="Loading..." id="weaImg" class="w-100 ">
+    </div>
+    <div class="col-5 row ml-lg-1 my-auto small">
+      <div>
+        <div>
+          기온:
+        </div>
+        <div>
+          강우 확률:
+        </div>
+        <div>
+          풍속:
+        </div>
+      </div>
+      <div class="ml-3">
+        <div id="temval">
+
+        </div>
+        <div id="rainval">
+
+        </div>
+        <div id="windval">
+
+        </div>
       </div>
     </div>
   </div>
 </div>
+</div>
+
+
 
 
 <!-- Contact-->
@@ -315,18 +336,6 @@
 <!-- Footer-->
 <%- include('./includes/footer'); %>
 
-<!-- github contribution graph -->
-<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
-<!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
-<link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
-<script>
-  GitHubCalendar(".calendar", "in3166", { responsive: true, tooltips: false, global_stats: false }).then(function () {
-    // delete the space underneath the module bar which is caused by minheight 
-    document.getElementsByClassName('calendar')[0].style.minHeight = "100px";
-    // hide more and less legen below the contribution graph
-    document.getElementsByClassName('contrib-legend')[0].style.display = "none";
-  });
-</script>
 <!-- Font Awesome icons (free version)-->
 <!-- <script data-cfasync="false" type="text/javascript" src="/javascripts/index_mail.js"></script> -->
 <script data-cfasync="false" type="text/javascript" src="/javascripts/form-submission-handler.js"></script>

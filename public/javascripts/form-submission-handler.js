@@ -126,6 +126,8 @@
     if (openBtn) {
         openBtn.addEventListener('click', openCloseToc, false);
     }
+
+
 })();
 
 function openCloseToc() {
@@ -137,3 +139,71 @@ function openCloseToc() {
         document.getElementById('toc-toggle').innerHTML = '접기 <i class="fas fa-caret-up"></i>';
     }
 }
+
+window.onload = function () {
+    getLocation();
+}
+
+function getLocation() {
+
+    if (navigator.geolocation) { // GPS를 지원하면
+        navigator.geolocation.getCurrentPosition(function (position) {
+            console.log(position.coords.latitude + ' ' + position.coords.longitude);
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            weatherFunc(lat, lon);
+        }, function (error) {
+            console.error(error);
+        }, {
+            enableHighAccuracy: false,
+            maximumAge: 0,
+            timeout: Infinity
+        });
+    } else {
+        alert('GPS를 지원하지 않습니다');
+    }
+}
+
+function weatherFunc(lat2, lon2) {
+    let lat = lat2;
+    let lon = lon2;
+    console.log(lat, "/", lon)
+    var data = { lat: lat, lon: lon }
+    let xhr = new XMLHttpRequest();
+    let wea_val
+    xhr.onload = function (paramas) {
+        if (xhr.status == 200) {
+            wea_val = JSON.parse(xhr.responseText);
+            console.log(wea_val)
+            console.log(window.location.pathname);
+            var imgUrl;
+            if (wea_val[1].val == 0) { // no rain
+                if (wea_val[5].val <= 5) {
+                    imgUrl = 'sun.jpg';
+                } else if (wea_val[5].val <= 8) {
+                    imgUrl = 'cloud-sun1.jpg';
+                } else {
+                    imgUrl = 'cloud_sun2.jpg';
+                }
+            } else if (wea_val[1].val == 1 || wea_val[1].val == 4 || wea_val[1].val == 5) { //rain
+                imgUrl = 'rain.jpg';
+            } else if (wea_val[1].val == 2 || wea_val[1].val == 6) { //rain, snow
+                imgUrl = 'snow-rain.jpg';
+            } else if (wea_val[1].val == 3 || wea_val[1].val == 7) { //snow
+                imgUrl = 'snow.jpg';
+            }
+            console.log(imgUrl)
+            document.getElementById('weaImg').src = "../img/weather/" + imgUrl;
+            document.getElementById('temval').innerHTML = wea_val[6].val + ' &#8451;';
+            document.getElementById('rainval').innerText = wea_val[0].val + ' %';
+            document.getElementById('windval').innerText = wea_val[10].val + ' m/s';
+        } else {
+
+        }
+    }
+    xhr.open('post', "/con");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(data));
+}
+
+

@@ -18,6 +18,14 @@ window.onload = function () {
         guestModalDelBtn.addEventListener("click", guestModalDel, false);
 
     }
+
+    GitHubCalendar(".calendar", "in3166", { responsive: true, tooltips: false, global_stats: false }).then(function () {
+        // delete the space underneath the module bar which is caused by minheight 
+        document.getElementsByClassName('calendar')[0].style.minHeight = "100px";
+        // hide more and less legen below the contribution graph
+        document.getElementsByClassName('contrib-legend')[0].style.display = "none";
+    });
+
 }
 
 //방명록 modal open

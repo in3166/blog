@@ -150,27 +150,22 @@
   </div>
 </section>
 
-<!-- Clients-->
+<!-- Github Contribution Graph-->
 <div class="py-5">
   <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-sm-6 my-3">
-        <a href="#!"><img class="img-fluid d-block mx-auto" src="/img/logos/envato.jpg" alt="" /></a>
-      </div>
-      <div class="col-md-3 col-sm-6 my-3">
-        <a href="#!"><img class="img-fluid d-block mx-auto" src="/img/logos/designmodo.jpg" alt="" /></a>
-      </div>
-      <div class="col-md-3 col-sm-6 my-3">
-        <a href="#!"><img class="img-fluid d-block mx-auto" src="/img/logos/themeforest.jpg" alt="" /></a>
-      </div>
-      <div class="col-md-3 col-sm-6 my-3">
-        <a href="#!"><img class="img-fluid d-block mx-auto" src="/img/logos/creative-market.jpg" alt="" /></a>
+    <div>
+      <!-- Prepare a container for your calendar. -->
+      <div class="text-center mb-2"><strong>My GitHub Contribution Graph</strong></div>
+      <div class="calendar">
+        <!-- Loading stuff -->
+        Loading data ...
       </div>
     </div>
   </div>
 </div>
 
-<!-- Contact-->
+
+<!-- GUEST-->
 <section class="page-section" id="guest">
   <div class="container">
     <div class="text-center">
@@ -633,6 +628,15 @@
 
 <!-- Footer-->
 <%- include('./includes/footer'); %>
+
+<!-- github contribution graph -->
+<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+
+<!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
+<script>
+
+</script>
 
 <input type="hidden" value="<%= data %>" id="guestDeleteConfirm" />
 

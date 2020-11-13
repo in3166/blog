@@ -233,7 +233,6 @@ function pagination(a) {
             jQuery('.pagination1 li:first-child').next().removeClass("disabled");
         }
     }
-
 }
 
 
