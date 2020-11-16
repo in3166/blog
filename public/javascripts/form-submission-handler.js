@@ -201,7 +201,7 @@ function weatherFunc(lat2, lon2) {
 
         }
     }
-    xhr.open('post', "/con");
+    xhr.open('post', "/weather");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(data));
 }

@@ -8,14 +8,23 @@ const request = require('request');
 const moment = require('moment');
 const cheerio = require('cheerio');
 
-
-router.post("/con", function (req, res) {
+router.post("/weather", function (req, res) {
   let lon = req.body.lon;
   let lat = req.body.lat;
-
-  wea(lat, lon, function (data) {
-    res.json(data)
+  // await는 async안에서만 사용 가능하므로 then을 사용
+  wea(lat, lon).then(function (val) { // val => ... ));
+    //console.log(val);
+    res.json(val);
+  }).catch(function (err) {
+    console.log(err);
+    res.statusCode(500);
   });
+
+  const data = async () => {
+    console.log(await wea(lat, lon))
+    return "done"
+  }
+
 });
 
 /* GET home page. */

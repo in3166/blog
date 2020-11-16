@@ -2,15 +2,16 @@ var covert = require("./converXY");
 const request = require('request');
 const moment = require('moment');
 const cheerio = require('cheerio');
-// promise version
-function weather(lat, lon) {
-    // 위도 경도 -> 기상청 API에 맞게 변환
+
+function weather(lat, lon, callback) {
+
     let location = covert.toXY(lat, lon);
     console.log(location.x, location.y);
 
     const nx = location.x;
     const ny = location.y;
-    // 현재 날짜, 시간 구하기
+    const dataType = 'XML';
+
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
@@ -90,9 +91,22 @@ function weather(lat, lon) {
             break;
     }
 
-    console.log("시간: " + hours);
-    console.log(nx, ny)
+    console.log("123:  " + hours)
 
+    var _nx = nx,
+        _ny = ny,
+        apikey = "MCY3wIU4Zx8fdOOEsVJdb3iTtG9GeFn1YnYW1I8wmirD%2FEB3nyQZCvcvIeEfLUCIaPJ8pZA0hSfsR8SLUUFVFA%3D%3D",
+        today = yyyy + "" + mm + "" + dd,
+        basetime = hours + "00",
+        fileName = "http://apis.data.go.kr/1360000/VilageFcstInfoService";
+    fileName += "?ServiceKey=" + apikey;
+    fileName += "&base_date=" + today;
+    fileName += "&base_time=" + basetime;
+    fileName += "&nx=" + _nx + "&ny=" + _ny;
+    fileName += "&pageNo=1&numOfRows=6";
+    fileName += "&_type=json";
+
+    console.log(nx, ny)
     var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst';
     var queryParams = '?' + encodeURIComponent('ServiceKey') + '=MCY3wIU4Zx8fdOOEsVJdb3iTtG9GeFn1YnYW1I8wmirD%2FEB3nyQZCvcvIeEfLUCIaPJ8pZA0hSfsR8SLUUFVFA%3D%3D'; /* Service Key*/
     queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* */
@@ -104,34 +118,34 @@ function weather(lat, lon) {
     queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent(ny); /* */
 
     var data = [];
-    return new Promise(function (resolve, reject) {
-        const result = request({
-            url: url + queryParams,
-            method: 'GET'
-        }, function (error, response, body) {
-            if (error) {
-                reject(error);
-            }
-            try {
-                // console.log(body);
-                let data = [];
-                $ = cheerio.load(body);
-                $('item').each(function (idx) {
-                    const time = $(this).find('fcstDate').text();
-                    const cate = $(this).find('category').text();
-                    const wea_val = $(this).find('fcstValue').text();
 
-                    data.push({ "time": time, "cate": cate, "val": wea_val });
-                    // 출력
-                    // console.log(`시간 : ${time} 날씨 정보 : ${cate} 값 : ${wea_val}`);
-                });
-                console.log(data);
-                resolve(data);
-            } catch (e) {
-                reject(e);
-            }
-        });
+    request({
+        url: url + queryParams,
+        method: 'GET'
+    }, function (error, response, body) {
+        //  console.log(body);
+        callback(body);
     });
 }
 
-module.exports = weather;
+function weather2(lat, lon, call) {
+    weather(lat, lon, function (body) {
+        // console.log(body);
+        let data = [];
+        $ = cheerio.load(body);
+        $('item').each(function (idx) {
+            const time = $(this).find('fcstDate').text();
+            const cate = $(this).find('category').text();
+            const wea_val = $(this).find('fcstValue').text();
+
+            data.push({ "time": time, "cate": cate, "val": wea_val });
+            // 출력
+            // console.log(`시간 : ${time} 날씨 정보 : ${cate} 값 : ${wea_val}`);
+        });
+        console.log(data);
+        call(data);
+        return data;
+    })
+}
+
+module.exports = weather2;
