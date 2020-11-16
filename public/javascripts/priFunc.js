@@ -6,11 +6,13 @@ window.onload = function () {
     let currentPageNumber = document.getElementById("currentPageNumber").value;
     let listClass = "cp" + currentPageNumber;
     //console.log(listClass)
-    let currentList = document.getElementById(listClass);
-    currentList.classList.add('current');
-    //let boardNum = document.getElementById("priPostSubmit").value;
     let currentBoard = document.getElementById(document.getElementById("priPostSubmit").value);
     currentBoard.classList.add('current');
+
+    let currentList = document.getElementById(listClass);
+    if (currentList)
+        currentList.classList.add('current');
+    //let boardNum = document.getElementById("priPostSubmit").value;
 
 
 

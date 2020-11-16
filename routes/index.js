@@ -1,12 +1,8 @@
 var express = require("express");
 var router = express.Router();
 //var index = require("../views/index.ejs");
-const app = require("../app.js");
-var covert = require("./converXY");
 var wea = require("./weather");
-const request = require('request');
-const moment = require('moment');
-const cheerio = require('cheerio');
+
 
 router.post("/weather", function (req, res) {
   let lon = req.body.lon;
