@@ -19,12 +19,6 @@ router.post("/weather", function (req, res) {
     console.log(err);
     res.statusCode(500);
   });
-
-  const data = async () => {
-    console.log(await wea(lat, lon))
-    return "done"
-  }
-
 });
 
 /* GET home page. */

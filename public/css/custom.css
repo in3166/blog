@@ -164,7 +164,19 @@ body,
 }
 
 /* weather */
-
+.weaVal {
+  font-size: 1rem;
+  text-align: left;
+  background-color: rgb(164, 213, 214);
+  font-family: Verdana,
+    Geneva,
+    Tahoma,
+    sans-serif;
+  font-weight: 600;
+  padding: 1rem;
+  text-shadow: 3px 1px 1px rgb(170, 172, 172);
+  border-radius: 0.35rem;
+}
 
 #aside {
   float: left;
