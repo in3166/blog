@@ -5,207 +5,248 @@
     <meta charset="utf-8">
     <title>Chapter 6 - Helper Script</title>
     <style>
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            counter-reset: page;
+            -webkit-font-smoothing: antialiased;
+            -moz-font-smoothing: grayscale;
+        }
+
         h1,
         h2,
         h3,
-        nav,
-        footer {
-            font-family: Georgia, Cambria, "Times New Roman", serif;
-        }
-
-        body {
-            font-family: "Lucida Sans", Verdana, Arial, sans-serif;
-            font-size: 100%;
-        }
-
-        /* form formatting */
-        .box {
-            margin: 2em auto 0 auto;
-            background-color: #D9C896;
-            width: 50%;
-            padding: 0.5em;
-        }
-
-        .box p {
-            margin: 0.5em;
-        }
-
-        /* table formatting */
-        table {
-            margin: 2em auto;
-            color: #666;
-            font-size: 0.85em;
-        }
-
-        table a {
-            color: #467b89;
-        }
-
-        table caption {
-            background: #8FAB98;
-            color: black;
-            font-size: 1em;
-            padding: 12px 0 8px 0;
-            text-align: center;
-        }
-
-        table thead th {
-            font-size: 0.65em;
-            padding: 5px 0;
-            color: #666;
+        h4,
+        h5,
+        h6 {
             text-transform: uppercase;
-            border-bottom: 1px solid #bbbbbb;
-            background: #F2F2F2;
         }
 
-        table tbody td {
-            color: #666;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-            padding: 8px;
+        a {
+            color: #28f;
+            text-decoration: none;
+        }
+
+        a:hover,
+        a:focus {
+            color: #0062d5;
+        }
+
+        a:active {
+            color: #003f88;
+        }
+
+        main {
+            margin: 0 auto;
+            max-width: 30em;
+            padding: 1em;
+        }
+
+        .article-list__page {
+            border-top: 1px solid #ddd;
+            clear: both;
+            counter-increment: page;
+            padding-bottom: 3em;
+            position: relative;
+        }
+
+        .article-list__page:before {
+            background-color: #ddd;
+            display: inline-block;
+            content: counter(page);
+            color: #888;
+            padding: .25em .5em;
+            position: absolute;
+            left: calc(50% - .75em);
+            top: -.75em;
+            vertical-align: middle;
+            z-index: 1;
+        }
+
+        .article-list__item {
+            background-color: #eee;
+            float: left;
+            height: 15em;
+            max-width: 50%;
+            opacity: .75;
+            -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+            -webkit-transition: opacity 0.2s, -webkit-transform 0.2s;
+            transition: opacity 0.2s, -webkit-transform 0.2s;
+            transition: opacity 0.2s, transform 0.2s;
+            transition: opacity 0.2s, transform 0.2s, -webkit-transform 0.2s;
+            width: 15em;
+        }
+
+        .article-list__item:hover {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .article-list__item__image {
+            display: block;
+            height: auto;
+            margin: 0;
+            opacity: 1;
+            -webkit-transition: opacity 0.2s;
+            transition: opacity 0.2s;
+            width: 100%;
+        }
+
+        .article-list__item__image--loading {
+            opacity: 0;
+        }
+
+        .article-list__pagination {
+            background-color: #222;
+            box-shadow: 0 0 1em rgba(0, 0, 0, 0.25);
+            display: block;
+            bottom: 0;
+            left: 0;
+            list-style-type: none;
+            margin: 0;
+            padding: .5em;
+            position: fixed;
+            right: 0;
             text-align: center;
-            font-weight: bold;
-            border: 1px solid;
-            border-color: #fff #bbbbbb #bbbbbb #fff;
-            background: #ededed;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+            -webkit-transition: -webkit-transform 0.2s;
+            transition: -webkit-transform 0.2s;
+            transition: transform 0.2s;
+            transition: transform 0.2s, -webkit-transform 0.2s;
+            z-index: 2;
         }
 
-        table tbody td.pad {
-            background: #F2F2F2;
+        .article-list__pagination--inactive {
+            -webkit-transform: translateY(100%);
+            transform: translateY(100%);
         }
 
-        tfoot {
-            color: #e0e0e0;
-            font-size: 12px;
-            text-align: center;
+        .article-list__pagination__item {
+            display: inline-block;
+            margin: 0 1em;
         }
 
-        table tfoot tr {
-            background: #F2F2F2;
+        .article-list__pagination__item a {
+            color: #888;
+            text-decoration: none;
         }
 
-        table tfoot td {
-            padding: 10px 10px;
+        .article-list__pagination__item a:hover,
+        .article-list__pagination__item a:focus {
+            color: #aeaeae;
         }
 
-        table tfoot a {
-            color: #666;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-        }
-
-        table tfoot td#prev {
-            text-align: left;
-        }
-
-        table tfoot td#next {
-            text-align: right;
-        }
-
-        #today {
-            color: #fff;
-            border: 1px solid #467b89;
-            background: #6eafbf;
-        }
-
-        .hoverNode {
-            background-color: #FFFFCC;
-            border: solid 1px black;
-            width: 100px;
-            height: 100px;
-            position: realtive;
-            float: top;
-            font-size: 10pt;
-            margin: 5px;
-            padding: 3px;
-            color: black;
+        .article-list__pagination__item a:active {
+            color: #d5d5d5;
         }
     </style>
 </head>
 
 <body>
-    <table id="calendar">
-        <caption>October 2014</caption>
-        <thead>
-            <tr>
-                <th scope="col" title="Sunday">S</th>
-                <th scope="col" title="Monday">M</th>
-                <th scope="col" title="Tuesday">T</th>
-                <th scope="col" title="Wednesday">W</th>
-                <th scope="col" title="Thursday">T</th>
-                <th scope="col" title="Friday">F</th>
-                <th scope="col" title="Saturday">S</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td colspan="3" id="prev"><a href="#" title="">&laquo; Sep</a></td>
-                <td class="pad">&nbsp;</td>
-                <td colspan="3" id="next"><a href="#" title="">Nov &raquo;</a></td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <tr>
-                <td colspan="3" class="pad">&nbsp;</td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td><a href="#" title="">5</a></td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>10</td>
-                <td>11</td>
-            </tr>
-            <tr>
-                <td><a href="#" title="">12</a></td>
-                <td>13</td>
-                <td id="today">14</td>
-                <td>15</td>
-                <td>16</td>
-                <td>17</td>
-                <td>18</td>
-            </tr>
-            <tr>
-                <td><a href="#" title="">19</a></td>
-                <td>20</td>
-                <td>21</td>
-                <td>22</td>
-                <td>23</td>
-                <td>24</td>
-                <td>25</td>
-            </tr>
-            <tr>
-                <td><a href="#" title="">26</a></td>
-                <td>27</td>
-                <td>28</td>
-                <td>29</td>
-                <td>30</td>
-                <td>31</td>
-                <td class="pad">&nbsp;</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="box">
-        <form method="get" action="http://www.randyconnolly.com/tests/process.php">
-            <fieldset>
-                <legend>Meeting Details</legend>
-                <p><label>Client Name: </label>
-                    <input type="text" name="client" placeholder="Enter name" /></p>
-                <p><label>First Meeting? </label> <input type="checkbox" name="first" /></p>
-                <p><label>Client Type: </label>
-                    <input type="radio" name="type" value="School" />School
-                    <input type="radio" name="type" value="College" />College
-                    <input type="radio" name="type" value="University" />University
-                </p>
-                </p>
-                <p><label>Meeting Date: </label>
-                    <input type="date" name="date" /></p>
-                <input type="submit" text="Add Meeting" />
-        </form>
-    </div>
+    <main>
+        <h1>Infinite Scroll + Pagination Experiment</h1>
+        <p>After a poll by <a href="https://twitter.com/smashingmag">@smashingmag</a>, <a
+                href="https://twitter.com/TimSeverien/status/693186708494536704">I got the idea to combine pagination
+                and infinite scroll.</a> The former gives the user control, but needs more effort. The latter lacks
+            control, but requires no special interaction.</p>
+
+        <div class="article-list" id="article-list"></div>
+        <ul class="article-list__pagination article-list__pagination--inactive" id="article-list-pagination"></ul>
+    </main>
+
+    <script>
+        function getPageId(n) {
+            return 'article-page-' + n;
+        }
+
+        function getDocumentHeight() {
+            const body = document.body;
+            const html = document.documentElement;
+
+            return Math.max(
+                body.scrollHeight, body.offsetHeight,
+                html.clientHeight, html.scrollHeight, html.offsetHeight
+            );
+        };
+
+        function getScrollTop() {
+            return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+        }
+
+        function getArticleImage() {
+            const hash = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+            const image = new Image;
+            image.className = 'article-list__item__image article-list__item__image--loading';
+            image.src = 'http://api.adorable.io/avatars/250/' + hash;
+
+            image.onload = function () {
+                image.classList.remove('article-list__item__image--loading');
+            };
+
+            return image;
+        }
+
+        function getArticle() {
+            const articleImage = getArticleImage();
+            const article = document.createElement('article');
+            article.className = 'article-list__item';
+            article.appendChild(articleImage);
+
+            return article;
+        }
+
+        function getArticlePage(page, articlesPerPage = 16) {
+            const pageElement = document.createElement('div');
+            pageElement.id = getPageId(page);
+            pageElement.className = 'article-list__page';
+
+            while (articlesPerPage--) {
+                pageElement.appendChild(getArticle());
+            }
+
+            return pageElement;
+        }
+
+        function addPaginationPage(page) {
+            const pageLink = document.createElement('a');
+            pageLink.href = '#' + getPageId(page);
+            pageLink.innerHTML = page;
+
+            const listItem = document.createElement('li');
+            listItem.className = 'article-list__pagination__item';
+            listItem.appendChild(pageLink);
+
+            articleListPagination.appendChild(listItem);
+
+            if (page === 2) {
+                articleListPagination.classList.remove('article-list__pagination--inactive');
+            }
+        }
+
+        function fetchPage(page) {
+            articleList.appendChild(getArticlePage(page));
+        }
+
+        function addPage(page) {
+            fetchPage(page);
+            addPaginationPage(page);
+        }
+
+        const articleList = document.getElementById('article-list');
+        const articleListPagination = document.getElementById('article-list-pagination');
+        let page = 0;
+
+        addPage(++page);
+
+        window.onscroll = function () {
+            if (getScrollTop() < getDocumentHeight() - window.innerHeight) return;
+            addPage(++page);
+        };
+
+    </script>
 </body>
 
 </html>

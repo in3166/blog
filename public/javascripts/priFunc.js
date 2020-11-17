@@ -1,5 +1,3 @@
-//const { post } = require("../../app");
-
 //private
 window.onload = function () {
     // 현재 페이지, 게시글 목록에서 표시
