@@ -177,21 +177,29 @@ function weatherFunc(lat2, lon2) {
             console.log(wea_val)
             console.log(window.location.pathname);
             var imgUrl;
-            if (wea_val[1].val == 0) { // no rain
-                if (wea_val[5].val <= 5) {
-                    imgUrl = 'sun.jpg';
-                } else if (wea_val[5].val <= 8) {
+
+            if (wea_val[5] == 1) {
+                imgUrl = 'sun.jpg';
+            } else if (wea_val[5] == 3) {
+                if (wea_val[1].val == 0) {
                     imgUrl = 'cloud-sun1.jpg';
-                } else {
-                    imgUrl = 'cloud_sun2.jpg';
+                } else if (wea_val[1].val == 1 || wea_val[1].val == 4 || wea_val[1].val == 5) {
+                    imgUrl = 'rain.jpg';
                 }
-            } else if (wea_val[1].val == 1 || wea_val[1].val == 4 || wea_val[1].val == 5) { //rain
-                imgUrl = 'rain.jpg';
-            } else if (wea_val[1].val == 2 || wea_val[1].val == 6) { //rain, snow
-                imgUrl = 'snow-rain.jpg';
-            } else if (wea_val[1].val == 3 || wea_val[1].val == 7) { //snow
-                imgUrl = 'snow.jpg';
+                else if (wea_val[1].val == 3 || wea_val[1].val == 7) {
+                    imgUrl = 'snow.jpg';
+                }
+                else if (wea_val[1].val == 2 || wea_val[1].val == 6) {
+                    imgUrl = 'snow-rain.jpg';
+                }
+            } else {
+                if (wea_val[1].val == 0) {
+                    imgUrl = 'cloud.jpg';
+                } else if (wea_val[1].val == 1 || wea_val[1].val == 4 || wea_val[1].val == 5) { imgUrl = 'rain.jpg'; }
+                else if (wea_val[1].val == 3 || wea_val[1].val == 7) { imgUrl = 'snow.jpg'; }
+                else if (wea_val[1].val == 2 || wea_val[1].val == 6) { imgUrl = 'snow-rain.jpg'; }
             }
+
             console.log(imgUrl)
             document.getElementById('weaImg').src = "../img/weather/" + imgUrl;
             document.getElementById('temval').innerHTML = wea_val[6].val + ' &#8451;';

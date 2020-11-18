@@ -99,6 +99,7 @@ window.onscroll = function () {
 
         if ((window.innerHeight + window.scrollY) >= height) {
             console.log("you're at the bottom of the page");
+            
         }
     }
 };
