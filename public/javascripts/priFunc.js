@@ -12,7 +12,14 @@ window.onload = function () {
         currentList.classList.add('current');
     //let boardNum = document.getElementById("priPostSubmit").value;
 
-
+    // if page = 3, hide pagination
+    let boardNum = document.getElementById('priPostSubmit');
+    if (boardNum.value == 3) {
+        document.getElementById('paging').style.display = 'none';
+        document.getElementById('postList').style.display = 'none';
+        // let postshow = document.getElementById('postshow').innerHTML;
+        // appendPost(postshow)
+    }
 
     //게시글 작성 모달 열기
     const priPostBtn = document.getElementById("priPostBtn");
@@ -27,18 +34,24 @@ window.onload = function () {
     }
 
     //댓글 등록
-    const commentSubmitBtn = document.getElementById("commentSubmit");
-    if (commentSubmitBtn) {
-        commentSubmitBtn.addEventListener("click", commentSubmit, false);
-    }
+    // const commentSubmitBtn = document.getElementsByClassName("commentSubmit");
+    // if (commentSubmitBtn) {
+    //     for (let index = 0; index < commentSubmitBtn.length; index++) {
+    //         console.log('댓글 등록: ' + index);
+    //         commentSubmitBtn[index].addEventListener("click", commentSubmit, false);
+    //     }
+    // }
+    // Use on method: append button's click not working
+    $('#postDiv').on('click', '.commentSubmit', commentSubmit);
+    $('#postDiv').on('click', '.commentDel', commentPwModalOpen);
 
     //댓글 삭제 비밀번호 입력창 열기
-    const commentDel = document.getElementsByName("commentDel");
-    if (commentDel) {
-        for (let i = 0; i < commentDel.length; i++) {
-            commentDel[i].addEventListener("click", commentPwModalOpen, false);
-        }
-    }
+    // const commentDel = document.getElementsByName("commentDel");
+    // if (commentDel) {
+    //     for (let i = 0; i < commentDel.length; i++) {
+    //         commentDel[i].addEventListener("click", commentPwModalOpen, false);
+    //     }
+    // }
 
     //댓글 수정
     const commentUpdate = document.getElementsByName("commentUpdate");
@@ -474,7 +487,7 @@ function commentSubmit() {
         if (xhr.status === 200 || xhr.status === 201) {
             //console.log(xhr.responseText);
             alert("댓글 작성 완료!");
-            window.location.reload();
+            //window.location.reload();
         } else {
             alert("댓글 작성 오류!");
             window.location.reload();

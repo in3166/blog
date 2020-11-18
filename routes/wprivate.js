@@ -192,54 +192,134 @@ router.use("/board/:bn/:pn", function (req, res, next) {
 
 // 특정 게시글 읽기
 router.get("/board/:bn/:pn/:id", function (req, res) {
-
-  db.query('select * from board' + req.params.bn + ' where id = ?', [req.params.id], function (err, show, fields) { // 보여줄 게시글
-    if (err) {
-      throw err;
-    }
-    console.log("현재 페이지: " + res.locals.page);
-    console.log("현재 페이지: " + req.params.id);
-
-    let page = res.locals.page;
-    // if (req.body.value != undefined) {
-    //   page = req.body.value; // 현재 페이지 번호
-    // }
-    //console.log(page);
-    // console.log(show);
-    db.query("select * from comment" + req.params.bn + " where boardid = ?;", [req.params.id], function (err, comment, fields) { // 게시글에 맞는 댓글
+  // 3번째 게시판 무한 스크롤 구현
+  if (res.locals.boardNum == 3) {
+    let id = parseInt(req.params.id);
+    console.log(id, parseInt(id + 2))
+    db.query('select * from (select @ROWNUM := @ROWNUM + 1 AS ROWNUM, T.* from board' + req.params.bn + ' T, (SELECT @ROWNUM := 0) TMP ORDER BY ID asc) A WHERE A.ROWNUM >=? and A.ROWNUM <=?;', [id, id + 2], function (err, post3, fields) { // 보여줄 게시글
       if (err) {
         throw err;
       }
+      console.log("33333333");
+      console.log(post3);
+      if (!post3.length) {
+        console.log("null?");
 
-      //console.log(rows);
-      res.render("wprivate", {
-        title: "Private Room",
-        list1: "top",
-        list2: "post",
-        list3: "comment",
-        list4: "/",
-        list5: "/work",
-        list6: "#post",
-        post: res.locals.rows1, // 해당 게시판 목록 정보
-        postshow: show, //해당 게시글 내용
-        boardnum: req.params.bn, // 현재 게시판
-        currentPage: req.params.pn,
-        postnum: req.params.id, //게시글 메뉴 - 현재 페이지
-        //postnum: 3, //게시글 메뉴 - 현재 페이지
-        comment: comment, // 댓글 리스트 정보
+        res.sendStatus(404);
+      } else {
+        // console.log(post3[0].id);
+        // console.log(post3[1].id);
+        // console.log(post3[2].id);
 
-        //pagination
-        totalCount: res.locals.totalCount,
-        totalPage: res.locals.totalPage,
-        countList: res.locals.countList,
-        countPage: res.locals.countPage,
-        page: page,
-        startPage: res.locals.startPage,
-        endPage: res.locals.endPage,
+        //res.json(post3);
+        //console.log("현재 페이지: " + res.locals.page);
+        // console.log("현재 페이지: " + req.params.id);
 
+        let page = res.locals.page;
+        // if (req.body.value != undefined) {
+        //   page = req.body.value; // 현재 페이지 번호
+        // }
+        //console.log(page);
+        // console.log(show);
+        let whereQuery
+        if (post3[1] == null) {
+          whereQuery = ' where boardid = ' + post3[0].id + ";";
+        } else if (post3[2] == null) {
+          whereQuery = ' where boardid = ' + post3[0].id + ' or boardid = ' + post3[1].id + ';'
+        } else {
+          whereQuery = ' where boardid = ' + post3[0].id + ' or boardid = ' + post3[1].id + ' or boardid = ' + post3[2].id + ';';
+        }
+        db.query("select * from comment" + req.params.bn + whereQuery, function (err, comment, fields) { // 게시글에 맞는 댓글
+          if (err) {
+            throw err;
+          }
+          console.log("444444444");
+          console.log(comment);
+
+          res.json({
+            post3: post3,
+            comment3: comment,
+          });
+          //console.log(rows);
+          // res.render("wprivate", {
+          //   title: "Private Room",
+          //   list1: "top",
+          //   list2: "post",
+          //   list3: "comment",
+          //   list4: "/",
+          //   list5: "/work",
+          //   list6: "#post",
+          //   post: res.locals.rows1, // 해당 게시판 목록 정보
+          //   postshow: show, //해당 게시글 내용
+          //   boardnum: req.params.bn, // 현재 게시판
+          //   currentPage: req.params.pn,
+          //   postnum: req.params.id, //게시글 메뉴 - 현재 페이지
+          //   //postnum: 3, //게시글 메뉴 - 현재 페이지
+          //   comment: comment, // 댓글 리스트 정보
+
+          //pagination
+          // totalCount: res.locals.totalCount,
+          // totalPage: res.locals.totalPage,
+          // countList: res.locals.countList,
+          // countPage: res.locals.countPage,
+          // page: page,
+          // startPage: res.locals.startPage,
+          // endPage: res.locals.endPage,
+          //});
+        });
+      }
+    });
+  } else {
+    db.query('select * from board' + req.params.bn + ' where id = ?', [req.params.id], function (err, show, fields) { // 보여줄 게시글
+      if (err) {
+        throw err;
+      }
+      //console.log("현재 페이지: " + res.locals.page);
+      // console.log("현재 페이지: " + req.params.id);
+
+      let page = res.locals.page;
+      // if (req.body.value != undefined) {
+      //   page = req.body.value; // 현재 페이지 번호
+      // }
+      //console.log(page);
+      // console.log(show);
+      db.query("select * from comment" + req.params.bn + " where boardid = ?;", [req.params.id], function (err, comment, fields) { // 게시글에 맞는 댓글
+        if (err) {
+          throw err;
+        }
+
+        //console.log(rows);
+        res.render("wprivate", {
+          title: "Private Room",
+          list1: "top",
+          list2: "post",
+
+
+          list3: "comment",
+          list4: "/",
+          list5: "/work",
+          list6: "#post",
+          post: res.locals.rows1, // 해당 게시판 목록 정보
+          postshow: show, //해당 게시글 내용
+          boardnum: req.params.bn, // 현재 게시판
+          currentPage: req.params.pn,
+          postnum: req.params.id, //게시글 메뉴 - 현재 페이지
+          //postnum: 3, //게시글 메뉴 - 현재 페이지
+          comment: comment, // 댓글 리스트 정보
+
+          //pagination
+          totalCount: res.locals.totalCount,
+          totalPage: res.locals.totalPage,
+          countList: res.locals.countList,
+          countPage: res.locals.countPage,
+          page: page,
+          startPage: res.locals.startPage,
+          endPage: res.locals.endPage,
+
+        });
       });
     });
-  });
+  }
 });
 
 // 게시판 선택 -> 게시글 목록 갱신 ,첫번째 게시글 출력
@@ -264,7 +344,6 @@ router.get("/board/:bn/:pn", function (req, res) {
 
       post: res.locals.rows1,
       postshow: res.locals.rows1,
-      postnum: 1,
       boardnum: req.params.bn,
       currentPage: req.params.pn,
       comment: comment,

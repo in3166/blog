@@ -2,20 +2,20 @@
 <%- include('./includes/header'); %>
 
 <div class="container" id="post">
-  <button class="float-right border-white btn-light btn btn-sm p-1 mr-5" id="postDelBtn"
-    value="board<%= boardnum%>/<%= postnum%>">삭제</button>
-  <button class="float-right border-white btn-light btn btn-sm p-1" id="postModBtn">수정</button>
-  <button class="float-right border-white btn-light btn btn-sm p-1" id="priPostBtn">글쓰기</button>
 
   <div class="row mb-6 col-xl-12">
     <!-- <div class="w-100 mb-5"><button class="btn-dark float-right mr-4">삭제</button><button
-          class="btn-dark float-right mr-2" id="priPostBtn">글쓰기</button>
-      </div> -->
+      class="btn-dark float-right mr-2" id="priPostBtn">글쓰기</button>
+    </div> -->
 
     <!-- Post Content Column -->
-    <div class="col-xl-8">
+    <div class="col-xl-8" id="postDiv">
       <!-- Title -->
       <div>
+        <button class="float-right border-white btn-light btn btn-sm p-1 mr-5 postDelBtn" id="postDelBtn"
+          value="board<%= boardnum%>/<%= postnum%>">삭제</button>
+        <button class="float-right border-white btn-light btn btn-sm p-1 postModBtn" id="postModBtn">수정</button>
+        <button class="float-right border-white btn-light btn btn-sm p-1 priPostBtn" id="priPostBtn">글쓰기</button>
         <h1 class="mt-4" id="postTitle0"><%= postshow[0].title %></h1>
         <hr>
       </div>
@@ -63,18 +63,18 @@
                   <%= comment[i].content %>
                 </span>
                 <span class="float-right small text-gray">
-                  <button class="btn2 ml-2" value="comment<%= boardnum%>/<%= comment[i].id%>" type="button"
-                    name="commentUpdate"><i class="fas fa-pen"></i></button>
-                  <button class="btn2 ml-2" value="comment<%= boardnum%>/<%= comment[i].id%>" type="button"
+                  <button class="btn2 ml-2 commentUpdate" value="comment<%= boardnum%>/<%= comment[i].id%>"
+                    type="button" name="commentUpdate"><i class="fas fa-pen"></i></button>
+                  <button class="btn2 ml-2 commentDel" value="comment<%= boardnum%>/<%= comment[i].id%>" type="button"
                     name="commentDel"><i class="fas fa-trash-alt"></i></button>
                 </span>
                 <div class="card-group mt-3">
                   <input type="password" name="commentUpdatePw" class="" hidden autocomplete="on"
                     placeholder="Password">
-                  <button class="btn2 ml-2 border-dark" hidden type="button"
+                  <button class="btn2 ml-2 border-dark commentUpdateComplete" hidden type="button"
                     value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentUpdateComplete">완료</button>
-                  <button class="btn2 ml-2" hidden value="comment<%= boardnum%>/<%= comment[i].id%>" type="button"
-                    name="commentUpCancel"> <i class="fas fa-times" id="commentUpClose"></i></button>
+                  <button class="btn2 ml-2 commentUpCancel" hidden value="comment<%= boardnum%>/<%= comment[i].id%>"
+                    type="button" name="commentUpCancel"> <i class="fas fa-times" id="commentUpClose"></i></button>
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@
               <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
               <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
                 type="button" autocomplete="on">
-              <button class="btn btn-primary float-right" id="commentSubmit" type="button"
+              <button class="btn btn-primary float-right commentSubmit" id="commentSubmit" type="button"
                 value="<%= boardnum%>/<%= postnum%>">Submit</button>
             </div>
           </form>
@@ -128,7 +128,7 @@
             </div>
           </div>
         </div> -->
-        <div>
+        <div id="paging">
           <nav>
             <ul class="pager list-unstyled">
               <% if(postnum == 1){ %>
@@ -191,7 +191,7 @@
       </div>
 
       <!-- Side Widget -->
-      <div class="card my-4">
+      <div class="card my-4" id="postList">
         <h5 class="card-header">게시글
         </h5>
 
@@ -217,7 +217,7 @@
         </div>
         <!-- li태그의 클래스에 active를 넣으면 색이 반전되고 클릭도 되지 않는다. -->
         <!-- active의 의미는 현재 페이지의 의미이다. -->
-        <div class=" align-self-center">
+        <div class="align-self-center">
           <ul class="pagination-sm pagination">
 
             <% if (page == 1){ %>
@@ -306,7 +306,6 @@
         </div>
       </form>
     </div>
-
   </div>
 </div>
 
@@ -360,6 +359,7 @@
 <!-- Footer-->
 <%- include('./includes/footer'); %>
 
+<h2 style="display:none;" id="postshow"><%= postshow %></h2>
 <input type="hidden" id="currentPageNumber" value="<%= postnum %>" />
 
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
