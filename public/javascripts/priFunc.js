@@ -17,6 +17,7 @@ window.onload = function () {
     if (boardNum.value == 3) {
         document.getElementById('paging').style.display = 'none';
         document.getElementById('postList').style.display = 'none';
+        document.getElementById('postList').style.display = 'none';
         // let postshow = document.getElementById('postshow').innerHTML;
         // appendPost(postshow)
     }

@@ -10,7 +10,8 @@ const { db } = require("../model/db_conn.js");
 // bn: 어떤 게시판인지
 
 // 최우선 할일: mysql-rownum-페이징, update구현 in work, required구현, 
-
+// 페이징, 페이지네이션 ejs에 id 대신 그냥 i 시퀀셜, 게시물 보여주기에서 rownum으로 select해서 게시물 보여주기 rownum에 맞는 id가 
+// get post put delete
 
 // 댓글/게시글 수정
 router.post("/update/:bn/:id", function (req, res) {
@@ -200,27 +201,10 @@ router.get("/board/:bn/:pn/:id", function (req, res) {
       if (err) {
         throw err;
       }
-      console.log("33333333");
-      console.log(post3);
       if (!post3.length) {
-        console.log("null?");
-
         res.sendStatus(404);
       } else {
-        // console.log(post3[0].id);
-        // console.log(post3[1].id);
-        // console.log(post3[2].id);
 
-        //res.json(post3);
-        //console.log("현재 페이지: " + res.locals.page);
-        // console.log("현재 페이지: " + req.params.id);
-
-        let page = res.locals.page;
-        // if (req.body.value != undefined) {
-        //   page = req.body.value; // 현재 페이지 번호
-        // }
-        //console.log(page);
-        // console.log(show);
         let whereQuery
         if (post3[1] == null) {
           whereQuery = ' where boardid = ' + post3[0].id + ";";
@@ -233,39 +217,11 @@ router.get("/board/:bn/:pn/:id", function (req, res) {
           if (err) {
             throw err;
           }
-          console.log("444444444");
-          console.log(comment);
 
           res.json({
             post3: post3,
             comment3: comment,
           });
-          //console.log(rows);
-          // res.render("wprivate", {
-          //   title: "Private Room",
-          //   list1: "top",
-          //   list2: "post",
-          //   list3: "comment",
-          //   list4: "/",
-          //   list5: "/work",
-          //   list6: "#post",
-          //   post: res.locals.rows1, // 해당 게시판 목록 정보
-          //   postshow: show, //해당 게시글 내용
-          //   boardnum: req.params.bn, // 현재 게시판
-          //   currentPage: req.params.pn,
-          //   postnum: req.params.id, //게시글 메뉴 - 현재 페이지
-          //   //postnum: 3, //게시글 메뉴 - 현재 페이지
-          //   comment: comment, // 댓글 리스트 정보
-
-          //pagination
-          // totalCount: res.locals.totalCount,
-          // totalPage: res.locals.totalPage,
-          // countList: res.locals.countList,
-          // countPage: res.locals.countPage,
-          // page: page,
-          // startPage: res.locals.startPage,
-          // endPage: res.locals.endPage,
-          //});
         });
       }
     });

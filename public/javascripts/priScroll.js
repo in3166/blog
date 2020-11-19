@@ -1,5 +1,5 @@
 function getPageId(n) {
-    return 'article-page-' + n;
+    return 'postpage' + n;
 }
 
 function getDocumentHeight() {
@@ -87,6 +87,8 @@ function addPage(page) {
 var bool_sw = true;
 var boardNum = document.getElementById('priPostSubmit');
 var i = 3;
+const articleListPagination = document.getElementById('article-list-pagination');
+let page = 0;
 window.onscroll = function () {
     if (boardNum.value == 3) {
         var height = Math.max(document.body.scrollHeight, document.body.offsetHeight,
@@ -139,7 +141,9 @@ window.onscroll = function () {
                 bool_sw = false;
                 xhr.send();
                 i = i + 2;
+                addPaginationPage(++page);
             }
+
         }
     }
 };
@@ -152,7 +156,8 @@ function appenPost3(post, comment) {
     let postDiv = document.getElementById('postDiv');
     let commentStr = "";
     for (let i = 0; i < comment.length; i++) {
-        commentStr += '<div id="comment3/' + comment[i].id + '">'
+        commentStr += '<div id="postpage' + i + '">'
+            + '<div id="comment3/' + comment[i].id + '">'
             + '<form>'
             + '<div class="media mb-4">'
             + '<div class="media-body">'
@@ -238,6 +243,7 @@ function appenPost3(post, comment) {
                                     value="3/` + post.id + `">Submit</button>
             </div>
           </form>
+        </div>
         </div>
         </div>
         </div>
