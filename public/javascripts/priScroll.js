@@ -2,52 +2,52 @@ function getPageId(n) {
     return 'postpage' + n;
 }
 
-function getDocumentHeight() {
-    const body = document.body;
-    const html = document.documentElement;
+// function getDocumentHeight() {
+//     const body = document.body;
+//     const html = document.documentElement;
 
-    return Math.max(
-        body.scrollHeight, body.offsetHeight,
-        html.clientHeight, html.scrollHeight, html.offsetHeight
-    );
-};
+//     return Math.max(
+//         body.scrollHeight, body.offsetHeight,
+//         html.clientHeight, html.scrollHeight, html.offsetHeight
+//     );
+// };
 
-function getScrollTop() {
-    return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-}
+// function getScrollTop() {
+//     return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+// }
 
-function getArticleImage() {
-    const hash = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
-    const image = new Image;
-    image.className = 'article-list__item__image article-list__item__image--loading';
-    image.src = 'http://api.adorable.io/avatars/250/' + hash;
+// function getArticleImage() {
+//     const hash = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+//     const image = new Image;
+//     image.className = 'article-list__item__image article-list__item__image--loading';
+//     image.src = 'http://api.adorable.io/avatars/250/' + hash;
 
-    image.onload = function () {
-        image.classList.remove('article-list__item__image--loading');
-    };
-    return image;
-}
+//     image.onload = function () {
+//         image.classList.remove('article-list__item__image--loading');
+//     };
+//     return image;
+// }
 
-function getArticle() {
-    const articleImage = getArticleImage();
-    const article = document.createElement('article');
-    article.className = 'article-list__item';
-    article.appendChild(articleImage);
+// function getArticle() {
+//     const articleImage = getArticleImage();
+//     const article = document.createElement('article');
+//     article.className = 'article-list__item';
+//     article.appendChild(articleImage);
 
-    return article;
-}
+//     return article;
+// }
 
-function getArticlePage(page, articlesPerPage = 16) {
-    const pageElement = document.createElement('div');
-    pageElement.id = getPageId(page);
-    pageElement.className = 'article-list__page';
+// function getArticlePage(page, articlesPerPage = 16) {
+//     const pageElement = document.createElement('div');
+//     pageElement.id = getPageId(page);
+//     pageElement.className = 'article-list__page';
 
-    while (articlesPerPage--) {
-        pageElement.appendChild(getArticle());
-    }
+//     while (articlesPerPage--) {
+//         pageElement.appendChild(getArticle());
+//     }
 
-    return pageElement;
-}
+//     return pageElement;
+// }
 
 function addPaginationPage(page) {
     const pageLink = document.createElement('a');
@@ -60,7 +60,7 @@ function addPaginationPage(page) {
 
     articleListPagination.appendChild(listItem);
 
-    if (page === 2) {
+    if (page === 1) {
         articleListPagination.classList.remove('article-list__pagination--inactive');
     }
 }
@@ -70,7 +70,7 @@ function fetchPage(page) {
 }
 
 function addPage(page) {
-    fetchPage(page);
+    //  fetchPage(page);
     addPaginationPage(page);
 }
 
@@ -84,9 +84,9 @@ function addPage(page) {
 //     if (getScrollTop() < getDocumentHeight() - window.innerHeight) return;
 //     addPage(++page);
 // };
-var bool_sw = true;
-var boardNum = document.getElementById('priPostSubmit');
-var i = 3;
+let bool_sw = true;
+let boardNum = document.getElementById('priPostSubmit');
+let i = 2;
 const articleListPagination = document.getElementById('article-list-pagination');
 let page = 0;
 window.onscroll = function () {
@@ -97,6 +97,7 @@ window.onscroll = function () {
 
         //console.log(window.innerHeight + " / " + window.scrollY + " / " + height)
         if ((window.innerHeight + window.scrollY) >= height - 2) {
+
             console.log("you're at the bottom of the page");
 
             let xhr = new XMLHttpRequest();
@@ -121,10 +122,11 @@ window.onscroll = function () {
                     console.log(comment1);
                     console.log(post);
                     console.log(comment3);
-                    appenPost3(post[0], comment1);
-                    appenPost3(post[1], comment2);
-                    appenPost3(post[2], comment3);
+                    appenPost3(post[0], comment1, true);
+                    appenPost3(post[1], comment2, false);
+                    appenPost3(post[2], comment3, false);
                     bool_sw = true;
+                    i = i + 3;
 
                 } else if (xhr.status === 404) {
                     console.log("마지막 페이지 입니다.");
@@ -137,18 +139,17 @@ window.onscroll = function () {
             xhr.open('get', '/private/board/3/1/' + i);
             xhr.setRequestHeader('content-type', 'application/json');
             if (bool_sw === true) {
-                console.log(i)
                 bool_sw = false;
-                xhr.send();
-                i = i + 2;
                 addPaginationPage(++page);
+                console.log(i)
+                xhr.send();
             }
-
         }
     }
 };
 
-function appenPost3(post, comment) {
+function appenPost3(post, comment, id) {
+
     if (post == null) {
         console.log("마지막")
         return
@@ -156,8 +157,7 @@ function appenPost3(post, comment) {
     let postDiv = document.getElementById('postDiv');
     let commentStr = "";
     for (let i = 0; i < comment.length; i++) {
-        commentStr += '<div id="postpage' + i + '">'
-            + '<div id="comment3/' + comment[i].id + '">'
+        commentStr += '<div id="comment3/' + comment[i].id + '">'
             + '<form>'
             + '<div class="media mb-4">'
             + '<div class="media-body">'
@@ -193,7 +193,17 @@ function appenPost3(post, comment) {
     var el = document.createElement("div")
     el.id = "page" + i;
     //el.classList
-    el.innerHTML = `
+    let page2;
+    let hr;
+    if (id) {
+        page2 = page + 1;
+        hr = "Page. " + page2;
+    } else {
+        page2 = "sub" + page + 1;
+        hr = "";
+    }
+    el.innerHTML = hr + `
+    <div id="postpage`+ page2 + `">
     <div>
         <h1 class="mt-4" id="postTitle0">`+ post.title + `</h1>
         <hr>

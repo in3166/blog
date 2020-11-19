@@ -185,6 +185,15 @@ body,
 }
 
 /*  */
+
+#hh {
+  display: inline-block;
+  width: 25%;
+
+  position: relative;
+  top: .2em;
+}
+
 .article-list__pagination--inactive {
   -webkit-transform: translateY(100%);
   transform: translateY(100%);
