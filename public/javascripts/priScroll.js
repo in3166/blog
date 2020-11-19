@@ -152,8 +152,8 @@ function appenPost3(post, comment) {
     let postDiv = document.getElementById('postDiv');
     let commentStr = "";
     for (let i = 0; i < comment.length; i++) {
-        commentStr += '<div id="comment3/' + comment[i].id + '">' +
-            +'<form>'
+        commentStr += '<div id="comment3/' + comment[i].id + '">'
+            + '<form>'
             + '<div class="media mb-4">'
             + '<div class="media-body">'
             + '<div class="mb-1">'
@@ -228,7 +228,7 @@ function appenPost3(post, comment) {
                 <h5 class="card-header">Leave a Comment:</h5>
                 <form>
                     <div class="card-body">
-                        <div class="form-group">
+                        <div class="form-group" id="contentdiv">
                             <textarea class="form-control" rows="2" id="commentSubmitContent"></textarea>
                         </div>
                         <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">

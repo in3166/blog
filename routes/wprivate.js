@@ -344,6 +344,7 @@ router.get("/board/:bn/:pn", function (req, res) {
 
       post: res.locals.rows1,
       postshow: res.locals.rows1,
+      postnum: 1,
       boardnum: req.params.bn,
       currentPage: req.params.pn,
       comment: comment,

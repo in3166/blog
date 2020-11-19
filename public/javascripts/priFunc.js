@@ -473,9 +473,10 @@ function commentSubmit() {
 
     let xhr = new XMLHttpRequest();
 
-    let name = document.getElementById("commentName").value;
-    let content = document.getElementById("commentSubmitContent").value;
-    let pw = document.getElementById("commentPw").value;
+    let name = $(this).prevAll("#commentName").val();
+    let content = $(this).prevAll("#contentdiv").find("#commentSubmitContent").val();
+    console.log("내용: " + content);
+    let pw = $(this).prevAll("#commentPw").val();
     let num = this.value;
     console.log(num);
 
@@ -490,7 +491,7 @@ function commentSubmit() {
             //window.location.reload();
         } else {
             alert("댓글 작성 오류!");
-            window.location.reload();
+            // window.location.reload();
         }
     }
 
