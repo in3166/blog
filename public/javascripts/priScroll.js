@@ -119,9 +119,9 @@ window.onscroll = function () {
                             comment3.push(e);
                         }
                     });
-                    console.log(comment1);
-                    console.log(post);
-                    console.log(comment3);
+                    //console.log(comment1);
+                    //console.log(post);
+                    //console.log(comment3);
                     appenPost3(post[0], comment1, true);
                     appenPost3(post[1], comment2, false);
                     appenPost3(post[2], comment3, false);
