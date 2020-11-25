@@ -155,7 +155,7 @@ router.use("/board/:bn/:pn", function (req, res, next) {
 
     let totalPage = parseInt(totalCount / countList); // 총 페이지 수
     console.log("totalPage: " + totalPage);
-    console.log(totalCount % countList);
+    //console.log(totalCount % countList);
     if (totalCount % countList > 0) {
       totalPage++;
     }
@@ -194,7 +194,9 @@ router.use("/board/:bn/:pn", function (req, res, next) {
 // 특정 게시글 읽기
 router.get("/board/:bn/:pn/:id", function (req, res) {
   // 3번째 게시판 무한 스크롤 구현
+
   if (res.locals.boardNum == 3) {
+
     let id = parseInt(req.params.id);
     console.log(id, parseInt(id + 2))
     db.query('select * from (select @ROWNUM := @ROWNUM + 1 AS ROWNUM, T.* from board' + req.params.bn + ' T, (SELECT @ROWNUM := 0) TMP ORDER BY ID asc) A WHERE A.ROWNUM >=? and A.ROWNUM <=?;', [id, id + 2], function (err, post3, fields) { // 보여줄 게시글
@@ -204,7 +206,7 @@ router.get("/board/:bn/:pn/:id", function (req, res) {
       if (!post3.length) {
         res.sendStatus(404);
       } else {
-
+        // 마지막 페이지의 게시글 댓글 불러오기
         let whereQuery
         if (post3[1] == null) {
           whereQuery = ' where boardid = ' + post3[0].id + ";";
@@ -227,29 +229,22 @@ router.get("/board/:bn/:pn/:id", function (req, res) {
     });
   } else {
     db.query('select * from board' + req.params.bn + ' where id = ?', [req.params.id], function (err, show, fields) { // 보여줄 게시글
+      console.log(req.params.bn, req.params.id)
       if (err) {
         throw err;
       }
-      //console.log("현재 페이지: " + res.locals.page);
-      // console.log("현재 페이지: " + req.params.id);
-
       let page = res.locals.page;
-      // if (req.body.value != undefined) {
-      //   page = req.body.value; // 현재 페이지 번호
-      // }
-      //console.log(page);
-      // console.log(show);
       db.query("select * from comment" + req.params.bn + " where boardid = ?;", [req.params.id], function (err, comment, fields) { // 게시글에 맞는 댓글
         if (err) {
           throw err;
         }
 
-        //console.log(rows);
+        console.log(show);
+        console.log("??")
         res.render("wprivate", {
           title: "Private Room",
           list1: "top",
           list2: "post",
-
 
           list3: "comment",
           list4: "/",
@@ -284,35 +279,39 @@ router.get("/board/:bn/:pn", function (req, res) {
   console.log("게시판 번호: " + res.locals.boardNum);
   console.log("현재 페이지: 넘겨 받은 값 " + res.locals.page);
 
-  db.query("select * from comment" + req.params.bn + " where boardid = 1;", function (err, comment, fields) {
-    if (err) {
-      throw err;
-    }
+  db.query("select MIN(id) as id from board" + req.params.bn, function (err, postnum, fields) {
+    console.log(postnum.id)
+    console.log(postnum[0].id)
 
-    res.render("wprivate", {
-      title: "Private Room",
-      list1: "top",
-      list2: "post",
-      list3: "comment",
-      list4: "/",
-      list5: "/work",
-      list6: "#post",
+    db.query("select * from comment" + req.params.bn + " where boardid = " + postnum[0].id + ";", function (err, comment, fields) {
+      if (err) {
+        throw err;
+      }
+      res.render("wprivate", {
+        title: "Private Room",
+        list1: "top",
+        list2: "post",
+        list3: "comment",
+        list4: "/",
+        list5: "/work",
+        list6: "#post",
 
-      post: res.locals.rows1,
-      postshow: res.locals.rows1,
-      postnum: 1,
-      boardnum: req.params.bn,
-      currentPage: req.params.pn,
-      comment: comment,
+        post: res.locals.rows1,
+        postshow: res.locals.rows1,
+        postnum: postnum[0].id,
+        boardnum: req.params.bn,
+        currentPage: req.params.pn,
+        comment: comment,
 
-      //pagination
-      totalCount: res.locals.totalCount,
-      totalPage: res.locals.totalPage,
-      countList: res.locals.countList,
-      countPage: res.locals.countPage,
-      page: res.locals.page,
-      startPage: res.locals.startPage,
-      endPage: res.locals.endPage,
+        //pagination
+        totalCount: res.locals.totalCount,
+        totalPage: res.locals.totalPage,
+        countList: res.locals.countList,
+        countPage: res.locals.countPage,
+        page: res.locals.page,
+        startPage: res.locals.startPage,
+        endPage: res.locals.endPage,
+      });
     });
   });
 });
