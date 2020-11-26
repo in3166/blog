@@ -18,7 +18,7 @@ function weather(lat, lon) {
     var hours = today.getHours();
     var minutes = today.getMinutes();
 
-    console.log("time " + minutes)
+    //console.log("time " + minutes)
 
     if (minutes < 30) {
         // 30분보다 작으면 한시간 전 값
@@ -121,9 +121,8 @@ function weather(lat, lon) {
                     const time = $(this).find('fcstDate').text();
                     const cate = $(this).find('category').text();
                     const wea_val = $(this).find('fcstValue').text();
-
                     data.push({ "time": time, "cate": cate, "val": wea_val });
-                    // 출력
+
                     // console.log(`시간 : ${time} 날씨 정보 : ${cate} 값 : ${wea_val}`);
                 });
                 console.log(data);
