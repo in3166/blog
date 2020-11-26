@@ -69,9 +69,15 @@ body,
   }
 }
 
+@media (max-width: 1235px) {
+  .msh1 {
+    display: none;
+  }
+}
+
 @media (min-width: 535px) {
   .msh {
-    display: none;
+    display: block;
   }
 }
 

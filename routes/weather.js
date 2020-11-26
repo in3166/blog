@@ -41,9 +41,9 @@ function weather(lat, lon) {
     if (dd < 10) {
         dd = '0' + dd
     }
-
+    hours = parseInt(hours)
     basedate = yyyy + "" + mm + "" + dd;
-    console.log("12321:  " + hours)
+    //console.log("12321:  " + hours)
 
     switch (hours) {
         case 23:
@@ -90,8 +90,9 @@ function weather(lat, lon) {
             break;
     }
 
-    console.log("시간: " + hours);
-    console.log(nx, ny)
+    //console.log("날짜: " + basedate);
+    //console.log("시간: " + hours);
+    //console.log(nx, ny)
 
     var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst';
     var queryParams = '?' + encodeURIComponent('ServiceKey') + '=MCY3wIU4Zx8fdOOEsVJdb3iTtG9GeFn1YnYW1I8wmirD%2FEB3nyQZCvcvIeEfLUCIaPJ8pZA0hSfsR8SLUUFVFA%3D%3D'; /* Service Key*/
