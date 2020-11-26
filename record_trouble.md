@@ -29,3 +29,17 @@ select @ROWNUM := @ROWNUM + 1 AS ROWNUM, T.* from board3 T, (SELECT @ROWNUM := 0
   + 댓글 가져오기 -> 가져온 게시물 ID에 맞는 댓글 가져오기 -> SELECT한 게시물 아이디 하나씩 저장 후 갯수만큼 댓글 쿼리 돌림?
   + 반복이 많아져서 where 절에 id or id or id
 ### 2. 
+
+
+#11-16
+### 다음 페이지, 이전 페이지 구현
+- 페이지네이션 설계 오류 -> ID 대신 limit, rownum -> 페이징 기능을 바꾸면 라우팅을 새로? / 아님 페이지네이션 자체의 로직 변경?
+
+### 오류 잡기 구현 미숙
+- 오류 코드
+- try-catch 부재
+
+### 댓글 추가 시 현재페이지에서 추가
+- 이름, 내용, 날짜는 추가 가능
+- 삭제, 수정 시 value에 ID 추가를 어떻게 할 것인지 -> INSERT 후 SELECT로 ID 받아와서 JS에서 APPEND?
+
