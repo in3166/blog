@@ -28,10 +28,9 @@ select @ROWNUM := @ROWNUM + 1 AS ROWNUM, T.* from board3 T, (SELECT @ROWNUM := 0
 + ### 문제
   + 댓글 가져오기 -> 가져온 게시물 ID에 맞는 댓글 가져오기 -> SELECT한 게시물 아이디 하나씩 저장 후 갯수만큼 댓글 쿼리 돌림?
   + 반복이 많아져서 where 절에 id or id or id
-### 2. 
 
 
-#11-16
+# 11-16
 ### 다음 페이지, 이전 페이지 구현
 - 페이지네이션 설계 오류 -> ID 대신 limit, rownum -> 페이징 기능을 바꾸면 라우팅을 새로? / 아님 페이지네이션 자체의 로직 변경?
 
