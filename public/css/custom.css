@@ -63,9 +63,15 @@ body,
   display: none;
 }
 
+@media (max-width: 535px) {
+  .msh {
+    display: none;
+  }
+}
+
 @media (min-width: 535px) {
   .msh {
-    display: block;
+    display: none;
   }
 }
 
