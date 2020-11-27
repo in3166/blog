@@ -180,12 +180,19 @@ function weatherFunc(lat2, lon2) {
             let temper;
             let wind;
             let rain;
+            let rainPer;
             let sky;
             for (let index = 0; index < wea_val.length; index++) {
                 if (wea_val[index].cate == "SKY") {
                     sky = wea_val[index].val;
                 } else if (wea_val[index].cate == "PTY") {
                     rain = wea_val[index].val;
+                } else if (wea_val[index].cate == "T3H") {
+                    temper = wea_val[index].val;
+                } else if (wea_val[index].cate == "POP") {
+                    rainPer = wea_val[index].val;
+                } else if (wea_val[index].cate == "WSD") {
+                    wind = wea_val[index].val;
                 }
 
             }
@@ -194,31 +201,31 @@ function weatherFunc(lat2, lon2) {
             if (sky == 1) {
                 imgUrl = 'sun.jpg';
             } else if (sky == 3) {
-                if (wea_val[1].val == 0) {
+                if (rain == 0) {
                     imgUrl = 'cloud-sun1.jpg';
-                } else if (wea_val[1].val == 1 || wea_val[1].val == 4 || wea_val[1].val == 5) {
+                } else if (rain == 1 || rain == 4 || rain == 5) {
                     imgUrl = 'rain.jpg';
                 }
-                else if (wea_val[1].val == 3 || wea_val[1].val == 7) {
+                else if (rain == 3 || rain == 7) {
                     imgUrl = 'snow.jpg';
                 }
-                else if (wea_val[1].val == 2 || wea_val[1].val == 6) {
+                else if (rain == 2 || rain == 6) {
                     imgUrl = 'snow-rain.jpg';
                 }
             } else {
-                if (wea_val[1].val == 0) {
+                if (rain == 0) {
                     imgUrl = 'cloud.jpg';
-                } else if (wea_val[1].val == 1 || wea_val[1].val == 4 || wea_val[1].val == 5) { imgUrl = 'rain.jpg'; }
-                else if (wea_val[1].val == 3 || wea_val[1].val == 7) { imgUrl = 'snow.jpg'; }
-                else if (wea_val[1].val == 2 || wea_val[1].val == 6) { imgUrl = 'snow-rain.jpg'; }
+                } else if (rain == 1 || rain == 4 || rain == 5) { imgUrl = 'rain.jpg'; }
+                else if (rain == 3 || rain == 7) { imgUrl = 'snow.jpg'; }
+                else if (rain == 2 || rain == 6) { imgUrl = 'snow-rain.jpg'; }
             }
 
             console.log(imgUrl)
 
             document.getElementById('weaImg').src = "../img/weather/" + imgUrl;
-            document.getElementById('temval').innerHTML = wea_val[6].val + ' &#8451;';
-            document.getElementById('rainval').innerText = wea_val[0].val + ' %';
-            document.getElementById('windval').innerText = wea_val[10].val + ' m/s';
+            document.getElementById('temval').innerHTML = temper + ' &#8451;';
+            document.getElementById('rainval').innerText = rainPer + ' %';
+            document.getElementById('windval').innerText = wind + ' m/s';
         } else {
 
         }
