@@ -177,10 +177,23 @@ function weatherFunc(lat2, lon2) {
             console.log(wea_val)
             console.log(window.location.pathname);
             var imgUrl;
+            let temper;
+            let wind;
+            let rain;
+            let sky;
+            for (let index = 0; index < wea_val.length; index++) {
+                if (wea_val[index].cate == "SKY") {
+                    sky = wea_val[index].val;
+                } else if (wea_val[index].cate == "PTY") {
+                    rain = wea_val[index].val;
+                }
 
-            if (wea_val[5] == 1) {
+            }
+
+
+            if (sky == 1) {
                 imgUrl = 'sun.jpg';
-            } else if (wea_val[5] == 3) {
+            } else if (sky == 3) {
                 if (wea_val[1].val == 0) {
                     imgUrl = 'cloud-sun1.jpg';
                 } else if (wea_val[1].val == 1 || wea_val[1].val == 4 || wea_val[1].val == 5) {
@@ -201,6 +214,7 @@ function weatherFunc(lat2, lon2) {
             }
 
             console.log(imgUrl)
+
             document.getElementById('weaImg').src = "../img/weather/" + imgUrl;
             document.getElementById('temval').innerHTML = wea_val[6].val + ' &#8451;';
             document.getElementById('rainval').innerText = wea_val[0].val + ' %';

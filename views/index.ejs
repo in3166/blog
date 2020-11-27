@@ -1,6 +1,8 @@
 <!-- Header-->
 <%- include('./includes/header'); %>
-
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v9.0"
+  nonce="v3p2aB2x"></script>
 <!-- Services-->
 <section class="page-section" id="introduce">
   <div class="container">
@@ -216,12 +218,15 @@
           <img class="mx-auto rounded-circle" src="/img/favicon.ico" alt="" />
           <h4>Yu InJong</h4>
           <p class="text-muted">1995. 02. 27</p>
+
           <a class="btn btn-dark btn-social mx-2" id="channel-chat-button" href="javascript:;"
             onclick="void chatChannel();">
             <img class="rounded-circle" width="40"
               src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" />
           </a>
-          <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+          <a target="_blank" class="btn btn-dark btn-social mx-2" data-href="https://www.facebook.com/in3166"
+            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fin3166&amp;src=sdkpreparse"
+            class="fb-xfbml-parse-ignore"><i class="fab fa-facebook-f"></i></a>
           <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
@@ -250,35 +255,34 @@
 </section>
 <!-- GitHub Graph-->
 
-<div class="container w-100">
-  <div class="row p-lg-3 border justify-content-center align-content-center">
-    <div class="my-auto"><img src="" alt="Loading..." id="weaImg" class="w-100 ">
-    </div>
-    <div class=" row ml-lg-1  my-auto small weaVal">
+<div class="row p-lg-3 border justify-content-center align-content-center">
+  <div class="my-auto"><img src="" alt="Loading..." id="weaImg" class="w-100 ">
+  </div>
+  <div class=" row ml-lg-1  my-auto small weaVal">
+    <div>
       <div>
-        <div>
-          기온:
-        </div>
-        <div>
-          강우 확률:
-        </div>
-        <div>
-          풍속:
-        </div>
+        기온:
       </div>
-      <div class="ml-3">
-        <div id="temval">
+      <div>
+        강우 확률:
+      </div>
+      <div>
+        풍속:
+      </div>
+    </div>
+    <div class="ml-3">
+      <div id="temval">
 
-        </div>
-        <div id="rainval">
+      </div>
+      <div id="rainval">
 
-        </div>
-        <div id="windval">
+      </div>
+      <div id="windval">
 
-        </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 </div>
 
