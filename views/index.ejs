@@ -216,7 +216,11 @@
           <img class="mx-auto rounded-circle" src="/img/favicon.ico" alt="" />
           <h4>Yu InJong</h4>
           <p class="text-muted">1995. 02. 27</p>
-          <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+          <a class="btn btn-dark btn-social mx-2" id="channel-chat-button" href="javascript:;"
+            onclick="void chatChannel();">
+            <img class="rounded-circle" width="40"
+              src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" />
+          </a>
           <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
           <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
         </div>
@@ -331,7 +335,16 @@
 
 <!-- Footer-->
 <%- include('./includes/footer'); %>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
+  Kakao.init('7e41432052c3dc4b8f2da4960c5c4ce7');
+  function chatChannel() {
+    Kakao.Channel.chat({
+      channelPublicId: '_xdxaJfK',
+    })
+  }
 
+</script>
 <!-- Font Awesome icons (free version)-->
 <!-- <script data-cfasync="false" type="text/javascript" src="/javascripts/index_mail.js"></script> -->
 <script data-cfasync="false" type="text/javascript" src="/javascripts/form-submission-handler.js"></script>
