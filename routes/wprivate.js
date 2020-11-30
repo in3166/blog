@@ -49,10 +49,21 @@ router.post("/delete/:bn/:id", function (req, res) {
   let pw = req.body.pw;
   console.log("입력한 비밀번호: " + pw);
   console.log("아이디: " + req.params.id);
-
+  let url = req.params.bn;
   db.query('select * from ' + req.params.bn + ' where id = ?', [req.params.id], function (err1, result) {
     //console.log(result[0].userpw);
     if (pw === result[0].userpw || pw === "zhrqkr12") {
+      if (url.includes('board')) {
+        url = url.replace("board", "comment");
+        db.query('delete from ' + url + ' where boardid = ?', [req.params.id], function (err, result) {
+          if (err) {
+            console.log('delete error', err);
+            //res.redirect('/work');
+            res.sendStatus(501);
+          }
+
+        });
+      }
       db.query('delete from ' + req.params.bn + ' where id = ?', [req.params.id], function (err, result) {
         if (err) {
           console.log('delete error', err);
