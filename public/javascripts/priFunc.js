@@ -46,6 +46,7 @@ window.onload = function () {
     // Use on method: append button's click not working
     $('#postDiv').on('click', '.commentSubmit', commentSubmit);
     $('#postDiv').on('click', '.commentDel', commentPwModalOpen);
+    $('#postDiv').on('click', '.commentUpdate', commentUpdateOpen);
 
     //댓글 삭제 비밀번호 입력창 열기
     // const commentDel = document.getElementsByName("commentDel");
@@ -56,12 +57,12 @@ window.onload = function () {
     // }
 
     //댓글 수정
-    const commentUpdate = document.getElementsByName("commentUpdate");
-    if (commentUpdate) {
-        for (let i = 0; i < commentUpdate.length; i++) {
-            commentUpdate[i].addEventListener("click", event => commentUpdateOpen(i), false);
-        }
-    }
+    // const commentUpdate = document.getElementsByName("commentUpdate");
+    // if (commentUpdate) {
+    //     for (let i = 0; i < commentUpdate.length; i++) {
+    //         commentUpdate[i].addEventListener("click", event => commentUpdateOpen(i), false);
+    //     }
+    // }
 
     let commentUpdateComplete = document.getElementsByName("commentUpdateComplete");
     if (commentUpdateComplete) {
@@ -70,12 +71,14 @@ window.onload = function () {
         }
     }
 
-    let commentUpCancel = document.getElementsByName("commentUpCancel");
-    if (commentUpCancel) {
-        for (let i = 0; i < commentUpCancel.length; i++) {
-            commentUpCancel[i].addEventListener("click", event => commentUpCancelFunc(i), false);
-        }
-    }
+    // 수정 x 버튼
+    $('#postDiv').on('click', '.commentUpCancel', commentUpCancelFunc);
+    // let commentUpCancel = document.getElementsByName("commentUpCancel");
+    // if (commentUpCancel) {
+    //     for (let i = 0; i < commentUpCancel.length; i++) {
+    //         commentUpCancel[i].addEventListener("click", event => commentUpCancelFunc(i), false);
+    //     }
+    // }
 
     //댓글 삭제
     let commentModalDelBtn = document.getElementById("commentModalDelBtn");
@@ -195,9 +198,13 @@ function postModModalOpen() {
     }, false);
 }
 
-function commentUpdateOpen(i1) {
+function commentUpdateOpen() {
     //길이 제한 추가
-    let i = i1;
+
+    // 업데이트 버튼 중 몇 번째의 요소인지 확인
+    let i = $('.commentUpdate').index(this);
+
+
     let upPw = document.getElementsByName("commentUpdatePw");
     let up = document.getElementsByName("commentUpdate");
     let upCom = document.getElementsByName("commentUpdateComplete");
@@ -220,7 +227,10 @@ function commentUpdateOpen(i1) {
 }
 
 // 댓글 수정 취소
-function commentUpCancelFunc(i) {
+function commentUpCancelFunc() {
+    let i = $('.commentUpCancel').index(this);
+    //console.log(i)
+
     let upPw = document.getElementsByName("commentUpdatePw");
     let up = document.getElementsByName("commentUpdate");
     let upCom = document.getElementsByName("commentUpdateComplete");
@@ -513,11 +523,11 @@ function commentSubmit() {
 
 function commentForm(name, content, num, id) {
     console.log('num: ', num)
-    let commentDiv = document.getElementById('comment' + num);
+    let commentDiv = document.getElementById('commentDiv' + num);
     var el = document.createElement("div")
-    el.id = "comment" + num[0] + '/' + id;
+    el.id = "";
     let commentStr = "";
-    commentStr += '<div id="comment3/' + id + '">'
+    commentStr += '<div id="comment' + num[0] + '/' + id + '">'
         + '<form>'
         + '<div class="media mb-4">'
         + '<div class="media-body">'

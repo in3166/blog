@@ -155,7 +155,7 @@ function appenPost3(post, comment, id) {
         return
     }
     let postDiv = document.getElementById('postDiv');
-    let commentStr = "";
+    let commentStr = '';
     for (let i = 0; i < comment.length; i++) {
         commentStr += '<div id="comment3/' + comment[i].id + '">'
             + '<form>'
@@ -179,12 +179,13 @@ function appenPost3(post, comment, id) {
             + '<div class="card-group mt-3">'
             + '<input type="password" name="commentUpdatePw" class="" hidden autocomplete="on" placeholder="Password">'
             + '<button class="btn2 ml-2 border-dark" hidden type="button" value="comment3/' + comment[i].id + '" name="commentUpdateComplete">완료</button>'
-            + '<button class="btn2 ml-2" hidden value="comment3/' + comment[i].id + '" type="button" name = "commentUpCancel" > <i class="fas fa-times" id="commentUpClose"></i></button>'
+            + '<button class="btn2 ml-2 commentUpCancel" hidden value="comment3/' + comment[i].id + '" type="button" name = "commentUpCancel" > <i class="fas fa-times" id="commentUpClose"></i></button>'
             + '</div>'
             + '</div>'
             + ' </div>'
             + '</form>'
             + '<hr>'
+
             + '</div>';
     }
 
@@ -230,34 +231,33 @@ function appenPost3(post, comment, id) {
       <br>
       <hr>
 
-      <!-- 댓글 -->
-      <!-- Single Comment -->
-      <div id="comment3/`+ post.id + `">`
+<div id="commentDiv3/` + post.id + `">`
 
         +
         commentStr
         +
 
-        `<!-- Comments Form -->
+        `</div>
+       
         <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
-                <form>
-                    <div class="card-body">
-                        <div class="form-group" id="contentdiv">
-                            <textarea class="form-control" rows="2" id="commentSubmitContent"></textarea>
-                        </div>
-                        <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
-                            <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
-                                type="button" autocomplete="on">
-                                <button class="btn btn-primary float-right commentSubmit" id="commentSubmit" type="button"
-                                    value="3/` + post.id + `">Submit</button>
+            <h5 class="card-header">Leave a Comment:</h5>
+            <form>
+                <div class="card-body">
+                    <div class="form-group" id="contentdiv">
+                        <textarea class="form-control" rows="2" id="commentSubmitContent"></textarea>
+                    </div>
+                    <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
+                        <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
+                            type="button" autocomplete="on">
+                            <button class="btn btn-primary float-right commentSubmit" id="commentSubmit" type="button"
+                                value="3/` + post.id + `">Submit</button>
             </div>
           </form>
+                </div>
         </div>
-        </div>
-        </div>
-        </div>
-    `;
+      
+        </div >
+        `;
 
     postDiv.appendChild(el);
 }
