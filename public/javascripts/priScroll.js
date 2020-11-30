@@ -232,7 +232,7 @@ function appenPost3(post, comment, id) {
 
       <!-- 댓글 -->
       <!-- Single Comment -->
-      <div id="comment">`
+      <div id="comment3/`+ post.id + `">`
 
         +
         commentStr

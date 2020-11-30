@@ -48,6 +48,7 @@ router.post("/update/:bn/:id", function (req, res) {
 router.post("/delete/:bn/:id", function (req, res) {
   let pw = req.body.pw;
   console.log("입력한 비밀번호: " + pw);
+  console.log("아이디: " + req.params.id);
 
   db.query('select * from ' + req.params.bn + ' where id = ?', [req.params.id], function (err1, result) {
     //console.log(result[0].userpw);
@@ -91,8 +92,13 @@ router.post("/write/:bn/:id", function (req, res) {
       console.log('\ninsert error!\n', err);
       res.send(501);
     } else {
-      console.log(`insert '(title, userpw, content, date, boardid) = %s %s %s %s %d`, body.name, body.pw, body.content, date, req.params.id);
-      res.send(200);
+      db.query('select max(id) AS id from ' + comment, [body.name, body.pw, body.content, date, req.params.id], function (err, id) {
+        console.log('현재 댓글 id:');
+        console.log(id);
+        res.json(
+          id
+        );
+      });
     }
   });
 });

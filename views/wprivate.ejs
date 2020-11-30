@@ -43,7 +43,7 @@
 
       <!-- 댓글 -->
       <!-- Single Comment -->
-      <div id="comment">
+      <div id="comment<%= boardnum%>/<%= postnum%>">
 
         <% for (let i = 0; i < comment.length ; i++) { %>
 
@@ -82,25 +82,25 @@
           <hr>
         </div>
         <% } %>
-
-        <!-- Comments Form -->
-        <div class="card my-4">
-          <h5 class="card-header">Leave a Comment:</h5>
-          <form>
-            <div class="card-body">
-              <div class="form-group commentSubmitContent" id="contentdiv">
-                <textarea class="form-control" rows="2" id="commentSubmitContent"></textarea>
-              </div>
-              <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
-              <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
-                type="button" autocomplete="on">
-              <button class="btn btn-primary float-right commentSubmit" id="commentSubmit" type="button"
-                value="<%= boardnum%>/<%= postnum%>">Submit</button>
+      </div>
+      <!-- Comments Form -->
+      <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <form>
+          <div class="card-body">
+            <div class="form-group commentSubmitContent" id="contentdiv">
+              <textarea class="form-control" rows="2" id="commentSubmitContent"></textarea>
             </div>
-          </form>
-        </div>
-        <!-- Comment with nested comments -->
-        <!-- <div class="media mb-4">
+            <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
+            <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
+              type="button" autocomplete="on">
+            <button class="btn btn-primary float-right commentSubmit" id="commentSubmit" type="button"
+              value="<%= boardnum%>/<%= postnum%>">Submit</button>
+          </div>
+        </form>
+      </div>
+      <!-- Comment with nested comments -->
+      <!-- <div class="media mb-4">
           <div class="media-body">
             <h5 class="mt-0">Commenter Name</h5>
             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
@@ -128,38 +128,38 @@
             </div>
           </div>
         </div> -->
-        <div id="paging">
-          <nav>
-            <ul class="pager list-unstyled">
-              <% if(postnum == 1){ %>
-              <li class="previousArrow" style="float: left;">
-                <a class="disabled">
-                  <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
-              </li>
-              <% } else { %>
-              <li class="previousArrow" style="float: left;">
-                <a href="/private/board/<%= boardnum %>/<%= page %>/<%= --postnum %>">
-                  <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
-              </li>
-              <% ++postnum %>
-              <% } %>
-              <% if(postnum == totalCount){ %>
-              <li class="nextArrow" style="float: right;">
-                <a class="disabled">
-                  <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
-              </li>
-              <% } else { %>
-              <% let pnum = ++postnum %>
-              <li class="nextArrow" style="float: right;">
-                <a href="/private/board/<%= boardnum %>/<%= page %>/<%= pnum %>">
-                  <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
-              </li>
-              <% --postnum %>
-              <% } %>
-            </ul>
-          </nav>
-        </div>
+      <div id="paging">
+        <nav>
+          <ul class="pager list-unstyled">
+            <% if(postnum == 1){ %>
+            <li class="previousArrow" style="float: left;">
+              <a class="disabled">
+                <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
+            </li>
+            <% } else { %>
+            <li class="previousArrow" style="float: left;">
+              <a href="/private/board/<%= boardnum %>/<%= page %>/<%= --postnum %>">
+                <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
+            </li>
+            <% ++postnum %>
+            <% } %>
+            <% if(postnum == totalCount){ %>
+            <li class="nextArrow" style="float: right;">
+              <a class="disabled">
+                <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
+            </li>
+            <% } else { %>
+            <% let pnum = ++postnum %>
+            <li class="nextArrow" style="float: right;">
+              <a href="/private/board/<%= boardnum %>/<%= page %>/<%= pnum %>">
+                <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
+            </li>
+            <% --postnum %>
+            <% } %>
+          </ul>
+        </nav>
       </div>
+
     </div>
     <ul class="article-list__pagination article-list__pagination--inactive" id="article-list-pagination"></ul>
     <!-- Sidebar Widgets Column -->

@@ -175,7 +175,6 @@ function weatherFunc(lat2, lon2) {
         if (xhr.status == 200) {
             wea_val = JSON.parse(xhr.responseText);
             console.log(wea_val)
-            console.log(window.location.pathname);
             var imgUrl;
             let temper;
             let wind;
@@ -219,8 +218,6 @@ function weatherFunc(lat2, lon2) {
                 else if (rain == 3 || rain == 7) { imgUrl = 'snow.jpg'; }
                 else if (rain == 2 || rain == 6) { imgUrl = 'snow-rain.jpg'; }
             }
-
-            console.log(imgUrl)
 
             document.getElementById('weaImg').src = "../img/weather/" + imgUrl;
             document.getElementById('temval').innerHTML = temper + ' &#8451;';

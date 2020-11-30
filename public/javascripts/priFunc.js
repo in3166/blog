@@ -1,3 +1,4 @@
+
 //private
 window.onload = function () {
     // 현재 페이지, 게시글 목록에서 표시
@@ -475,6 +476,7 @@ function commentSubmit() {
     let xhr = new XMLHttpRequest();
 
     let name = $(this).prevAll("#commentName").val();
+
     let content = $(this).prevAll("#contentdiv").find("#commentSubmitContent").val();
     console.log("내용: " + content);
     let pw = $(this).prevAll("#commentPw").val();
@@ -485,10 +487,18 @@ function commentSubmit() {
     data = JSON.stringify(data);
     console.log(data);
 
+
+
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
-            //console.log(xhr.responseText);
+            let id = JSON.parse(xhr.responseText);
+            console.log(num[0]);
+            // 댓글창에 추가
+            commentForm(name, content, num, id[0].id);
             alert("댓글 작성 완료!");
+            document.getElementById('commentName').value = '';
+            document.getElementById('commentPw').value = '';
+            document.getElementById('commentSubmitContent').value = '';
             //window.location.reload();
         } else {
             alert("댓글 작성 오류!");
@@ -500,6 +510,46 @@ function commentSubmit() {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(data);
 }
+
+function commentForm(name, content, num, id) {
+    console.log('num: ', num)
+    let commentDiv = document.getElementById('comment' + num);
+    var el = document.createElement("div")
+    el.id = "comment" + num[0] + '/' + id;
+    let commentStr = "";
+    commentStr += '<div id="comment3/' + id + '">'
+        + '<form>'
+        + '<div class="media mb-4">'
+        + '<div class="media-body">'
+        + '<div class="mb-1">'
+        + ' <span id="commentId" name="commentId">'
+        + '  <h5 class="mt-0 d-inline">' + name + '</h5>'
+        + ' </span>'
+        + ' <span class="float-right small text-gray">'
+        + 'none'
+        + ' </span>'
+        + '</div>'
+        + '<span id="commentContent" name="commentContent">'
+        + content
+        + '</span>'
+        + '<span class="float-right small text-gray">'
+        + '<button class="btn2 ml-2 commentUpdate" value="comment' + num[0] + '/' + id + '" type="button" name="commentUpdate"><i class="fas fa-pen"></i></button>'
+        + ' <button class="btn2 ml-2 commentDel" value="comment' + num[0] + '/' + id + '" type="button" name="commentDel"><i class="fas fa-trash-alt"></i></button>'
+        + '</span>'
+        + '<div class="card-group mt-3">'
+        + '<input type="password" name="commentUpdatePw" class="" hidden autocomplete="on" placeholder="Password">'
+        + '<button class="btn2 ml-2 border-dark" hidden type="button" value="comment' + num[0] + '/' + id + '" name="commentUpdateComplete">완료</button>'
+        + '<button class="btn2 ml-2" hidden value="comment' + num[0] + '/' + id + '" type="button" name = "commentUpCancel" > <i class="fas fa-times" id="commentUpClose"></i></button>'
+        + '</div>'
+        + '</div>'
+        + ' </div>'
+        + '</form>'
+        + '<hr>'
+        + '</div>';
+    el.innerHTML = commentStr;
+    commentDiv.appendChild(el);
+}
+
 
 // $("a").click(function () {
 //     $(".current").removeClass("current");
