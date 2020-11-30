@@ -178,7 +178,7 @@ function appenPost3(post, comment, id) {
             + '</span>'
             + '<div class="card-group mt-3">'
             + '<input type="password" name="commentUpdatePw" class="" hidden autocomplete="on" placeholder="Password">'
-            + '<button class="btn2 ml-2 border-dark" hidden type="button" value="comment3/' + comment[i].id + '" name="commentUpdateComplete">완료</button>'
+            + '<button class="btn2 ml-2 border-dark commentUpdateComplete" hidden type="button" value="comment3/' + comment[i].id + '" name="commentUpdateComplete">완료</button>'
             + '<button class="btn2 ml-2 commentUpCancel" hidden value="comment3/' + comment[i].id + '" type="button" name = "commentUpCancel" > <i class="fas fa-times" id="commentUpClose"></i></button>'
             + '</div>'
             + '</div>'
