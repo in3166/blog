@@ -338,7 +338,7 @@ function upComFunc(op, i1, val) {
         }
     };
     //코멘트 아이디랑 보드넘버bn id / comment1/12
-    xhr.open("POST", "/private/update/" + url);
+    xhr.open("PUT", "/private/update/" + url);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(data);
 }
@@ -412,7 +412,7 @@ function commentModalDel(e) {
             window.location.reload();
         }
     };
-    xhr.open("POST", "/private/delete/" + value);
+    xhr.open("DELETE", "/private/delete/" + value);
     xhr.setRequestHeader("Content-Type", "application/json"); // 컨텐츠타입을 json으로
     xhr.send(data);
     //console.log(guestPw.value);
