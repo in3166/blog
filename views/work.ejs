@@ -96,7 +96,7 @@
             <a class="page-link" href="#">&raquo;</a>
           </li>
           <% } else{%>
-          <%  page1 = ++page %>
+          <%  page1 = page + 1 %>
           <li class="page-item">
             <a class="page-link" href="/work/<%= page1 %>">&gt;</a>
           </li>
@@ -312,7 +312,7 @@
 
 <!-- Modal 1-->
 
-<% page -= 1 %>
+
 <% for (let j = (page *countList)-countList; j < (page * countList) ; j++) { %>
 <% if(j >= totalCount-1){ %>
 <% j++; %>
