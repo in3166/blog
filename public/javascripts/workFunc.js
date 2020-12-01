@@ -9,7 +9,6 @@ window.onload = function () {
     if (guestDel) {
         for (let i = 0; i < guestDel.length; i++) {
             guestDel[i].addEventListener("click", guestPwModalOpen, false);
-
         }
     }
 
