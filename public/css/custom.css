@@ -59,7 +59,7 @@ body,
 }
 
 /* 메뉴 화면의 상단 텍스트 처리 */
-.msh {
+/* .msh {
   display: none;
 }
 
@@ -67,11 +67,23 @@ body,
   .msh {
     display: none;
   }
-}
+} */
 
 @media (max-width: 1235px) {
   .msh1 {
     display: none;
+  }
+}
+
+@media (max-width: 575px) {
+
+  .carousel-item .btn {
+    padding: 0.25rem 1.0rem;
+  }
+
+  .carousel-item .masthead-heading {
+    font-size: medium !important;
+    margin-bottom: 0px !important;
   }
 }
 
@@ -132,7 +144,7 @@ body,
   #postDiv img {
     max-width: 100%;
     height: auto;
-   
+
   }
 }
 
