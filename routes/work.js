@@ -53,13 +53,58 @@ router.delete("/delete/:id", function (req, res) {
   });
 });
 
-router.use("/", function (request, res, next) {
-  console.log(0);
-  next();
+router.use("/:pagenum", function (req, res, next) {
+
+  db.query("select * from portpolio;", function (err, rows1, fields) {
+    if (err) {
+      throw err;
+    }
+    res.locals.rows1 = rows1;
+    console.log("-----------");
+    console.log(rows1);
+    console.log("-----------");
+
+    let totalCount = rows1.length + 1
+    console.log("길이: " + totalCount);
+
+    let page = req.params.pagenum;
+    console.log("page: " + page);
+
+    let countList = 6; // 한 페이지에 출력될 게시물 수
+    let countPage = 5; // 한 화면에 출력될 페이지 수, 하단의 페이지 번호
+
+    let totalPage = parseInt(totalCount / countList); // 총 페이지 수
+    console.log("totalPage: " + totalPage);
+    //console.log(totalCount % countList);
+    if (totalCount % countList > 0) {
+      totalPage++;
+    }
+    console.log("totalPage: " + totalPage);
+
+    let startPage = parseInt(((page - 1) / countPage)) * countPage + 1;
+    let endPage = startPage + countPage - 1;
+    console.log("startPage: " + startPage);
+    console.log("endPage: " + totalPage);
+    //  여기서 마지막 페이지를 보정해줍니다.
+    if (endPage > totalPage) {
+      endPage = totalPage;
+    }
+    console.log("endPage: " + totalPage);
+
+    res.locals.totalCount = totalCount;
+    res.locals.totalPage = totalPage;
+    res.locals.countList = countList;
+    res.locals.countPage = countPage;
+    res.locals.page = page;
+    res.locals.startPage = startPage;
+    res.locals.endPage = endPage;
+    console.log("__________________________")
+    next();
+  });
 });
 
 /* GET work page. */
-router.get("/", function (request, res) {
+router.get("/:pagenum", function (request, res) {
   console.log("Access to Work");
   db.query("SELECT * FROM guest;", function (err, rows, fields) {
 
@@ -74,9 +119,23 @@ router.get("/", function (request, res) {
       list6: "/private",
       guest: rows,
       data: false,
+      work: res.locals.rows1,
       //     footer: footer1,
+
+      //pagination
+      totalCount: res.locals.totalCount,
+      totalPage: res.locals.totalPage,
+      countList: res.locals.countList,
+      countPage: res.locals.countPage,
+      page: res.locals.page,
+      startPage: res.locals.startPage,
+      endPage: res.locals.endPage,
     });
   });
+});
+
+router.get("/", function (request, res) {
+  res.redirect('/work/1');
 });
 
 module.exports = router;

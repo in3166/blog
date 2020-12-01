@@ -9,143 +9,103 @@
         Lorem ipsum dolor sit amet consectetur.
       </h3>
     </div>
+
     <div class="row">
+      <% for (let i = (page *countList)-countList; i < (page * countList) ; i++) { %>
+      <% if(i >= totalCount){ %>
+      <% i++; %>
+      <% }else if(i == totalCount-1){ %>
+      <div class=" col-lg-4 col-sm-6 mb-4" style="height: 330px;">
+        <div class="portfolio-item text-center bg-white" style="height: 330px;">
+          <a class="portfolio-link workPostBtn" data-toggle="modal" href="" style="height: 330px;" id="workPostBtn">
+            <div class="portfolio-hover ">
+              <div class="portfolio-hover-content ">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <div class="text-center flex-column justify-content-center h-100 d-flex ">
+              <i class="fas fa-plus fa-3x align-self-center"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+      <% }else{ %>
       <div class="col-lg-4 col-sm-6 mb-4">
         <div class="portfolio-item text-center bg-white">
-          <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+          <a class="portfolio-link" data-toggle="modal" href="#portfolioModal<%= work[i].num %>">
             <div class="portfolio-hover">
               <div class="portfolio-hover-content">
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-            <img class="img-fluid pf-img" src="/img/portfolio/d1.png" alt="" />
+            <img class="img-fluid pf-img" src="<%= work[i].cover %>" alt="" />
           </a>
           <div class="portfolio-caption">
-            <div class="portfolio-caption-heading">E-mail 암호화</div>
+            <div class="portfolio-caption-heading"><%= work[i].title %></div>
             <div class="portfolio-caption-subheading text-muted">
-              Web Application
+              <%= work[i].title2 %>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="portfolio-item text-center bg-white">
-          <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
-            <div class="portfolio-hover">
-              <div class="portfolio-hover-content">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid pf-img" src="/img/portfolio/a1.jpg" alt="" />
-          </a>
-          <div class="portfolio-caption">
-            <div class="portfolio-caption-heading">근무일 확인</div>
-            <div class="portfolio-caption-subheading text-muted">
-              Progressive Web Application
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="portfolio-item text-center bg-white">
-          <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
-            <div class="portfolio-hover">
-              <div class="portfolio-hover-content">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid pf-img" src="/img/portfolio/03-thumbnail.jpg" alt="" />
-          </a>
-          <div class="portfolio-caption">
-            <div class="portfolio-caption-heading">Finish</div>
-            <div class="portfolio-caption-subheading text-muted">
-              Identity
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-        <div class="portfolio-item text-center bg-white">
-          <a class="portfolio-link" data-toggle="modal" href="#portfolioModal4">
-            <div class="portfolio-hover">
-              <div class="portfolio-hover-content">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid pf-img" src="/img/portfolio/04-thumbnail.jpg" alt="" />
-          </a>
-          <div class="portfolio-caption">
-            <div class="portfolio-caption-heading">Lines</div>
-            <div class="portfolio-caption-subheading text-muted">
-              Branding
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-        <div class="portfolio-item text-center bg-white">
-          <a class="portfolio-link" data-toggle="modal" href="#portfolioModal5">
-            <div class="portfolio-hover">
-              <div class="portfolio-hover-content">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid pf-img" src="/img/portfolio/05-thumbnail.jpg" alt="" />
-          </a>
-          <div class="portfolio-caption">
-            <div class="portfolio-caption-heading">Southwest</div>
-            <div class="portfolio-caption-subheading text-muted">
-              Website Design
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6">
-        <div class="portfolio-item text-center bg-white">
-          <a class="portfolio-link" data-toggle="modal" href="#portfolioModal6">
-            <div class="portfolio-hover">
-              <div class="portfolio-hover-content">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid pf-img" src="/img/portfolio/06-thumbnail.jpg" alt="" />
-          </a>
-          <div class="portfolio-caption">
-            <div class="portfolio-caption-heading">Window</div>
-            <div class="portfolio-caption-subheading text-muted">
-              Photography
-            </div>
-          </div>
-        </div>
-      </div>
+      <% } %>
+      <% }; %>
+
+
     </div>
     <!-- Side Widget -->
     <div class="my-4">
       <!-- li태그의 클래스에 active를 넣으면 색이 반전되고 클릭도 되지 않는다. -->
       <!-- active의 의미는 현재 페이지의 의미이다. -->
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#">&laquo;</a>
-        </li>
-        <li class="page-item active">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">4</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">5</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">&raquo;</a>
-        </li>
-      </ul>
+      <div class="align-self-center">
+        <ul class="pagination-sm pagination justify-content-center">
+          <% if (page == 1){ %>
+          <li class="page-item disabled">
+            <a class="page-link" href="#">&laquo;</a>
+          </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#">&lt;</a>
+          </li>
+          <% } else{%>
+          <% let page1 = page - 1 %>
+          <li class="page-item">
+            <a class="page-link" href="/work/<%= 1 %>">&laquo;</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="/work/<%= page1 %>">&lt;</a>
+          </li>
+          <% } %>
+          <% for (let i = startPage; i <= endPage ; i++) { %>
+
+          <% if (i == page){ %>
+          <li class="page-item active">
+            <a class="page-link" href="/work/<%= i %>"><%= i %></a>
+          </li>
+          <% } else{%>
+          <li class="page-item">
+            <a class="page-link" href="/work/<%= i %>"><%= i %></a>
+            <!-- <button class="page-link listNum" id="listNum<%= i %>" name="listNum" value="<%= i %>"><%= i %></button> -->
+          </li>
+          <% } %>
+          <% }; %>
+          <% if (page == totalPage){ %>
+          <li class="page-item disabled">
+            <a class="page-link" href="#">&gt;</a>
+          </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#">&raquo;</a>
+          </li>
+          <% } else{%>
+          <%  page1 = ++page %>
+          <li class="page-item">
+            <a class="page-link" href="/work/<%= page1 %>">&gt;</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="/work/<%= totalPage %>">&raquo;</a>
+          </li>
+          <% }%>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -351,7 +311,14 @@
 </div>
 
 <!-- Modal 1-->
-<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+
+<% page -= 1 %>
+<% for (let j = (page *countList)-countList; j < (page * countList) ; j++) { %>
+<% if(j >= totalCount-1){ %>
+<% j++; %>
+<% }else{ %>
+<div class="portfolio-modal modal fade" id="portfolioModal<%= work[j].num %>" tabindex="-1" role="dialog"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="close-modal" data-dismiss="modal">
@@ -362,43 +329,20 @@
           <div class="col-lg-8">
             <div class="modal-body">
               <!-- Project Details Go Here-->
-              <h2 class="text-uppercase">E-Mail 암호화</h2>
+              <h2 class="text-uppercase"><%= work[j].title %></h2>
               <p class="item-intro text-muted">
-                이메일 암호화 Web Applicatio
+                <%= work[j].title2 %>
               </p>
-              <img class="img-fluid d-block mx-auto" src="/img/portfolio/d4.png" alt="" />
+              <img class="img-fluid d-block mx-auto" src="<%= work[j].img %>" alt="" />
               <p>
               <h4><strong>설명</strong></h4><br>
-              여러 이메일 서비스를 IMAP, SMTP로 연결하여 사용하여<br>
-              이메일 리스트를 조회하는 등의 서비스를 이용할 수 있다.<br>
-              이메일 작성 시 내용과 제목을 암호화하여 전송할 수 있어<br>
-              작성자와 받는 사람 외에는 메일 내용을 볼 수 없도록 한다.<br>
-              암호화되어 전송된 메일은 복호화하여 볼 수 있다.<br><br>
 
-              AWS Certification 적용 (HTTPS)<br>
-              AWS Route 53 추가<br>
-              AWS Elastic LoadBalancing 적용<br><br>
-
-              (AccessWall Email Part)<br><br>
-              <h4><strong>사용한 언어</strong></h4><br>
-              - Golang<br>
-              - HTML5<br>
-              - CSS<br>
-              - Javascript<br>
-              - PostgreSQL<br><br>
-
-              <h4><strong>추가할 기능들</strong></h4><br>
-              - 이메일 검색 기능<br>
-              - 이메일 삭제 시 휴지통으로 이동<br>
-              - Oauth를 사용한 Gmail 연동<br><br>
-
-
-              </p>
+              <%- work[j].content %>
 
               <ul class="list-inline">
-                <li>Date: June 2020</li>
-                <li>Category: Web Application</li>
-                <li><a href="https://github.com/in3166/yu-email-ui">GitHub</a></li>
+                <li>Date: <%= work[j].date %></li>
+                <li>Category: <%= work[j].title2 %></li>
+                <li><a href="<%= work[j].git %>">GitHub</a></li>
               </ul>
               <button class="btn btn-primary" data-dismiss="modal" type="button">
                 <i class="fas fa-times mr-1"></i>
@@ -411,220 +355,57 @@
     </div>
   </div>
 </div>
+<% } %>
+<% } %>
 
-<!-- Modal 2-->
-<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="close-modal" data-dismiss="modal">
-        <img src="/img/close-icon.svg" alt="Close modal" />
-      </div>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="modal-body">
-              <!-- Project Details Go Here-->
-              <h2 class="text-uppercase">Day & Night</h2>
-              <p class="item-intro text-muted">
-                근무일 조회 Progressive Web App
-              </p>
-              <img class="img-fluid d-block mx-auto" src="/img/portfolio/a2.jpg" alt="" />
-              <p>
-              <h4><strong>설명</strong></h4><br>
-              야간 근무와 주간 근무를 번갈아 하시는 어머니를 위해<br>
-              일주일, 오늘, 내일의 근무를 쉽게 조회할 수 있도록 만들었다.<br>
-              주간 근무 이틀과 야간 근무 이틀, 휴일 이틀이 번갈아 가면서 나타낸다<br>
-              GitHub Pages를 이용하여 접속<br>
-              번거러운 설치나 URL 검색없이 스마트폰에서도 볼 수 있도록 PWA로 만들었다.<br><br>
 
-              <h4><strong>사용한 언어</strong></h4><br>
-              - HTML5<br>
-              - CSS<br>
-              - Javascript<br><br>
+<!-- Post Modal-->
+<div class="modal2" id="postModal">
+  <div class="modal-content2">
+    <div class="close2">
+      <i class="fas fa-times mr-2" id="postClose"></i>
+    </div>
+    <div class="container">
+      <form>
 
-              <h4><strong>추가할 기능들</strong></h4><br>
-              - 조잡한 시간 계산 개선<br>
-              - 날짜 추가, 월별 메뉴 추가<br>
-              - 시작할 날짜를 선택할 수 있도록 하는 기능<br>
-              - 야간, 주간, 휴일 일수를 조정할 수 있는 기능<br><br>
+        <div class="row" id="row_style">
+          <div class="col-md-10  offset-md-1">
+            <form>
+              <div class="form-group">
+                <input type="text" class="form-control mt-5" id="" placeholder="제목" />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control " id="" placeholder="이미지 URL" />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control " id="" placeholder="커버 이미지 URL" />
+              </div>
+              <div class="form-group">
+                <textarea class="form-control " id="" placeholder="설명" rows="6"></textarea>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control " id="" placeholder="카테고리" />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control " id="" placeholder="Github URL" />
+              </div>
+              <br>
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" id="postPw" autocomplete="on">
+              </div>
+            </form>
 
-              </p>
-              <ul class="list-inline">
-                <li>Date: July 2020</li>
-                <li>Category: Progressive Web App</li>
-                <li><a href="https://github.com/in3166/DayNight">GitHub</a></li>
-              </ul>
-              <button class="btn btn-primary" data-dismiss="modal" type="button">
-                <i class="fas fa-times mr-1"></i>
-                Close Project
-              </button>
+            <div class="form-group">
+              <button class="btn btn-primary" id="priPostSubmit" value="">Post</button>
+              <button class="btn btn-primary" hidden id="postUpdate" type="button" value="">Update</button>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
-<!-- Modal 3-->
-<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="close-modal" data-dismiss="modal">
-        <img src="/img/close-icon.svg" alt="Close modal" />
-      </div>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="modal-body">
-              <!-- Project Details Go Here-->
-              <h2 class="text-uppercase">Project Name</h2>
-              <p class="item-intro text-muted">
-                Lorem ipsum dolor sit amet consectetur.
-              </p>
-              <img class="img-fluid d-block mx-auto" src="/img/portfolio/03-full.jpg" alt="" />
-              <p>
-                Use this area to describe your project. Lorem ipsum dolor
-                sit amet, consectetur adipisicing elit. Est blanditiis
-                dolorem culpa incidunt minus dignissimos deserunt repellat
-                aperiam quasi sunt officia expedita beatae cupiditate,
-                maiores repudiandae, nostrum, reiciendis facere nemo!
-              </p>
-              <ul class="list-inline">
-                <li>Date: January 2020</li>
-                <li>Client: Finish</li>
-                <li>Category: Identity</li>
-              </ul>
-              <button class="btn btn-primary" data-dismiss="modal" type="button">
-                <i class="fas fa-times mr-1"></i>
-                Close Project
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal 4-->
-<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="close-modal" data-dismiss="modal">
-        <img src="/img/close-icon.svg" alt="Close modal" />
-      </div>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="modal-body">
-              <!-- Project Details Go Here-->
-              <h2 class="text-uppercase">Project Name</h2>
-              <p class="item-intro text-muted">
-                Lorem ipsum dolor sit amet consectetur.
-              </p>
-              <img class="img-fluid d-block mx-auto" src="/img/portfolio/04-full.jpg" alt="" />
-              <p>
-                Use this area to describe your project. Lorem ipsum dolor
-                sit amet, consectetur adipisicing elit. Est blanditiis
-                dolorem culpa incidunt minus dignissimos deserunt repellat
-                aperiam quasi sunt officia expedita beatae cupiditate,
-                maiores repudiandae, nostrum, reiciendis facere nemo!
-              </p>
-              <ul class="list-inline">
-                <li>Date: January 2020</li>
-                <li>Client: Lines</li>
-                <li>Category: Branding</li>
-              </ul>
-              <button class="btn btn-primary" data-dismiss="modal" type="button">
-                <i class="fas fa-times mr-1"></i>
-                Close Project
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal 5-->
-<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="close-modal" data-dismiss="modal">
-        <img src="/img/close-icon.svg" alt="Close modal" />
-      </div>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="modal-body">
-              <!-- Project Details Go Here-->
-              <h2 class="text-uppercase">Project Name</h2>
-              <p class="item-intro text-muted">
-                Lorem ipsum dolor sit amet consectetur.
-              </p>
-              <img class="img-fluid d-block mx-auto" src="/img/portfolio/05-full.jpg" alt="" />
-              <p>
-                Use this area to describe your project. Lorem ipsum dolor
-                sit amet, consectetur adipisicing elit. Est blanditiis
-                dolorem culpa incidunt minus dignissimos deserunt repellat
-                aperiam quasi sunt officia expedita beatae cupiditate,
-                maiores repudiandae, nostrum, reiciendis facere nemo!
-              </p>
-              <ul class="list-inline">
-                <li>Date: January 2020</li>
-                <li>Client: Southwest</li>
-                <li>Category: Website Design</li>
-              </ul>
-              <button class="btn btn-primary" data-dismiss="modal" type="button">
-                <i class="fas fa-times mr-1"></i>
-                Close Project
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal 6-->
-<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="close-modal" data-dismiss="modal">
-        <img src="/img/close-icon.svg" alt="Close modal" />
-      </div>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="modal-body">
-              <!-- Project Details Go Here-->
-              <h2 class="text-uppercase">Project Name</h2>
-              <p class="item-intro text-muted">
-                Lorem ipsum dolor sit amet consectetur.
-              </p>
-              <img class="img-fluid d-block mx-auto" src="/img/portfolio/06-full.jpg" alt="" />
-              <p>
-                Use this area to describe your project. Lorem ipsum dolor
-                sit amet, consectetur adipisicing elit. Est blanditiis
-                dolorem culpa incidunt minus dignissimos deserunt repellat
-                aperiam quasi sunt officia expedita beatae cupiditate,
-                maiores repudiandae, nostrum, reiciendis facere nemo!
-              </p>
-              <ul class="list-inline">
-                <li>Date: January 2020</li>
-                <li>Client: Window</li>
-                <li>Category: Photography</li>
-              </ul>
-              <button class="btn btn-primary" data-dismiss="modal" type="button">
-                <i class="fas fa-times mr-1"></i>
-                Close Project
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <!-- Footer-->
 <%- include('./includes/footer'); %>

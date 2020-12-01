@@ -19,6 +19,18 @@ window.onload = function () {
 
     }
 
+    //게시글 작성 모달 열기
+    const workPostBtn = document.getElementById("workPostBtn");
+    if (workPostBtn) {
+        workPostBtn.addEventListener("click", workModalOpen, false);
+    }
+
+    //게시글 등록
+    const priPostSubmit = document.getElementById("priPostSubmit");
+    if (priPostSubmit) {
+        priPostSubmit.addEventListener("click", postSubmit, false);
+    }
+
     GitHubCalendar(".calendar", "in3166", { responsive: true, tooltips: false, global_stats: false }).then(function () {
         // delete the space underneath the module bar which is caused by minheight 
         document.getElementsByClassName('calendar')[0].style.minHeight = "100px";
@@ -27,6 +39,76 @@ window.onload = function () {
     });
 
 }
+
+
+//게시글 작성 모달 오픈
+function workModalOpen() {
+    $('body').css("overflow", "hidden");
+
+    let postModal = document.getElementById("postModal");
+    // let guestModalId = document.getElementById("guestModalId");
+    let span = document.getElementById("postClose");
+    // let postModalBtn = document.getElementById("postModalBtn");
+    //let modal = document.getElementById("modal-window-4");
+
+    //게시글 작성 모달 오픈
+    //location.href = '#guestDelModal'
+    postModal.style.display = "block";
+    //    document.getElementById("postTitle").focus();
+    // guestModalId.value = value;
+
+    // When the user clicks on <span> (x), close the modal
+    if (span) {
+        span.addEventListener("click", function () {
+            postModal.style.display = "none";
+            $('body').css("overflow", "scroll");
+        }, false);
+    }
+
+    // 모달 영역 밖 선택 시 창 닫기
+    window.addEventListener("click", function () {
+        if (event.target == postModal) {
+            postModal.style.display = "none";
+            $('body').css("overflow", "scroll");
+        }
+    }, false);
+}
+
+
+//게시글 전송
+function postSubmit() {
+
+    let xhr = new XMLHttpRequest();
+    let title = document.getElementById("postTitle").value;
+    let content = CKEDITOR.instances.p_content.getData();
+    let boardNum = this.value;
+    let postPw = document.getElementById("postPw").value;
+
+    let data = { title: title, content: content, pw: postPw };
+    data = JSON.stringify(data);
+    console.log(data);
+
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            //console.log(xhr.responseText);
+            alert("게시글 작성 완료!");
+            let postModal = document.getElementById("postModal");
+            postModal.style.display = "none";
+            $('body').css("overflow", "scroll");
+        } else if (500) {
+            //console.error(xhr.responseText);
+            console.log("오잉?")
+            alert("비밀번호를 확인하세요.");
+        } else {
+            alert("게시글 작성 오류!");
+        }
+    }
+
+    xhr.open('post', '/private/write/' + boardNum);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(data);
+}
+
 
 //방명록 modal open
 function guestPwModalOpen() {
