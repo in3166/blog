@@ -14,7 +14,7 @@ const { db } = require("../model/db_conn.js");
 // get post put delete
 
 // 댓글/게시글 수정
-router.put("/update/:bn/:id", function (req, res) {
+router.put("/:bn/:id", function (req, res) {
   let pw = req.body.pw;
   let content = req.body.content;
   let id = req.body.id;
@@ -45,7 +45,7 @@ router.put("/update/:bn/:id", function (req, res) {
 });
 
 // 댓글/게시글 삭제
-router.delete("/delete/:bn/:id", function (req, res) {
+router.delete("/:bn/:id", function (req, res) {
   let pw = req.body.pw;
   console.log("입력한 비밀번호: " + pw);
   console.log("아이디: " + req.params.id);
@@ -83,7 +83,7 @@ router.delete("/delete/:bn/:id", function (req, res) {
 });
 
 // 댓글 쓰기
-router.post("/write/:bn/:id", function (req, res) {
+router.post("/:bn/:id", function (req, res) {
   console.log("댓글 작성 입장");
   const body = req.body; //req name으로 보내짐
   let comment = "comment" + req.params.bn;
@@ -115,7 +115,7 @@ router.post("/write/:bn/:id", function (req, res) {
 });
 
 // 게시판 글쓰기
-router.post("/write/:bn", function (req, res) {
+router.post("/:bn", function (req, res) {
   const body = req.body; //req name으로 보내짐
   let board = "board" + req.params.bn;
   console.log(board);

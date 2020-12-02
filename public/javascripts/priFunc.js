@@ -338,7 +338,7 @@ function upComFunc(op, i1, val) {
         }
     };
     //코멘트 아이디랑 보드넘버bn id / comment1/12
-    xhr.open("PUT", "/private/update/" + url);
+    xhr.open("PUT", "/private/" + url);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(data);
 }
@@ -412,7 +412,7 @@ function commentModalDel(e) {
             window.location.reload();
         }
     };
-    xhr.open("DELETE", "/private/delete/" + value);
+    xhr.open("DELETE", "/private/" + value);
     xhr.setRequestHeader("Content-Type", "application/json"); // 컨텐츠타입을 json으로
     xhr.send(data);
     //console.log(guestPw.value);
@@ -480,7 +480,7 @@ function postSubmit() {
         }
     }
 
-    xhr.open('post', '/private/write/' + boardNum);
+    xhr.open('post', '/private/' + boardNum);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(data);
 }
@@ -521,7 +521,7 @@ function commentSubmit() {
         }
     }
 
-    xhr.open('post', '/private/write/' + num);
+    xhr.open('post', '/private/' + num);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(data);
 }

@@ -7,8 +7,8 @@ var db = require("../model/db_conn").db;
 
 const app = require("../app.js");
 
-
-router.post("/create", function (req, res) {
+// 방명록 작성
+router.post("/guest", function (req, res) {
   const body = req.body; //req name으로 보내짐
   let date = momnet().format("YYYY-MM-DD");
   db.query('insert into guest(userid, userpw, content, date) values (?, ?, ?, ?);', [body.id, body.pw, body.content, date], function (err, result) {
@@ -24,7 +24,8 @@ router.post("/create", function (req, res) {
   });
 });
 
-router.delete("/delete/:id", function (req, res) {
+// 방명록 삭제
+router.delete("/guest/:id", function (req, res) {
   const body = req.body;
   //console.log(body);
   let pw = body.pw;
@@ -53,16 +54,14 @@ router.delete("/delete/:id", function (req, res) {
   });
 });
 
+// pagination
 router.use("/:pagenum", function (req, res, next) {
-
+  //portpolio list
   db.query("select * from portpolio;", function (err, rows1, fields) {
     if (err) {
       throw err;
     }
     res.locals.rows1 = rows1;
-    console.log("-----------");
-    console.log(rows1);
-    console.log("-----------");
 
     let totalCount = rows1.length + 1
     console.log("길이: " + totalCount);
@@ -106,6 +105,7 @@ router.use("/:pagenum", function (req, res, next) {
 /* GET work page. */
 router.get("/:pagenum", function (request, res) {
   console.log("Access to Work");
+  //방명록 목록
   db.query("SELECT * FROM guest;", function (err, rows, fields) {
 
     // render 확인, 여기 말고 rows 값만 밖으로 내보낼 수 없는지 확인!

@@ -191,7 +191,7 @@ function guestModalDel() {
             window.location.reload();
         }
     };
-    xhr.open("delete", "/work/delete/" + value);
+    xhr.open("delete", "/work/guest/" + value);
     xhr.setRequestHeader("Content-Type", "application/json"); // 컨텐츠타입을 json으로
     xhr.send(data);
 }
