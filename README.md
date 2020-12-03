@@ -6,15 +6,18 @@ Using Bootstrap
 
 # PAGES
 1. HOME
-  - Explain this blog
+  - About this blog
   - Introduce myself
+  - Weather
   - Contact Me (using https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server)
+
 2. WORK
   - My works
-  - projects
+  - Guest
+
 3. PRIVATE
-  - study post
-  - daily post
+  - Study post
+  - Daily post (SPA)
   
 # Database
   - Use AWS RDS MySQL
