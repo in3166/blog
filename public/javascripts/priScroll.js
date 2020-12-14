@@ -1,3 +1,5 @@
+'use strict';
+
 function getPageId(n) {
     return 'postpage' + n;
 }

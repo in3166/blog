@@ -1,3 +1,5 @@
+'use strict';
+
 function pagination(a) {
     var req_num_row = 10; //한 페이지에 출력할 행 개수
     var $tr = jQuery('.tb tr');
