@@ -43,45 +43,47 @@
 
       <!-- 댓글 -->
       <!-- Single Comment -->
-      <div id="commentDiv<%= boardnum%>/<%= postnum%>">
+      <div id="comment">
+        <div id="commentDiv<%= boardnum%>/<%= postnum%>">
 
-        <% for (let i = 0; i < comment.length ; i++) { %>
+          <% for (let i = 0; i < comment.length ; i++) { %>
 
-        <div id="comment<%= boardnum%>/<%= comment[i].id%>">
-          <form>
-            <div class="media mb-4">
-              <div class="media-body">
-                <div class="mb-1">
-                  <span id="commentId" name="commentId">
-                    <h5 class="mt-0 d-inline"><%= comment[i].title %></h5>
+          <div id="comment<%= boardnum%>/<%= comment[i].id%>">
+            <form>
+              <div class="media mb-4">
+                <div class="media-body">
+                  <div class="mb-1">
+                    <span id="commentId" name="commentId">
+                      <h5 class="mt-0 d-inline"><%= comment[i].title %></h5>
+                    </span>
+                    <span class="float-right small text-gray">
+                      <%= comment[i].date %>
+                    </span>
+                  </div>
+                  <span id="commentContent" name="commentContent">
+                    <%= comment[i].content %>
                   </span>
                   <span class="float-right small text-gray">
-                    <%= comment[i].date %>
+                    <button class="btn2 ml-2 commentUpdate" value="comment<%= boardnum%>/<%= comment[i].id%>"
+                      type="button" name="commentUpdate"><i class="fas fa-pen"></i></button>
+                    <button class="btn2 ml-2 commentDel" value="comment<%= boardnum%>/<%= comment[i].id%>" type="button"
+                      name="commentDel"><i class="fas fa-trash-alt"></i></button>
                   </span>
-                </div>
-                <span id="commentContent" name="commentContent">
-                  <%= comment[i].content %>
-                </span>
-                <span class="float-right small text-gray">
-                  <button class="btn2 ml-2 commentUpdate" value="comment<%= boardnum%>/<%= comment[i].id%>"
-                    type="button" name="commentUpdate"><i class="fas fa-pen"></i></button>
-                  <button class="btn2 ml-2 commentDel" value="comment<%= boardnum%>/<%= comment[i].id%>" type="button"
-                    name="commentDel"><i class="fas fa-trash-alt"></i></button>
-                </span>
-                <div class="card-group mt-3">
-                  <input type="password" name="commentUpdatePw" class="" hidden autocomplete="on"
-                    placeholder="Password">
-                  <button class="btn2 ml-2 border-dark commentUpdateComplete" hidden type="button"
-                    value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentUpdateComplete">완료</button>
-                  <button class="btn2 ml-2 commentUpCancel" hidden value="comment<%= boardnum%>/<%= comment[i].id%>"
-                    type="button" name="commentUpCancel"> <i class="fas fa-times" id="commentUpClose"></i></button>
+                  <div class="card-group mt-3">
+                    <input type="password" name="commentUpdatePw" class="" hidden autocomplete="on"
+                      placeholder="Password">
+                    <button class="btn2 ml-2 border-dark commentUpdateComplete" hidden type="button"
+                      value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentUpdateComplete">완료</button>
+                    <button class="btn2 ml-2 commentUpCancel" hidden value="comment<%= boardnum%>/<%= comment[i].id%>"
+                      type="button" name="commentUpCancel"> <i class="fas fa-times" id="commentUpClose"></i></button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
-          <hr>
+            </form>
+            <hr>
+          </div>
+          <% } %>
         </div>
-        <% } %>
       </div>
       <!-- Comments Form -->
       <div class="card my-4">

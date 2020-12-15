@@ -172,6 +172,10 @@ body,
   font-size: 1.3em;
 }
 
+.kakao-img:hover {
+  filter: brightness(50%);
+}
+
 /* Guest Delete Modal */
 /* The Modal (background) */
 .modal2 {
