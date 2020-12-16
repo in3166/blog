@@ -65,7 +65,7 @@ window.onload = function () {
     // }
 
     // 수정 완료 버튼
-    $('#postDiv').on('click', '.commentUpdateComplete', upComFunc);
+    //  $('#postDiv').on('click', '.commentUpdateComplete', upComFunc);
     // let commentUpdateComplete = document.getElementsByName("commentUpdateComplete");
     // if (commentUpdateComplete) {
     //     for (let i = 0; i < commentUpdateComplete.length; i++) {
@@ -97,6 +97,7 @@ window.onload = function () {
     //게시글 수정 버튼
     const postModBtn = document.getElementById("postModBtn");
     if (postModBtn) {
+        console.log("엥?")
         postModBtn.addEventListener("click", postModModalOpen, false);
     }
 
@@ -170,6 +171,7 @@ function postModModalOpen() {
     CKEDITOR.instances['p_content'].setData(postCotent);
     postUpdate.removeAttribute('hidden');
     priPostSubmit.style.display = "none";
+    priPostSubmit.setAttribute('disabled', 'disabled');
     //게시글 작성 모달 오픈
     postModal.style.display = "block";
     document.getElementById("postTitle").focus();
@@ -183,6 +185,7 @@ function postModModalOpen() {
             CKEDITOR.instances['p_content'].setData("");
             postUpdate.setAttribute('hidden', 'true');
             priPostSubmit.style.display = "block";
+            priPostSubmit.removeAttribute('disabled');
         }, false);
     }
 
@@ -196,6 +199,7 @@ function postModModalOpen() {
             CKEDITOR.instances['p_content'].setData("");
             postUpdate.setAttribute('hidden', 'true');
             priPostSubmit.style.display = "block";
+            priPostSubmit.removeAttribute('disabled');
         }
     }, false);
 }
@@ -286,7 +290,7 @@ function upComFunc(op, i1, val) {
     let title = data.id;
     let content = data.content;
     data = JSON.stringify(data);
-    console.log(data);
+    // console.log(data);
 
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
@@ -338,8 +342,9 @@ function upComFunc(op, i1, val) {
         }
     };
     //코멘트 아이디랑 보드넘버bn id / comment1/12
+    console.log("url: " + url)
     xhr.open("PUT", "/private/" + url);
-    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.send(data);
 }
 

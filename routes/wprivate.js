@@ -21,7 +21,7 @@ router.put("/:bn/:id", function (req, res) {
 
   console.log("입력한 비밀번호: " + pw);
   console.log("입력한 id: " + id);
-  console.log("입력한 content: " + content);
+  // console.log("입력한 content: " + content);
 
   db.query('select * from ' + req.params.bn + ' where id = ?', [req.params.id], function (err1, result) {
     //console.log(result[0].userpw);
@@ -68,10 +68,10 @@ router.delete("/:bn/:id", function (req, res) {
         if (err) {
           console.log('delete error', err);
           //res.redirect('/work');
-          res.sendStatus(501);
+          res.send(501);
         } else {
           console.log(`delete id = %d`, req.params.id);
-          res.sendStatus(200);
+          res.send(200);
         }
       });
     } else {
@@ -118,11 +118,11 @@ router.post("/:bn/:id", function (req, res) {
 router.post("/:bn", function (req, res) {
   const body = req.body; //req name으로 보내짐
   let board = "board" + req.params.bn;
-  console.log(board);
-  console.log("------");
-  console.log(body.pw);
-  console.log(body.title);
-  console.log(body.content);
+  // console.log(board);
+  console.log("-글쓰기-----");
+  // console.log(body.pw);
+  // console.log(body.title);
+  // console.log(body.content);
   console.log("------");
   let date = momnet().format("YYYY-MM-DD");
   console.log(date);
@@ -158,14 +158,17 @@ router.use("/board/:bn/:pn", function (req, res, next) {
     if (err) {
       throw err;
     }
+    if (typeof rows1 == "undefined" || rows1 == null || rows1.length == null || rows1.length == 0) {
+      rows1 = [{ id: 0, title: '게시글 없음', content: '', date: '' }]
+    }
     res.locals.rows1 = rows1;
-    //console.log(rows1);
+    // console.log(rows1);
 
     let totalCount = rows1.length
     console.log("길이: " + totalCount);
 
     let page = req.params.pn;
-    console.log("page: " + page);
+    // console.log("page: " + page);
 
     let countList = 6; // 한 페이지에 출력될 게시물 수
     let countPage = 5; // 한 화면에 출력될 페이지 수, 하단의 페이지 번호
@@ -256,8 +259,11 @@ router.get("/board/:bn/:pn/:id", function (req, res) {
           throw err;
         }
 
-        console.log(show);
+        //   console.log(show);
         console.log("??")
+        if (show == undefined) {
+          show = [{ id: 0, title: '게시글 없음', content: '', date: '' }]
+        }
         res.render("wprivate", {
           title: "Private Room",
           list1: "top",
