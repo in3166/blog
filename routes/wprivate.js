@@ -159,7 +159,7 @@ router.use("/board/:bn/:pn", function (req, res, next) {
       throw err;
     }
     if (typeof rows1 == "undefined" || rows1 == null || rows1.length == null || rows1.length == 0) {
-      rows1 = [{ id: 0, title: '게시글 없음', content: '', date: '' }]
+      rows1 = [{ id: '', title: '게시글 없음', content: '', date: '' }]
     }
     res.locals.rows1 = rows1;
     // console.log(rows1);
@@ -262,7 +262,7 @@ router.get("/board/:bn/:pn/:id", function (req, res) {
         //   console.log(show);
         console.log("??")
         if (show == undefined) {
-          show = [{ id: 0, title: '게시글 없음', content: '', date: '' }]
+          show = [{ id: '', title: '게시글 없음', content: '', date: '' }]
         }
         res.render("wprivate", {
           title: "Private Room",

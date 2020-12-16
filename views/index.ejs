@@ -13,9 +13,7 @@
     <div class="text-center textborder">
       <p>
         블로그에 접속해주셔서 감사합니다.<br />
-        이 블로그는 그냥 만들어봤어요.<br />
-        저의 코딩 작업물과 일상적인 것들을 올릴거에요.<br />
-        과연 완성 될 수 있을지...
+        저의 코딩 작업물 등을 올릴 예정입니다.<br />
       </p>
     </div>
   </div>
@@ -35,12 +33,12 @@
         </span>
         <h4 class="my-3">Front-End</h4>
         <p class="text-muted">
-          - <del>React</del> <br />
-          - <del>TypeScript & Redux Pattern</del><br />
           - Bootstrap <br />
           - HTML5 <br />
           - Javascript <br />
-          - EJS
+          - EJS<br />
+          - <del>React</del> <br />
+          - <del>TypeScript & Redux Pattern</del>
         </p>
       </div>
       <div class="col-md-4">
@@ -49,7 +47,11 @@
           <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
         </span>
         <h4 class="my-3">Back-End</h4>
-        <p class="text-muted">- <del>SpringBoot</del> <br />- <del>Postgre SQL</del> <br />- Express <br />- MySQL</p>
+        <p class="text-muted">
+          - Express<br />
+          - MySQL<br />
+          - <del>SpringBoot</del> <br />
+          - <del>Postgre SQL</del></p>
       </div>
       <div class="col-md-4">
         <span class="fa-stack fa-4x">
@@ -58,8 +60,11 @@
         </span>
         <h4 class="my-3">Etc.</h4>
         <p class="text-muted">
+          - 이메일 전송 <br />
           - REST API <br />
-          - SSL 인증서 <BR /> - 댓글 & 푸쉬 <BR /> - Swagger in Rest API <BR /> - 이메일 전송
+          - SSL 인증서 <br />
+          - <del>댓글 & 푸쉬</del> <br />
+          - <del>Swagger in Rest API</del>
         </p>
       </div>
     </div>
@@ -88,11 +93,9 @@
           </div>
           <div class="timeline-inverted timeline-body">
             <p class="text-muted">
-              Okky의 한 포트폴리오에 대한 글을 읽은 후 블로그 제작을
-              결심했다. 프론트로는 React, 백엔드로는 SpringBoot, DB는
-              postgreSQL를 사용하기로 결정했다. 일단 화면의 전체적인 틀은
-              부트스트랩의 테마를 따와서 시작한다. 화면부터 제작 시작 ->
-              vaniliaJS를 사용한 SPA 제작 후 React로 변환 계획!
+              - 화면 설계 <br />
+              - 화면 제작<br />
+              - HTML, bootstrap, css, 순수 Javascript 등 사용
             </p>
           </div>
         </div>
@@ -104,14 +107,12 @@
         <div class="timeline-panel">
           <div class="timeline-heading">
             <h4>2020-7-21</h4>
-            <h4 class="subheading">Oh My Goodness!</h4>
+            <h4 class="subheading">Server!</h4>
           </div>
           <div class="timeline-body">
             <p class="text-muted">
-              spa로 모든 페이지를 만들고 싶었지만 너무 어려워... 우선 페이지
-              3개 만들고 페이지 안에 내용물 들은 ajax로(?)... 대략적인
-              페이지 내용 완성! 서버는 node로 하기로 바꿨다. 나중에
-              spring으로 바꿔서 해봐야지..
+              - express 서버 생성<br />
+              - routing 생성
             </p>
           </div>
         </div>
@@ -123,13 +124,13 @@
         <div class="timeline-panel">
           <div class="timeline-heading">
             <h4>2020-8-18</h4>
-            <h4 class="subheading">Server 구현</h4>
+            <h4 class="subheading">DB 구현</h4>
           </div>
           <div class="timeline-body">
             <p class="text-muted">
-              NodeJS의 Express를 사용한 간단한 서버를 구현하였다. 이제 DB를
-              연결해서 글을 생성하고 삭제하는 등의 작업을 해야겠다. 아직 갈
-              길이 멀다... (PostgreSQL과 Golang으로 팀프로젝트를 하나 했었는데 아직 익숙치 않아서 mySQL로 변경ㅠ 자료도 별로 없고...)
+              - MySQL DB 구조 설계<br />
+              - MySQL DB 생성<br />
+              - MySQL DB 연결 확인
             </p>
           </div>
         </div>
@@ -141,13 +142,14 @@
         <div class="timeline-panel">
           <div class="timeline-heading">
             <h4>2020-9-18</h4>
-            <h4 class="subheading">View는 ejs로 결정</h4>
+            <h4 class="subheading">View는 ejs로</h4>
           </div>
           <div class="timeline-body">
             <p class="text-muted">
-              인공지능 업무를 맡아서 블로그 만들기를 전혀 못하다가 다시 들여다본다..ㅠ(너무 어려워)
-              view를 그냥 js로 만들었더니 너무 번거롭고 어려웠다. ejs로 새로 만들어서 적용!
-              완전 간편..!(React로 하고 싶은데 엄두가 안난다..) DB연결도 했고 이제 포트폴리오에 연동해서 뿌려줘야겠다.
+              - view를 js -> ejs로 변경<br />
+              - index 이미지, 레이아웃 정리<br />
+              - Contact 기능 추가
+              - 날씨 기능 추가
             </p>
           </div>
         </div>
@@ -163,12 +165,10 @@
           </div>
           <div class="timeline-body">
             <p class="text-muted">
-              Work Page를 어느 정도 작업했다. 방명록과 DB를 연동하여 CRUD 기능 추가했고(Update는 미뤄뒀지만..;) Javascript로
-              페이지네이션 기능을 구현해봤다. 모듈로 간편히 할 수 있다는 것을 중간에 알았지만.. 되돌리기엔 너무 늦어
-              직접 구현해 봤다. 작동은 되는데.. 과연 제대로 한건지 의문이다.(너무 어려웠다;)
-              PortFolio 부분도 DB와 연동하고 직접 글을 쓸 수 있도록 하려고 했지만
-              아직 올릴 글도 많이 없고(올릴 포트폴리오가 없다니..) 직접 div 틀에 작성하여 넣었다.
-              이제 Private 페이지를 작업해야겠다.
+              - 방명록 기능 추가<br />
+              - 글쓰기, 수정, 삭제, 전체보기<br />
+              - 작업물과 DB 연결하여 뿌려주기<br />
+              - Portpolio 부분에 페이지네이션 추가
             </p>
           </div>
         </div>
@@ -180,14 +180,14 @@
         <div class="timeline-panel">
           <div class="timeline-heading">
             <h4>2020-11-11</h4>
-            <h4 class="subheading">오랜만에 진행 과정 작성</h4>
+            <h4 class="subheading">Private Page </h4>
           </div>
           <div class="timeline-body">
             <p class="text-muted">
-              그 동안 틈틈이 블로그 개발을 해왔다.
-              Private, work 페이지에 게시판 CRUD 기능, Client/Server side Pagination,
-              header, footer 파일 나누기, UI 수정, DB 연동 등등...
-              앞으로 Ajax 입력창에 required 기능, 앞 뒤 페이지이동, 날씨api 연동 등을 추가할 계획이다.
+              - Private Page 게시판 구현<br />
+              - 서버 단 페이지네이션 구현<br />
+              - CRUD 기능은 AJAX로 구현<br />
+              - Photo 페이지는 Single Page로 구현
             </p>
           </div>
         </div>
@@ -195,10 +195,9 @@
       <li class="timeline-inverted">
         <div class="timeline-image">
           <h4>
-            Be Part
             <br />
-            Of Our <br />
-            Story!
+            . . .
+            <br />
           </h4>
         </div>
       </li>
@@ -232,13 +231,12 @@
         </div>
       </div>
       <div class="col-lg-8 border p-md-4">
-        <p class="large text-muted">
-          이름: 유인종 <BR>
-          이메일: in3166@naver.com <br>
-          직업: 대학생 / 신입개발자<br>
-          학교: 가천대학교 컴퓨터공학과 <BR>
-          관심있는 언어: Javascript, Golang, NodeJS ...<br>
-          관심 분야: Front-End 개발자 -> Full-Stack 개발자
+        <p class="large text-muted text-center">
+          Name: Yu InJong <BR>
+          Email: in3166@naver.com <br>
+          Education: 가천대학교 컴퓨터공학과 <BR>
+          Language: Javascript, Golang, NodeJS ...<br>
+          GitHub: <a href="https://github.com/in3166" style="text-decoration: none;">https://github.com/in3166</a>
         </p>
       </div>
     </div>
@@ -246,7 +244,7 @@
 
   </div>
 </section>
-<!-- GitHub Graph-->
+
 
 <div class="row p-lg-3 border justify-content-center align-content-center">
   <div class="my-auto"><img src="" alt="Loading..." id="weaImg" class="w-100 ">
