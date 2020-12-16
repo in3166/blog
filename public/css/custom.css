@@ -167,6 +167,12 @@ body,
   border-radius: 0.25rem;
 }
 
+.post-list {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .current {
   color: rgba(84, 113, 156, 0.767);
   font-size: 1.3em;
