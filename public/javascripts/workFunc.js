@@ -29,7 +29,7 @@ window.onload = function () {
     //게시글 등록
     const priPostSubmit = document.getElementById("priPostSubmit");
     if (priPostSubmit) {
-        priPostSubmit.addEventListener("click", postSubmit, false);
+        priPostSubmit.addEventListener("click", portpolioSubmit, false);
     }
 
     GitHubCalendar(".calendar", "in3166", { responsive: true, tooltips: false, global_stats: false }).then(function () {
@@ -77,37 +77,35 @@ function workModalOpen() {
 
 
 //게시글 전송
-function postSubmit() {
+function portpolioSubmit() {
+    alert('비밀번호를 확인하세요.');
+    // let xhr = new XMLHttpRequest();
+    // let title = document.getElementById("postTitle").value;
+    // let content = CKEDITOR.instances.p_content.getData();
+    // let boardNum = this.value;
+    // let postPw = document.getElementById("postPw").value;
 
-    let xhr = new XMLHttpRequest();
-    let title = document.getElementById("postTitle").value;
-    let content = CKEDITOR.instances.p_content.getData();
-    let boardNum = this.value;
-    let postPw = document.getElementById("postPw").value;
+    // let data = { title: title, content: content, pw: postPw };
+    // data = JSON.stringify(data);
+    // console.log(data);
 
-    let data = { title: title, content: content, pw: postPw };
-    data = JSON.stringify(data);
-    console.log(data);
+    // xhr.onload = function () {
+    //     if (xhr.status === 200 || xhr.status === 201) {
+    //         //console.log(xhr.responseText);
+    //         alert("게시글 작성 완료!");
+    //         let postModal = document.getElementById("postModal");
+    //         postModal.style.display = "none";
+    //         $('body').css("overflow", "scroll");
+    //     } else if (500) {
+    //         alert("비밀번호를 확인하세요.");
+    //     } else {
+    //         alert("게시글 작성 오류!");
+    //     }
+    // }
 
-    xhr.onload = function () {
-        if (xhr.status === 200 || xhr.status === 201) {
-            //console.log(xhr.responseText);
-            alert("게시글 작성 완료!");
-            let postModal = document.getElementById("postModal");
-            postModal.style.display = "none";
-            $('body').css("overflow", "scroll");
-        } else if (500) {
-            //console.error(xhr.responseText);
-            console.log("오잉?")
-            alert("비밀번호를 확인하세요.");
-        } else {
-            alert("게시글 작성 오류!");
-        }
-    }
-
-    xhr.open('post', '/private/write/' + boardNum);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(data);
+    // xhr.open('post', '/private/write/' + boardNum);
+    // xhr.setRequestHeader("Content-Type", "application/json");
+    // xhr.send(data);
 }
 
 
