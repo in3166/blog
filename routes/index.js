@@ -7,10 +7,10 @@ var wea = require("./weather");
 router.post("/weather", function (req, res) {
   let lon = req.body.lon;
   let lat = req.body.lat;
-  console.log(lon, '/', lat)
+  // console.log(lon, '/', lat)
   // await는 async안에서만 사용 가능하므로 then을 사용
   wea(lat, lon).then(function (val) { // val => ... ));
-    console.log(val);
+    //console.log(val);
     res.json(val);
   }).catch(function (err) {
     console.log(err);
@@ -24,7 +24,7 @@ router.get("/index", function (req, res) {
 });
 
 router.get("/", function (req, res, next) {
-  console.log("Access to Home");
+  //console.log("Access to Home");
   res.render("index", {
     title: "Cup of Coding Box",
     list1: "top",

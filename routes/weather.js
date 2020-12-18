@@ -6,7 +6,7 @@ const cheerio = require('cheerio');
 function weather(lat, lon) {
     // 위도 경도 -> 기상청 API에 맞게 변환
     let location = covert.toXY(lat, lon);
-    console.log(location.x, location.y);
+    //console.log(location.x, location.y);
 
     const nx = location.x;
     const ny = location.y;
@@ -90,9 +90,9 @@ function weather(lat, lon) {
             break;
     }
 
-    console.log("날짜: " + basedate);
-    console.log("시간: " + hours);
-    console.log(nx, ny)
+    //console.log("날짜: " + basedate);
+    // console.log("시간: " + hours);
+    // console.log(nx, ny)
 
     var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst';
     var queryParams = '?' + encodeURIComponent('ServiceKey') + '=MCY3wIU4Zx8fdOOEsVJdb3iTtG9GeFn1YnYW1I8wmirD%2FEB3nyQZCvcvIeEfLUCIaPJ8pZA0hSfsR8SLUUFVFA%3D%3D'; /* Service Key*/
@@ -103,7 +103,7 @@ function weather(lat, lon) {
     queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent(hours + '00'); /* */
     queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent(nx); /* */
     queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent(ny); /* */
-    console.log(url + queryParams);
+    //console.log(url + queryParams);
 
     var data = [];
     return new Promise(function (resolve, reject) {
@@ -115,8 +115,8 @@ function weather(lat, lon) {
                 reject(error);
             }
             try {
-                console.log('body');
-                console.log(body);
+                // console.log('body');
+                // console.log(body);
                 let data = [];
                 $ = cheerio.load(body);
                 $('item').each(function (idx) {
@@ -125,7 +125,7 @@ function weather(lat, lon) {
                     const wea_val = $(this).find('fcstValue').text();
                     data.push({ "time": time, "cate": cate, "val": wea_val });
 
-                    console.log(`시간 : ${time} 날씨 정보 : ${cate} 값 : ${wea_val}`);
+                    // console.log(`시간 : ${time} 날씨 정보 : ${cate} 값 : ${wea_val}`);
                 });
                 //console.log(data);
                 resolve(data);
