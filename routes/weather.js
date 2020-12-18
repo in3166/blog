@@ -103,6 +103,7 @@ function weather(lat, lon) {
     queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent(hours + '00'); /* */
     queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent(nx); /* */
     queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent(ny); /* */
+    console.log(url + queryParams);
 
     var data = [];
     return new Promise(function (resolve, reject) {
