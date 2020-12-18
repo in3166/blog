@@ -9,7 +9,7 @@ router.post("/weather", function (req, res) {
   let lat = req.body.lat;
   // await는 async안에서만 사용 가능하므로 then을 사용
   wea(lat, lon).then(function (val) { // val => ... ));
-    //console.log(val);
+    console.log(val);
     res.json(val);
   }).catch(function (err) {
     console.log(err);
