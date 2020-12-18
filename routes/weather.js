@@ -6,7 +6,7 @@ const cheerio = require('cheerio');
 function weather(lat, lon) {
     // 위도 경도 -> 기상청 API에 맞게 변환
     let location = covert.toXY(lat, lon);
-    //console.log(location.x, location.y);
+    console.log(location.x, location.y);
 
     const nx = location.x;
     const ny = location.y;
@@ -114,7 +114,8 @@ function weather(lat, lon) {
                 reject(error);
             }
             try {
-                // console.log(body);
+                console.log('body');
+                console.log(body);
                 let data = [];
                 $ = cheerio.load(body);
                 $('item').each(function (idx) {
