@@ -7,6 +7,7 @@ var wea = require("./weather");
 router.post("/weather", function (req, res) {
   let lon = req.body.lon;
   let lat = req.body.lat;
+  console.log(lon, '/', lat)
   // await는 async안에서만 사용 가능하므로 then을 사용
   wea(lat, lon).then(function (val) { // val => ... ));
     console.log(val);

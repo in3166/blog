@@ -90,9 +90,9 @@ function weather(lat, lon) {
             break;
     }
 
-    //console.log("날짜: " + basedate);
-    //console.log("시간: " + hours);
-    //console.log(nx, ny)
+    console.log("날짜: " + basedate);
+    console.log("시간: " + hours);
+    console.log(nx, ny)
 
     var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst';
     var queryParams = '?' + encodeURIComponent('ServiceKey') + '=MCY3wIU4Zx8fdOOEsVJdb3iTtG9GeFn1YnYW1I8wmirD%2FEB3nyQZCvcvIeEfLUCIaPJ8pZA0hSfsR8SLUUFVFA%3D%3D'; /* Service Key*/
@@ -123,7 +123,7 @@ function weather(lat, lon) {
                     const wea_val = $(this).find('fcstValue').text();
                     data.push({ "time": time, "cate": cate, "val": wea_val });
 
-                    // console.log(`시간 : ${time} 날씨 정보 : ${cate} 값 : ${wea_val}`);
+                    console.log(`시간 : ${time} 날씨 정보 : ${cate} 값 : ${wea_val}`);
                 });
                 //console.log(data);
                 resolve(data);
