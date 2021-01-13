@@ -17,6 +17,7 @@ var config = require('./db_config').local;
 //         }
 //     }
 // };
+
 const conn = mysql.createConnection({
     multipleStatements: true, // 여러 쿼리 가능 https://stackoverflow.com/questions/52245174/render-multiple-queries-in-node-express
     host: config.host,

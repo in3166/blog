@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 //var index = require("../views/index.ejs");
-var wea = require("./weather");
+var wea = require("../model/weather");
 
 
 router.post("/weather", function (req, res) {

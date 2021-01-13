@@ -1,4 +1,4 @@
-var covert = require("./converXY");
+var covert = require("../model/converXY");
 const request = require('request');
 const moment = require('moment');
 const cheerio = require('cheerio');
