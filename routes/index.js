@@ -24,7 +24,12 @@ router.get("/index", function (req, res) {
 });
 
 router.get("/", function (req, res, next) {
-  //console.log("Access to Home");
+  let Counter = require('../model/counter');
+  let visitorCounter = null;
+  Counter.findOne({ name: "visitors" }, function (err, counter) {
+    if (!err) visitorCounter = counter;
+  });
+  console.log(visitorCounter);
   res.render("index", {
     title: "Cup of Coding Box",
     list1: "top",

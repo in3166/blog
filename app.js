@@ -1,7 +1,6 @@
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
-const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
@@ -9,6 +8,7 @@ const workRouter = require("./routes/work");
 const privateRouter = require("./routes/wprivate");
 
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const compression = require("compression");
 
@@ -51,6 +51,8 @@ app.use(express.static("public"));
 //route의 callback함수의 req.body에 form으로 입력받은 데이터 사용 가능: 웹브라우저 폼에 입력한 데이터가 bodyParser를 통해 req.body로 생성
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser()); // 쿠키사용
+app.use(countVisitor()); // 모든 요청 지나감 - 어떤 페이지든 카운트
 app.use(compression());
 
 // // DB schema: DB에서 사용할 스키마 설정-정보 어떤식으로 저장할 지 지정 - contact라는 형태의 데이터 저장 시 3개의 항목 지님
@@ -94,6 +96,35 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+function countVisitor(req, res, next) {
+  if (!req.cookies.count && req.cookies['connect.sid']) {
+    // count 쿠키값이 있으면 함수 사용 x, 이 쿠키는 1시간 브라우저 저장(1시간 동안 날짜 검사 x)
+    // connext.sid: express session id 저장 쿠키값 -> 여기선 브라우저 쿠키사용 여부 판단 -> 쿠키값 없는 경우 카운팅 시 페이지 열때마다 카운팅
+    res.cookie('count', "", { maxArg: 3600000, httpOnly: true });
+    let now = new Date();
+    let date = now.getFullYear() + "/" + now.getMonth() + "/" + now.getDate();
+    if (date != req.cookies.countDate) { // count가 없으면 오늘의 날짜를 구하고 countData와 비교
+      res.cookie('countDate', date, { maxArg: 86400000, httpOnly: true });
+      let Counter = require('./model/counter');
+      Counter.findOne({ name: "visitors" }, function (err, counter) {
+        if (err) return next();
+        if (counter === null) { // visitors 데이터 불러옴 없으면 생성
+          Counter.create({ name: "visitors", totalCount: 1, todayCount: 1, date: date });
+        } else {
+          Counter.totalCount++;
+          if (Counter.date == date) {
+            Counter.todayCount++;
+          } else {
+            Counter.todayCount = 1;
+            Counter.date = date;
+          }
+          counter.save();
+        }
+      });
+    }
+  }
+}
 
 // app.listen(3001, () => console.log("Express app 3001!"));
 //module.exports = connection;
