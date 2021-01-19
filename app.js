@@ -52,8 +52,9 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser()); // 쿠키사용
-app.use(countVisitor()); // 모든 요청 지나감 - 어떤 페이지든 카운트
 app.use(compression());
+
+//app.use(countVisitor()); // 모든 요청 지나감 - 어떤 페이지든 카운트
 
 // // DB schema: DB에서 사용할 스키마 설정-정보 어떤식으로 저장할 지 지정 - contact라는 형태의 데이터 저장 시 3개의 항목 지님
 // var guestBookSchema = mongoose.Schema({
@@ -64,16 +65,12 @@ app.use(compression());
 // // 스키마의 model을 생성, 1파라미터: mondb에서 사용되는 콜렉션 이름, 2파라미터: 스키마 객체
 // //DB에 있는 Contact라는 데이터 콜렉션을 현재 코드의 Contact 변수에 연결
 // var GuestBook = mongoose.model("contact", guestBookSchema); // db에 접근하여 data를 변경할 수 있는 함수가짐 https://www.a-mean-blog.com/ko/blog/%ED%86%A0%EB%A7%89%EA%B8%80/_/ORM-Object-relational-mapping-%EA%B3%BC-Model
-
 //app.use(express.urlencoded({ extended: false }));
 //app.use(cookieParser());
-
-//app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/work", workRouter);
 app.use("/private", privateRouter);
-
 
 app.use((request, response, next) => {
   response.status(404).send("Cant Find!");
@@ -96,35 +93,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-function countVisitor(req, res, next) {
-  if (!req.cookies.count && req.cookies['connect.sid']) {
-    // count 쿠키값이 있으면 함수 사용 x, 이 쿠키는 1시간 브라우저 저장(1시간 동안 날짜 검사 x)
-    // connext.sid: express session id 저장 쿠키값 -> 여기선 브라우저 쿠키사용 여부 판단 -> 쿠키값 없는 경우 카운팅 시 페이지 열때마다 카운팅
-    res.cookie('count', "", { maxArg: 3600000, httpOnly: true });
-    let now = new Date();
-    let date = now.getFullYear() + "/" + now.getMonth() + "/" + now.getDate();
-    if (date != req.cookies.countDate) { // count가 없으면 오늘의 날짜를 구하고 countData와 비교
-      res.cookie('countDate', date, { maxArg: 86400000, httpOnly: true });
-      let Counter = require('./model/counter');
-      Counter.findOne({ name: "visitors" }, function (err, counter) {
-        if (err) return next();
-        if (counter === null) { // visitors 데이터 불러옴 없으면 생성
-          Counter.create({ name: "visitors", totalCount: 1, todayCount: 1, date: date });
-        } else {
-          Counter.totalCount++;
-          if (Counter.date == date) {
-            Counter.todayCount++;
-          } else {
-            Counter.todayCount = 1;
-            Counter.date = date;
-          }
-          counter.save();
-        }
-      });
-    }
-  }
-}
 
 // app.listen(3001, () => console.log("Express app 3001!"));
 //module.exports = connection;
