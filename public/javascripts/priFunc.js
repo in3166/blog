@@ -43,6 +43,7 @@ window.onload = function () {
     //         commentSubmitBtn[index].addEventListener("click", commentSubmit, false);
     //     }
     // }
+
     // Use on method: append button's click not working
     $('#postDiv').on('click', '.commentSubmit', commentSubmit);
     $('#postDiv').on('click', '.commentDel', commentPwModalOpen);
@@ -104,6 +105,7 @@ window.onload = function () {
     //게시글 수정 확인 버튼
     const postUpdate = document.getElementById("postUpdate");
     if (postUpdate) {
+        console.log("up")
         postUpdate.addEventListener("click", e => upComFunc(1, 0, postUpdate.value), false);
     }
 

@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 //var index = require("../views/index.ejs");
-var wea = require("../model/weather");
+var wea = require("../controller/weather");
 
 
 router.post("/weather", function (req, res) {
@@ -24,12 +24,12 @@ router.get("/index", function (req, res) {
 });
 
 router.get("/", function (req, res, next) {
-  let Counter = require('../model/counter');
-  let visitorCounter = null;
-  Counter.findOne({ name: "visitors" }, function (err, counter) {
-    if (!err) visitorCounter = counter;
-  });
-  console.log(visitorCounter);
+  // let Counter = require('../model/counter');
+  // let visitorCounter = null;
+  // Counter.findOne({ name: "visitors" }, function (err, counter) {
+  //   if (!err) visitorCounter = counter;
+  // });
+  //console.log(visitorCounter);
   res.render("index", {
     title: "Cup of Coding Box",
     list1: "top",
