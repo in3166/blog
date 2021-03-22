@@ -3,7 +3,7 @@ var momnet = require("moment");
 const app = require("../app.js");
 var router = express.Router();
 //var template = require("../views/template.js");
-const { db } = require("../controller/db_conn.js");
+const { db } = require("../models/db_conn.js");
 
 
 //여러개 디비 쿼리 적용, 페이지네이션, 댓글 삭제, 게시글 삭제

@@ -2,7 +2,7 @@ var express = require("express");
 var momnet = require("moment");
 var router = express.Router();
 //var footer1 = require("./footer");
-var db = require("../controller/db_conn").db;
+var db = require("../models/db_conn").db;
 //var conn = require("../model/db_conn").conn; // connect 안해도 사용?
 
 const app = require("../app.js");
