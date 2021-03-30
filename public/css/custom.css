@@ -3,6 +3,10 @@
   padding: 15px;
 }
 
+canvas {
+  position: fixed !important;
+}
+
 html,
 body,
 .grid-container {

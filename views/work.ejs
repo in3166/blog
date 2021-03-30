@@ -1,430 +1,497 @@
 <!-- Header-->
 <%- include('./includes/header'); %>
 
-<section class="page-section bg-light" id="portfolio">
-  <div class="container">
-    <div class="text-center">
-      <h2 class="section-heading text-uppercase">Portfolio</h2>
-      <h3 class="section-subheading text-muted">
-        Lorem ipsum dolor sit amet consectetur.
-      </h3>
-    </div>
-
-    <div class="row">
-      <% for (let i = (page *countList)-countList; i < (page * countList) ; i++) { %>
-      <% if(i >= totalCount){ %>
-      <% i++; %>
-      <% }else if(i == totalCount-1){ %>
-      <div class=" col-lg-4 col-sm-6 mb-4" style="height: 330px;">
-        <div class="portfolio-item text-center bg-white" style="height: 330px;">
-          <a class="portfolio-link workPostBtn" data-toggle="modal" href="" style="height: 330px;" id="workPostBtn">
-            <div class="portfolio-hover ">
-              <div class="portfolio-hover-content ">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <div class="text-center flex-column justify-content-center h-100 d-flex ">
-              <i class="fas fa-plus fa-3x align-self-center"></i>
-            </div>
-          </a>
-        </div>
-      </div>
-      <% }else{ %>
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="portfolio-item text-center bg-white">
-          <a class="portfolio-link" data-toggle="modal" href="#portfolioModal<%= work[i].num %>">
-            <div class="portfolio-hover">
-              <div class="portfolio-hover-content">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid pf-img" src="<%= work[i].cover %>" alt="" />
-          </a>
-          <div class="portfolio-caption">
-            <div class="portfolio-caption-heading"><%= work[i].title %></div>
-            <div class="portfolio-caption-subheading text-muted">
-              <%= work[i].title2 %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% } %>
-      <% }; %>
-
-
-    </div>
-    <!-- Side Widget -->
-    <div class="my-4">
-      <!-- li태그의 클래스에 active를 넣으면 색이 반전되고 클릭도 되지 않는다. -->
-      <!-- active의 의미는 현재 페이지의 의미이다. -->
-      <div class="align-self-center">
-        <ul class="pagination-sm pagination justify-content-center">
-          <% if (page == 1){ %>
-          <li class="page-item disabled">
-            <a class="page-link" href="#">&laquo;</a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="#">&lt;</a>
-          </li>
-          <% } else{%>
-          <% let page1 = page - 1 %>
-          <li class="page-item">
-            <a class="page-link" href="/work/<%= 1 %>">&laquo;</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="/work/<%= page1 %>">&lt;</a>
-          </li>
-          <% } %>
-          <% for (let i = startPage; i <= endPage ; i++) { %>
-
-          <% if (i == page){ %>
-          <li class="page-item active">
-            <a class="page-link" href="/work/<%= i %>"><%= i %></a>
-          </li>
-          <% } else{%>
-          <li class="page-item">
-            <a class="page-link" href="/work/<%= i %>"><%= i %></a>
-            <!-- <button class="page-link listNum" id="listNum<%= i %>" name="listNum" value="<%= i %>"><%= i %></button> -->
-          </li>
-          <% } %>
-          <% }; %>
-          <% if (page == totalPage){ %>
-          <li class="page-item disabled">
-            <a class="page-link" href="#">&gt;</a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="#">&raquo;</a>
-          </li>
-          <% } else{%>
-          <%  page1 = page + 1 %>
-          <li class="page-item">
-            <a class="page-link" href="/work/<%= page1 %>">&gt;</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="/work/<%= totalPage %>">&raquo;</a>
-          </li>
-          <% }%>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Github Contribution Graph-->
-<div class="py-5">
-  <div class="container">
-    <div>
-      <!-- Prepare a container for your calendar. -->
-      <div class="text-center mb-2"><strong>My GitHub Contribution Graph</strong></div>
-      <div class="calendar">
-        <!-- Loading stuff -->
-        Loading data ...
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- GUEST-->
-<section class="page-section" id="guest">
-  <div class="container">
-    <div class="text-center">
-      <h2 class="section-heading text-uppercase">방명록</h2>
-      <h3 class="section-subheading text-muted">La vie turbulente.</h3>
-    </div>
-    <div class="float-right mb-md-1"> <a class="portfolio-link" data-toggle="modal" href="#guestAllModal">전체보기</a>
-    </div>
-    <div class="table-responsive mb-3">
-      <table class="table table-hover table-condensed bg-light" id="dataTable0">
-        <colgroup>
-          <col class="col1" width="56px" />
-          <col width="22%" />
-          <col width="*" />
-          <col class="col1" width="17%" />
-          <col width="5%" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th class="col1">번호</th>
-            <th>이름</th>
-            <th>내용</th>
-            <th class="col1">날짜</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% let j = 1 %>
-          <% for (let i = guest.length-1; i >= 0 ; i--) { %>
-          <% if (i==(guest.length-6)) break; %>
-          <tr id="guest0<%= guest[i].id %>">
-            <td class="text-center col1"><%= j++ %></td>
-            <td><%= guest[i].userid %></td>
-            <td><%= guest[i].content %></td>
-            <td class="col1"><%= guest[i].date %></td>
-            <!-- <th><a href="/work/delete/<%= i+1 %>">삭제</a></th> -->
-            <th><button id="guestDel" class="btn2" value="<%=guest[i].id %>" name="guestDel"><i
-                  class="fas fa-trash-alt"></i></button></th>
-            <!-- <a class="portfolio-link" data-toggle="modal" href="#guestDelModal" id="guestDel"
-                    value="<%= i+1 %>">삭제</a></th> -->
-          </tr>
-          <% }; %>
-        </tbody>
-        <input type="hidden" value="" id="guestIdHidden">
-      </table>
-      <div ID="passDIV" style="DISPLAY: none; position: absolute">
-        <table cellpadding="5" cellspacing="0" width="160" style="border: 1 solid #A6A6A6">
-          <tr>
-            <td width="40" align="right">PW</td>
-            <td align="middle" valign="middle"><input id="password1" name="passwd" type="password" size="10"
-                maxlength="10" class="form1">
-              <a href=""> </a> <a href=" javascript:closeSub();">x</a>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <form id="contactForm" name="sentMessage" action="/work/guest" method="POST">
-      <div class="row align-items-stretch mb-3">
-        <div class="col-md-4">
-          <div class="form-group">
-            <input class="form-control" id="id" name="id" type="text" placeholder="Your Name *" required
-              data-validation-required-message="Please enter your name." />
-            <p class="help-block text-danger"></p>
-          </div>
-
-          <div class="form-group">
-            <input class="form-control" id="pw" name="pw" type="password" placeholder="Your Password *" required
-              data-validation-required-message="Please enter your password." />
-            <p class="help-block text-danger"></p>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="form-group form-group-textarea mb-md-0">
-            <textarea class="form-control" rows="3" id="content" name="content" placeholder="Your Message *" required
-              data-validation-required-message="Please enter a message."></textarea>
-            <p class="help-block text-danger"></p>
-          </div>
-        </div>
-      </div>
-      <div class="text-center">
-        <div id="success"></div>
-        <input class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit" value="send">
-      </div>
-    </form>
-  </div>
-</section>
-
-<!-- Guset Delete Modal-->
-<div class="modal2" id="guestDelModal" tabindex="0">
-  <div class="modal-content2 col-7">
-    <div class="close2">
-      <i class="fas fa-times mr-1" id="guestClose"></i>
-    </div>
-
-    <div class="container text-center">
-      <form id="guestDelForm">
-        <input type="password" id="guestPw" name="guestPw" data-backdrop="false" placeholder="Enter Your Password"
-          required class="mr-md-3 col-lg-auto" />
-        <!-- <input type="hidden" id="guestModalId"> -->
-        <button class="btn btn-primary col-lg-auto mt-1" id="guestModalDelBtn" type="button" value="">
-          Delete
-        </button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- 방명록 전체보기 -->
-<div class="portfolio-modal modal fade" id="guestAllModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="close-modal" data-dismiss="modal">
-        <img src="/img/close-icon.svg" alt="Close modal" />
-      </div>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-12">
-            <div class="modal-body">
-              <!-- Project Details Go Here-->
-              <h2 class="text-uppercase">방명록</h2>
-              <p class="item-intro text-muted">
-                Lorem ipsum dolor sit amet consectetur.
-              </p>
-
-              <div class="table-responsive" id="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
-                  style="table-layout: fixed;" id="products">
-                  <colgroup>
-                    <col class="col1" width="56px" />
-                    <col width="23%" />
-                    <col width="*" />
-                    <col class="col1" width="13%" />
-                    <col width="13%" />
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th class="col1">번호</th>
-                      <th>이름</th>
-                      <th>내용</th>
-                      <th class="col1">날짜</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody class="tb">
-                    <% let k = 1 %>
-                    <% for (let i = guest.length-1; i >= 0 ; i--) { %>
-                    <tr id="guest<%= guest[i].id %>" class="guest<%= guest[i].id %>">
-                      <td class="col1"><%= k++ %></td>
-                      <td><%= guest[i].userid %></td>
-                      <td><%= guest[i].content %></td>
-                      <td class="col1"><%= guest[i].date %></td>
-                      <!-- <th><a href="/work/delete/<%= i+1 %>">삭제</a></th> -->
-                      <th><button id="guestDel" class="btn2" value="<%= guest[i].id %>" name="guestDel"><i
-                            class="fas fa-trash-alt"></i></button>
-                      </th>
-                      <!-- <a class="portfolio-link" data-toggle="modal" href="#guestDelModal" id="guestDel"
-              value="<%= i+1 %>">삭제</a></th> -->
-                    </tr>
-                    <% }; %>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="page-s">
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination1 justify-content-center" id="pagination1">
-                  </ul>
-                </nav>
-              </div>
-
-              <button class="btn btn-primary" data-dismiss="modal" type="button">
-                <i class="fas fa-times mr-1"></i>
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal 1-->
-
-
-<% for (let j = (page *countList)-countList; j < (page * countList) ; j++) { %>
-<% if(j >= totalCount-1){ %>
-<% j++; %>
-<% }else{ %>
-<div class="portfolio-modal modal fade" id="portfolioModal<%= work[j].num %>" tabindex="-1" role="dialog"
-  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="close-modal" data-dismiss="modal">
-        <img src="/img/close-icon.svg" alt="Close modal" />
-      </div>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="modal-body">
-              <!-- Project Details Go Here-->
-              <h2 class="text-uppercase"><%= work[j].title %></h2>
-              <p class="item-intro text-muted">
-                <%= work[j].title2 %>
-              </p>
-              <img class="img-fluid d-block mx-auto" src="<%= work[j].img %>" alt="" />
-              <p>
-              <h4><strong>설명</strong></h4><br>
-
-              <%- work[j].content %>
-
-              <ul class="list-inline">
-                <li>Date: <%= work[j].date %></li>
-                <li>Category: <%= work[j].title2 %></li>
-                <li><a href="<%= work[j].git %>">GitHub</a></li>
-              </ul>
-              <button class="btn btn-primary" data-dismiss="modal" type="button">
-                <i class="fas fa-times mr-1"></i>
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<% } %>
-<% } %>
-
-
-<!-- Post Modal-->
-<div class="modal2" id="postModal">
-  <div class="modal-content2">
-    <div class="close2">
-      <i class="fas fa-times mr-2" id="postClose"></i>
-    </div>
+  <section class="page-section" id="portfolio" style="background-color: rgba(245, 245, 245, 0.829);">
     <div class="container">
-      <form>
+      <div class="text-center">
+        <h2 class="section-heading text-uppercase">Portfolio</h2>
+        <h3 class="section-subheading text-muted">
+          Lorem ipsum dolor sit amet consectetur.
+        </h3>
+      </div>
 
-        <div class="row" id="row_style">
-          <div class="col-md-10  offset-md-1">
-            <form>
-              <div class="form-group">
-                <input type="text" class="form-control mt-5" id="" placeholder="제목" />
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control " id="" placeholder="이미지 URL" />
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control " id="" placeholder="커버 이미지 URL" />
-              </div>
-              <div class="form-group">
-                <textarea class="form-control " id="" placeholder="설명" rows="6"></textarea>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control " id="" placeholder="카테고리" />
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control " id="" placeholder="Github URL" />
-              </div>
-              <br>
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" id="postPw" autocomplete="on">
-              </div>
-            </form>
+      <div class="row">
+        <% for (let i=(page *countList)-countList; i < (page * countList) ; i++) { %>
+          <% if(i>= totalCount){ %>
+            <% i++; %>
+              <% }else if(i==totalCount-1){ %>
+                <div class=" col-lg-4 col-sm-6 mb-4" style="height: 330px;">
+                  <div class="portfolio-item text-center bg-white" style="height: 330px;">
+                    <a class="portfolio-link workPostBtn" data-toggle="modal" href="" style="height: 330px;"
+                      id="workPostBtn">
+                      <div class="portfolio-hover ">
+                        <div class="portfolio-hover-content ">
+                          <i class="fas fa-plus fa-3x"></i>
+                        </div>
+                      </div>
+                      <div class="text-center flex-column justify-content-center h-100 d-flex ">
+                        <i class="fas fa-plus fa-3x align-self-center"></i>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <% }else{ %>
+                  <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="portfolio-item text-center bg-white">
+                      <a class="portfolio-link" data-toggle="modal" href="#portfolioModal<%= work[i].num %>">
+                        <div class="portfolio-hover">
+                          <div class="portfolio-hover-content">
+                            <i class="fas fa-plus fa-3x"></i>
+                          </div>
+                        </div>
+                        <img class="img-fluid pf-img" src="<%= work[i].cover %>" alt="" />
+                      </a>
+                      <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">
+                          <%= work[i].title %>
+                        </div>
+                        <div class="portfolio-caption-subheading text-muted">
+                          <%= work[i].title2 %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% } %>
+                    <% }; %>
+
+
+      </div>
+      <!-- Side Widget -->
+      <div class="my-4">
+        <!-- li태그의 클래스에 active를 넣으면 색이 반전되고 클릭도 되지 않는다. -->
+        <!-- active의 의미는 현재 페이지의 의미이다. -->
+        <div class="align-self-center">
+          <ul class="pagination-sm pagination justify-content-center">
+            <% if (page==1){ %>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">&laquo;</a>
+              </li>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">&lt;</a>
+              </li>
+              <% } else{%>
+                <% let page1=page - 1 %>
+                  <li class="page-item">
+                    <a class="page-link" href="/work/<%= 1 %>">&laquo;</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="/work/<%= page1 %>">&lt;</a>
+                  </li>
+                  <% } %>
+                    <% for (let i=startPage; i <=endPage ; i++) { %>
+
+                      <% if (i==page){ %>
+                        <li class="page-item active">
+                          <a class="page-link" href="/work/<%= i %>">
+                            <%= i %>
+                          </a>
+                        </li>
+                        <% } else{%>
+                          <li class="page-item">
+                            <a class="page-link" href="/work/<%= i %>">
+                              <%= i %>
+                            </a>
+                            <!-- <button class="page-link listNum" id="listNum<%= i %>" name="listNum" value="<%= i %>"><%= i %></button> -->
+                          </li>
+                          <% } %>
+                            <% }; %>
+                              <% if (page==totalPage){ %>
+                                <li class="page-item disabled">
+                                  <a class="page-link" href="#">&gt;</a>
+                                </li>
+                                <li class="page-item disabled">
+                                  <a class="page-link" href="#">&raquo;</a>
+                                </li>
+                                <% } else{%>
+                                  <% page1=page + 1 %>
+                                    <li class="page-item">
+                                      <a class="page-link" href="/work/<%= page1 %>">&gt;</a>
+                                    </li>
+                                    <li class="page-item">
+                                      <a class="page-link" href="/work/<%= totalPage %>">&raquo;</a>
+                                    </li>
+                                    <% }%>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Github Contribution Graph-->
+  <div class="py-5">
+    <div class="container">
+      <div>
+        <!-- Prepare a container for your calendar. -->
+        <div class="text-center mb-2 text-warning"><strong>My GitHub Contribution Graph</strong></div>
+        <div class="calendar">
+          <!-- Loading stuff -->
+          Loading data ...
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- GUEST-->
+  <section class="page-section" id="guest">
+    <div class="container p-5 border">
+      <div class="text-center">
+        <h2 class="section-heading text-uppercase text-warning">방명록</h2>
+        <h3 class="section-subheading text-muted">La vie turbulente.</h3>
+      </div>
+      <div class="float-right mb-md-1"> <a class="portfolio-link" data-toggle="modal" href="#guestAllModal">전체보기</a>
+      </div>
+      <div class="table-responsive mb-3">
+        <table class="table table-hover table-condensed bg-light" id="dataTable0">
+          <colgroup>
+            <col class="col1" width="56px" />
+            <col width="22%" />
+            <col width="*" />
+            <col class="col1" width="17%" />
+            <col width="5%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="col1">번호</th>
+              <th>이름</th>
+              <th>내용</th>
+              <th class="col1">날짜</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% let j=1 %>
+              <% for (let i=guest.length-1; i>= 0 ; i--) { %>
+                <% if (i==(guest.length-6)) break; %>
+                  <tr id="guest0<%= guest[i].id %>">
+                    <td class="text-center col1">
+                      <%= j++ %>
+                    </td>
+                    <td>
+                      <%= guest[i].userid %>
+                    </td>
+                    <td>
+                      <%= guest[i].content %>
+                    </td>
+                    <td class="col1">
+                      <%= guest[i].date %>
+                    </td>
+                    <!-- <th><a href="/work/delete/<%= i+1 %>">삭제</a></th> -->
+                    <th><button id="guestDel" class="btn2" value="<%=guest[i].id %>" name="guestDel"><i
+                          class="fas fa-trash-alt"></i></button></th>
+                    <!-- <a class="portfolio-link" data-toggle="modal" href="#guestDelModal" id="guestDel"
+                    value="<%= i+1 %>">삭제</a></th> -->
+                  </tr>
+                  <% }; %>
+          </tbody>
+          <input type="hidden" value="" id="guestIdHidden">
+        </table>
+        <div ID="passDIV" style="DISPLAY: none; position: absolute">
+          <table cellpadding="5" cellspacing="0" width="160" style="border: 1 solid #A6A6A6">
+            <tr>
+              <td width="40" align="right">PW</td>
+              <td align="middle" valign="middle"><input id="password1" name="passwd" type="password" size="10"
+                  maxlength="10" class="form1">
+                <a href=""> </a> <a href=" javascript:closeSub();">x</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <form id="contactForm" name="sentMessage" action="/work/guest" method="POST">
+        <div class="row align-items-stretch mb-3">
+          <div class="col-md-4">
+            <div class="form-group">
+              <input class="form-control" id="id" name="id" type="text" placeholder="Your Name *" required
+                data-validation-required-message="Please enter your name." />
+              <p class="help-block text-danger"></p>
+            </div>
 
             <div class="form-group">
-              <button class="btn btn-primary" id="priPostSubmit" value="">Post</button>
-              <button class="btn btn-primary" hidden id="postUpdate" type="button" value="">Update</button>
+              <input class="form-control" id="pw" name="pw" type="password" placeholder="Your Password *" required
+                data-validation-required-message="Please enter your password." />
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group form-group-textarea mb-md-0">
+              <textarea class="form-control" rows="3" id="content" name="content" placeholder="Your Message *" required
+                data-validation-required-message="Please enter a message."></textarea>
+              <p class="help-block text-danger"></p>
             </div>
           </div>
         </div>
+        <div class="text-center">
+          <div id="success"></div>
+          <input class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit" value="send">
+        </div>
       </form>
     </div>
+  </section>
+
+  <!-- Guset Delete Modal-->
+  <div class="modal2" id="guestDelModal" tabindex="0">
+    <div class="modal-content2 col-7">
+      <div class="close2">
+        <i class="fas fa-times mr-1" id="guestClose"></i>
+      </div>
+
+      <div class="container text-center">
+        <form id="guestDelForm">
+          <input type="password" id="guestPw" name="guestPw" data-backdrop="false" placeholder="Enter Your Password"
+            required class="mr-md-3 col-lg-auto" />
+          <!-- <input type="hidden" id="guestModalId"> -->
+          <button class="btn btn-primary col-lg-auto mt-1" id="guestModalDelBtn" type="button" value="">
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
+
+  <!-- 방명록 전체보기 -->
+  <div class="portfolio-modal modal fade" id="guestAllModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+          <img src="/img/close-icon.svg" alt="Close modal" />
+        </div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-12">
+              <div class="modal-body">
+                <!-- Project Details Go Here-->
+                <h2 class="text-uppercase">방명록</h2>
+                <p class="item-intro text-muted">
+                  Lorem ipsum dolor sit amet consectetur.
+                </p>
+
+                <div class="table-responsive" id="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
+                    style="table-layout: fixed;" id="products">
+                    <colgroup>
+                      <col class="col1" width="56px" />
+                      <col width="23%" />
+                      <col width="*" />
+                      <col class="col1" width="13%" />
+                      <col width="13%" />
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th class="col1">번호</th>
+                        <th>이름</th>
+                        <th>내용</th>
+                        <th class="col1">날짜</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody class="tb">
+                      <% let k=1 %>
+                        <% for (let i=guest.length-1; i>= 0 ; i--) { %>
+                          <tr id="guest<%= guest[i].id %>" class="guest<%= guest[i].id %>">
+                            <td class="col1">
+                              <%= k++ %>
+                            </td>
+                            <td>
+                              <%= guest[i].userid %>
+                            </td>
+                            <td>
+                              <%= guest[i].content %>
+                            </td>
+                            <td class="col1">
+                              <%= guest[i].date %>
+                            </td>
+                            <!-- <th><a href="/work/delete/<%= i+1 %>">삭제</a></th> -->
+                            <th><button id="guestDel" class="btn2" value="<%= guest[i].id %>" name="guestDel"><i
+                                  class="fas fa-trash-alt"></i></button>
+                            </th>
+                            <!-- <a class="portfolio-link" data-toggle="modal" href="#guestDelModal" id="guestDel"
+              value="<%= i+1 %>">삭제</a></th> -->
+                          </tr>
+                          <% }; %>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="page-s">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination1 justify-content-center" id="pagination1">
+                    </ul>
+                  </nav>
+                </div>
+
+                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                  <i class="fas fa-times mr-1"></i>
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 1-->
 
 
-<!-- Footer-->
-<%- include('./includes/footer'); %>
+  <% for (let j=(page *countList)-countList; j < (page * countList) ; j++) { %>
+    <% if(j>= totalCount-1){ %>
+      <% j++; %>
+        <% }else{ %>
+          <div class="portfolio-modal modal fade" id="portfolioModal<%= work[j].num %>" tabindex="-1" role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                  <img src="/img/close-icon.svg" alt="Close modal" />
+                </div>
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                      <div class="modal-body">
+                        <!-- Project Details Go Here-->
+                        <h2 class="text-uppercase">
+                          <%= work[j].title %>
+                        </h2>
+                        <p class="item-intro text-muted">
+                          <%= work[j].title2 %>
+                        </p>
+                        <img class="img-fluid d-block mx-auto" src="<%= work[j].img %>" alt="" />
+                        <p>
+                        <h4><strong>설명</strong></h4><br>
 
-<!-- github contribution graph -->
-<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+                        <%- work[j].content %>
 
-<!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
-<link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
-<script>
+                          <ul class="list-inline">
+                            <li>Date: <%= work[j].date %>
+                            </li>
+                            <li>Category: <%= work[j].title2 %>
+                            </li>
+                            <li><a href="<%= work[j].git %>">GitHub</a></li>
+                          </ul>
+                          <button class="btn btn-primary" data-dismiss="modal" type="button">
+                            <i class="fas fa-times mr-1"></i>
+                            Close
+                          </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+            <% } %>
 
-</script>
 
-<input type="hidden" value="<%= data %>" id="guestDeleteConfirm" />
+              <!-- Post Modal-->
+              <div class="modal2" id="postModal">
+                <div class="modal-content2">
+                  <div class="close2">
+                    <i class="fas fa-times mr-2" id="postClose"></i>
+                  </div>
+                  <div class="container">
+                    <form>
+
+                      <div class="row" id="row_style">
+                        <div class="col-md-10  offset-md-1">
+                          <form>
+                            <div class="form-group">
+                              <input type="text" class="form-control mt-5" id="" placeholder="제목" />
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form-control " id="" placeholder="이미지 URL" />
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form-control " id="" placeholder="커버 이미지 URL" />
+                            </div>
+                            <div class="form-group">
+                              <textarea class="form-control " id="" placeholder="설명" rows="6"></textarea>
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form-control " id="" placeholder="카테고리" />
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form-control " id="" placeholder="Github URL" />
+                            </div>
+                            <br>
+                            <div class="form-group">
+                              <input type="password" class="form-control" placeholder="Password" id="postPw"
+                                autocomplete="on">
+                            </div>
+                          </form>
+
+                          <div class="form-group">
+                            <button class="btn btn-primary" id="priPostSubmit" value="">Post</button>
+                            <button class="btn btn-primary" hidden id="postUpdate" type="button"
+                              value="">Update</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <script>
+                var stars = [];
+
+                function setup() {
+                  canvas = createCanvas(window.innerWidth, window.innerHeight);
+                  canvas.position(0, 0);
+                  canvas.style('z-index', '-10');
+                  for (var i = 0; i < 1000; i++) {
+                    stars[i] = new Star();
+                  }
+                }
+
+                function draw() {
+                  background(30);
+
+                  for (var i = 0; i < stars.length; i++) {
+                    stars[i].draw();
+                  }
+                }
+
+
+                // star class //
+                class Star {
+                  constructor() {
+                    this.x = random(width);
+                    this.y = random(height);
+                    this.size = random(0.25, 3);
+                    this.t = random(TAU);
+                  }
+
+                  draw() {
+                    this.t += 0.1;
+                    var scale = this.size + sin(this.t) * 2;
+                    noStroke();
+                    ellipse(this.x, this.y, scale, scale);
+                  }
+                }
+              </script>
+              <!-- Footer-->
+              <%- include('./includes/footer'); %>
+
+                <!-- github contribution graph -->
+                <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+
+                <!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
+                <link rel="stylesheet"
+                  href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
+                <script>
+
+                </script>
+
+                <input type="hidden" value="<%= data %>" id="guestDeleteConfirm" />
 
 
 
-<script src="/javascripts/pagination.js"></script>
-<script src="/javascripts/workFunc.js"></script>
-</body>
+                <script src="/javascripts/pagination.js"></script>
+                <script src="/javascripts/workFunc.js"></script>
+                </body>
 
-</html>
+                </html>
