@@ -1,108 +1,115 @@
 <!-- Header-->
 <%- include('./includes/header'); %>
 
-<div class="container" id="post">
+  <div class="container" id="post">
 
-  <div class="row mb-6 col-xl-12">
-    <!-- <div class="w-100 mb-5"><button class="btn-dark float-right mr-4">삭제</button><button
+    <div class="row mb-6 col-xl-12">
+      <!-- <div class="w-100 mb-5"><button class="btn-dark float-right mr-4">삭제</button><button
       class="btn-dark float-right mr-2" id="priPostBtn">글쓰기</button>
     </div> -->
 
-    <!-- Post Content Column -->
-    <div class="col-xl-8" id="postDiv">
-      <!-- Title -->
-      <div id="postpage1">
-        <button class="float-right border-white btn-light btn btn-sm p-1 mr-5 postDelBtn" id="postDelBtn"
-          value="board<%= boardnum%>/<%= postnum%>">삭제</button>
-        <button class="float-right border-white btn-light btn btn-sm p-1 postModBtn" id="postModBtn">수정</button>
-        <button class="float-right border-white btn-light btn btn-sm p-1 priPostBtn" id="priPostBtn">글쓰기</button>
-        <h1 class="mt-4" id="postTitle0"><%= postshow[0].title %></h1>
-        <hr>
-      </div>
+      <!-- Post Content Column -->
+      <div class="col-xl-8" id="postDiv">
+        <!-- Title -->
+        <div id="postpage1">
+          <button class="float-right border-white btn-light btn btn-sm p-1 mr-5 postDelBtn" id="postDelBtn"
+            value="board<%= boardnum%>/<%= postnum%>">삭제</button>
+          <button class="float-right border-white btn-light btn btn-sm p-1 postModBtn" id="postModBtn">수정</button>
+          <button class="float-right border-white btn-light btn btn-sm p-1 priPostBtn" id="priPostBtn">글쓰기</button>
+          <h1 class="mt-4" id="postTitle0">
+            <%= postshow[0].title %>
+          </h1>
+          <hr>
+        </div>
 
-      <!-- Author -->
-      <!-- <p class="lead">
+        <!-- Author -->
+        <!-- <p class="lead">
           by
           <a href="#">Start Bootstrap</a>
         </p> -->
 
-      <!-- Date/Time -->
-      <div class="text-right m-2 text-gray">
-        <p><%= postshow[0].date %></p>
-      </div>
-      <hr>
-
-      <!-- Post Content -->
-      <!-- class for iframe responsive -->
-      <div class="embed-responsive demoWrapper" id="postCotent0">
-        <%- postshow[0].content %>
-      </div>
-
-      <br>
-      <hr>
-
-      <!-- 댓글 -->
-      <!-- Single Comment -->
-      <div id="comment">
-        <div id="commentDiv<%= boardnum%>/<%= postnum%>">
-
-          <% for (let i = 0; i < comment.length ; i++) { %>
-
-          <div id="comment<%= boardnum%>/<%= comment[i].id%>">
-            <form>
-              <div class="media mb-4">
-                <div class="media-body">
-                  <div class="mb-1">
-                    <span id="commentId" name="commentId">
-                      <h5 class="mt-0 d-inline"><%= comment[i].title %></h5>
-                    </span>
-                    <span class="float-right small text-gray">
-                      <%= comment[i].date %>
-                    </span>
-                  </div>
-                  <span id="commentContent" name="commentContent">
-                    <%= comment[i].content %>
-                  </span>
-                  <span class="float-right small text-gray">
-                    <button class="btn2 ml-2 commentUpdate" value="comment<%= boardnum%>/<%= comment[i].id%>"
-                      type="button" name="commentUpdate"><i class="fas fa-pen"></i></button>
-                    <button class="btn2 ml-2 commentDel" value="comment<%= boardnum%>/<%= comment[i].id%>" type="button"
-                      name="commentDel"><i class="fas fa-trash-alt"></i></button>
-                  </span>
-                  <div class="card-group mt-3">
-                    <input type="password" name="commentUpdatePw" class="" hidden autocomplete="on"
-                      placeholder="Password">
-                    <button class="btn2 ml-2 border-dark commentUpdateComplete" hidden type="button"
-                      value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentUpdateComplete">완료</button>
-                    <button class="btn2 ml-2 commentUpCancel" hidden value="comment<%= boardnum%>/<%= comment[i].id%>"
-                      type="button" name="commentUpCancel"> <i class="fas fa-times" id="commentUpClose"></i></button>
-                  </div>
-                </div>
-              </div>
-            </form>
-            <hr>
-          </div>
-          <% } %>
+        <!-- Date/Time -->
+        <div class="text-right m-2 text-gray">
+          <p>
+            <%= postshow[0].date %>
+          </p>
         </div>
-      </div>
-      <!-- Comments Form -->
-      <div class="card my-4">
-        <h5 class="card-header">Leave a Comment:</h5>
-        <form>
-          <div class="card-body">
-            <div class="form-group commentSubmitContent" id="contentdiv">
-              <textarea class="form-control" rows="2" id="commentSubmitContent"></textarea>
-            </div>
-            <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
-            <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
-              type="button" autocomplete="on">
-            <button class="btn btn-primary float-right commentSubmit" id="commentSubmit" type="button"
-              value="<%= boardnum%>/<%= postnum%>">Submit</button>
+        <hr>
+
+        <!-- Post Content -->
+        <!-- class for iframe responsive -->
+        <div class="embed-responsive demoWrapper" id="postCotent0">
+          <%- postshow[0].content %>
+        </div>
+
+        <br>
+        <hr>
+
+        <!-- 댓글 -->
+        <!-- Single Comment -->
+        <div id="comment">
+          <div id="commentDiv<%= boardnum%>/<%= postnum%>">
+
+            <% for (let i=0; i < comment.length ; i++) { %>
+
+              <div id="comment<%= boardnum%>/<%= comment[i].id%>">
+                <form>
+                  <div class="media mb-4">
+                    <div class="media-body">
+                      <div class="mb-1">
+                        <span id="commentId" name="commentId">
+                          <h5 class="mt-0 d-inline">
+                            <%= comment[i].title %>
+                          </h5>
+                        </span>
+                        <span class="float-right small text-gray">
+                          <%= comment[i].date %>
+                        </span>
+                      </div>
+                      <span id="commentContent" name="commentContent">
+                        <%= comment[i].content %>
+                      </span>
+                      <span class="float-right small text-gray">
+                        <button class="btn2 ml-2 commentUpdate" value="comment<%= boardnum%>/<%= comment[i].id%>"
+                          name="commentUpdate"><i class="fas fa-pen"></i></button>
+                        <button class="btn2 ml-2 commentDel" value="comment<%= boardnum%>/<%= comment[i].id%>"
+                          name="commentDel"><i class="fas fa-trash-alt"></i></button>
+                      </span>
+                      <div class="card-group mt-3">
+                        <input type="password" name="commentUpdatePw" class="" hidden autocomplete="on"
+                          placeholder="Password">
+                        <button class="btn2 ml-2 border-dark commentUpdateComplete" hidden
+                          value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentUpdateComplete">완료</button>
+                        <button class="btn2 ml-2 commentUpCancel" hidden
+                          value="comment<%= boardnum%>/<%= comment[i].id%>" name="commentUpCancel"> <i
+                            class="fas fa-times" id="commentUpClose"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <hr>
+              </div>
+              <% } %>
           </div>
-        </form>
-      </div>
-      <!-- Comment with nested comments -->
-      <!-- <div class="media mb-4">
+        </div>
+        <!-- Comments Form -->
+        <div class="card my-4">
+          <h5 class="card-header">Leave a Comment:</h5>
+          <form>
+            <div class="card-body">
+              <div class="form-group commentSubmitContent" id="contentdiv">
+                <textarea class="form-control" rows="2" id="commentSubmitContent"></textarea>
+              </div>
+              <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
+              <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
+                type="button" autocomplete="on">
+              <button class="btn btn-primary float-right commentSubmit" id="commentSubmit"
+                value="<%= boardnum%>/<%= postnum%>">Submit</button>
+            </div>
+          </form>
+        </div>
+        <!-- Comment with nested comments -->
+        <!-- <div class="media mb-4">
           <div class="media-body">
             <h5 class="mt-0">Commenter Name</h5>
             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
@@ -130,214 +137,230 @@
             </div>
           </div>
         </div> -->
-      <div id="paging">
-        <nav>
-          <ul class="pager list-unstyled">
-            <% if(postnum == 1){ %>
-            <li class="previousArrow" style="float: left;">
-              <a class="disabled">
-                <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
-            </li>
-            <% } else { %>
-            <li class="previousArrow" style="float: left;">
-              <a href="/private/board/<%= boardnum %>/<%= page %>/<%= --postnum %>">
-                <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
-            </li>
-            <% ++postnum %>
-            <% } %>
-            <% if(postnum == totalCount){ %>
-            <li class="nextArrow" style="float: right;">
-              <a class="disabled">
-                <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
-            </li>
-            <% } else { %>
-            <% let pnum = ++postnum %>
-            <li class="nextArrow" style="float: right;">
-              <a href="/private/board/<%= boardnum %>/<%= page %>/<%= pnum %>">
-                <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
-            </li>
-            <% --postnum %>
-            <% } %>
-          </ul>
-        </nav>
+        <div id="paging">
+          <nav>
+            <ul class="pager list-unstyled">
+              <% if(postnum==1){ %>
+                <li class="previousArrow" style="float: left;">
+                  <a class="disabled">
+                    <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
+                </li>
+                <% } else { %>
+                  <li class="previousArrow" style="float: left;">
+                    <a href="/private/board/<%= boardnum %>/<%= page %>/<%= --postnum %>">
+                      <i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
+                  </li>
+                  <% ++postnum %>
+                    <% } %>
+                      <% if(postnum==totalCount){ %>
+                        <li class="nextArrow" style="float: right;">
+                          <a class="disabled">
+                            <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
+                        </li>
+                        <% } else { %>
+                          <% let pnum=++postnum %>
+                            <li class="nextArrow" style="float: right;">
+                              <a href="/private/board/<%= boardnum %>/<%= page %>/<%= pnum %>">
+                                <i class="fas fa-arrow-alt-circle-right fa-lg"></i></a>
+                            </li>
+                            <% --postnum %>
+                              <% } %>
+            </ul>
+          </nav>
+        </div>
+
       </div>
+      <ul class="article-list__pagination article-list__pagination--inactive" id="article-list-pagination"></ul>
+      <!-- Sidebar Widgets Column -->
+      <div class="col-xl-4 pl-lg-5">
+        <!-- Categories Widget -->
+        <div class="card my-3">
 
-    </div>
-    <ul class="article-list__pagination article-list__pagination--inactive" id="article-list-pagination"></ul>
-    <!-- Sidebar Widgets Column -->
-    <div class="col-xl-4 pl-lg-5">
-      <!-- Categories Widget -->
-      <div class="card my-3">
-
-        <h5 class="card-header">MENU</h5>
-        <div class="card-body">
-          <div class="">
-            <ul class="list-unstyled mb-0">
-              <div class="text-gray small">Language</div>
-              <li class="list-item list-group-item-action active ml-2 mt-1"><a class="" href="/private/board/1/1"
-                  id="1">
-                  <h5>Javascript</h5>
-                </a></li>
-              <!-- <li class="list-item list-group-item-action active ml-2 mt-1"><a class="" href="" id="1">
+          <h5 class="card-header">MENU</h5>
+          <div class="card-body">
+            <div class="">
+              <ul class="list-unstyled mb-0">
+                <dl>
+                  <div class="text-gray small">Language</div>
+                </dl>
+                <li class="list-item list-group-item-action active ml-2 mt-1"><a class="" href="/private/board/1/1"
+                    id="1">
+                    <h5>Javascript</h5>
+                  </a>
+                  <hr />
+                </li>
+                <!-- <li class="list-item list-group-item-action active ml-2 mt-1"><a class="" href="" id="1">
                   <h5>Java</h5>
                 </a></li> -->
-              <hr>
-              <div class="text-gray small">Programming</div>
-              <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/2/1" id="2">
-                  <h5>Algorithm</h5>
-                </a></li>
-              <hr>
-              <div class="text-gray small">Etc.</div>
-              <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/3/1" id="3">
-                  <h5>Photo</h5>
-                </a></li>
+                <dl>
+                  <div class="text-gray small">Programming</div>
+                </dl>
+                <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/2/1" id="2">
+                    <h5>Algorithm</h5>
+                  </a>
+                  <hr />
+                </li>
+                <dl>
+                  <div class="text-gray small">Etc.</div>
+                </dl>
+                <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/3/1" id="3">
+                    <h5>Photo</h5>
+                  </a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side Widget -->
+        <div class="card my-4" id="postList">
+          <h5 class="card-header">게시글
+          </h5>
+
+          <div class="card-body">
+            <div class="pl-lg-3 ">
+              <ul class="list-unstyled">
+                <% for (let i=(page *countList)-countList; i < (page * countList) ; i++) { %>
+                  <% if(i>= totalCount){ %>
+                    <% i++; %>
+                      <% }else{ %>
+                        <% let data=post[i]; %>
+
+                          <li class=" list-item list-group-item-action post-list"><a id="cp<%=  post[i].id%>" class=""
+                              href="/private/board/<%= boardnum%>/<%= currentPage%>/<%= post[i].id%>">
+                              <%= post[i].title %>
+                            </a>
+                          </li>
+
+                          <% } %>
+                            <% }; %>
+              </ul>
+              <div class="page-s">
+              </div>
+            </div>
+          </div>
+          <!-- li태그의 클래스에 active를 넣으면 색이 반전되고 클릭도 되지 않는다. -->
+          <!-- active의 의미는 현재 페이지의 의미이다. -->
+          <div class="align-self-center">
+            <ul class="pagination-sm pagination">
+
+              <% if (page==1){ %>
+                <li class="page-item disabled">
+                  <a class="page-link" href="#">&laquo;</a>
+                </li>
+                <li class="page-item disabled">
+                  <a class="page-link" href="#">&lt;</a>
+                </li>
+                <% } else{%>
+                  <% let page1=page - 1 %>
+                    <li class="page-item">
+                      <a class="page-link" href="/private/board/<%= boardnum %>/<%= 1 %>/<%= postnum %>">&laquo;</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="/private/board/<%= boardnum %>/<%= page1 %>/<%= postnum %>">&lt;</a>
+                    </li>
+                    <% } %>
+                      <% for (let i=startPage; i <=endPage ; i++) { %>
+
+                        <% if (i==page){ %>
+                          <li class="page-item active">
+                            <a class="page-link" href="/private/board/<%= boardnum %>/<%= i %>/<%= postnum %>">
+                              <%= i %>
+                            </a>
+                          </li>
+                          <% } else{%>
+                            <li class="page-item">
+                              <a class="page-link" href="/private/board/<%= boardnum %>/<%= i %>/<%= postnum %>">
+                                <%= i %>
+                              </a>
+                              <!-- <button class="page-link listNum" id="listNum<%= i %>" name="listNum" value="<%= i %>"><%= i %></button> -->
+                            </li>
+                            <% } %>
+                              <% }; %>
+                                <% if (page==totalPage){ %>
+                                  <li class="page-item disabled">
+                                    <a class="page-link" href="#">&gt;</a>
+                                  </li>
+                                  <li class="page-item disabled">
+                                    <a class="page-link" href="#">&raquo;</a>
+                                  </li>
+                                  <% } else{%>
+                                    <% page1=++page %>
+                                      <li class="page-item">
+                                        <a class="page-link"
+                                          href="/private/board/<%= boardnum %>/<%= page1 %>/<%= postnum %>">&gt;</a>
+                                      </li>
+                                      <li class="page-item">
+                                        <a class="page-link"
+                                          href="/private/board/<%= boardnum %>/<%= totalPage %>/<%= postnum %>">&raquo;</a>
+                                      </li>
+                                      <% }%>
             </ul>
           </div>
         </div>
       </div>
+      <!-- /.row -->
+    </div>
+  </div>
+  </div>
+  <!-- /.container -->
 
-      <!-- Side Widget -->
-      <div class="card my-4" id="postList">
-        <h5 class="card-header">게시글
-        </h5>
 
-        <div class="card-body">
-          <div class="pl-lg-3 ">
-            <ul class="list-unstyled">
-              <% for (let i = (page *countList)-countList; i < (page * countList) ; i++) { %>
-              <% if(i >= totalCount){ %>
-              <% i++; %>
-              <% }else{ %>
-              <% let data = post[i]; %>
+  <!-- Post Modal-->
+  <div class="modal2" id="postModal">
+    <div class="modal-content2">
+      <div class="close2">
+        <i class="fas fa-times mr-2" id="postClose"></i>
+      </div>
+      <div class="container">
+        <form>
 
-              <li class=" list-item list-group-item-action post-list"><a id="cp<%=  post[i].id%>" class=""
-                  href="/private/board/<%= boardnum%>/<%= currentPage%>/<%= post[i].id%>"><%= post[i].title %></a>
-              </li>
-
-              <% } %>
-              <% }; %>
-            </ul>
-            <div class="page-s">
+          <div class="row" id="row_style">
+            <div class="col-md-10  offset-md-1">
+              <div class="form-group">
+                <input type="text" class="form-control mt-5" placeholder="Title" id="postTitle">
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" id="p_content"></textarea>
+              </div>
+              <br>
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" id="postPw" autocomplete="on">
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary" id="priPostSubmit" value="<%= boardnum%>">Post</button>
+                <button class="btn btn-primary" hidden id="postUpdate"
+                  value="board<%= boardnum%>/<%= postnum %>">Update</button>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- li태그의 클래스에 active를 넣으면 색이 반전되고 클릭도 되지 않는다. -->
-        <!-- active의 의미는 현재 페이지의 의미이다. -->
-        <div class="align-self-center">
-          <ul class="pagination-sm pagination">
-
-            <% if (page == 1){ %>
-            <li class="page-item disabled">
-              <a class="page-link" href="#">&laquo;</a>
-            </li>
-            <li class="page-item disabled">
-              <a class="page-link" href="#">&lt;</a>
-            </li>
-            <% } else{%>
-            <% let page1 = page - 1 %>
-            <li class="page-item">
-              <a class="page-link" href="/private/board/<%= boardnum %>/<%= 1 %>/<%= postnum %>">&laquo;</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="/private/board/<%= boardnum %>/<%= page1 %>/<%= postnum %>">&lt;</a>
-            </li>
-            <% } %>
-            <% for (let i = startPage; i <= endPage ; i++) { %>
-
-            <% if (i == page){ %>
-            <li class="page-item active">
-              <a class="page-link" href="/private/board/<%= boardnum %>/<%= i %>/<%= postnum %>"><%= i %></a>
-            </li>
-            <% } else{%>
-            <li class="page-item">
-              <a class="page-link" href="/private/board/<%= boardnum %>/<%= i %>/<%= postnum %>"><%= i %></a>
-              <!-- <button class="page-link listNum" id="listNum<%= i %>" name="listNum" value="<%= i %>"><%= i %></button> -->
-            </li>
-            <% } %>
-            <% }; %>
-            <% if (page == totalPage){ %>
-            <li class="page-item disabled">
-              <a class="page-link" href="#">&gt;</a>
-            </li>
-            <li class="page-item disabled">
-              <a class="page-link" href="#">&raquo;</a>
-            </li>
-            <% } else{%>
-            <%  page1 = ++page %>
-            <li class="page-item">
-              <a class="page-link" href="/private/board/<%= boardnum %>/<%= page1 %>/<%= postnum %>">&gt;</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="/private/board/<%= boardnum %>/<%= totalPage %>/<%= postnum %>">&raquo;</a>
-            </li>
-            <% }%>
-          </ul>
-        </div>
+        </form>
       </div>
     </div>
-    <!-- /.row -->
   </div>
-</div>
-</div>
-<!-- /.container -->
 
 
-<!-- Post Modal-->
-<div class="modal2" id="postModal">
-  <div class="modal-content2">
-    <div class="close2">
-      <i class="fas fa-times mr-2" id="postClose"></i>
-    </div>
-    <div class="container">
-      <form>
+  <!-- Comment Delete Modal-->
+  <div class="modal2" id="commentDelModal" tabindex="0">
+    <div class="modal-content2 col-7">
+      <div class="close2">
+        <i class="fas fa-times mr-1" id="commentClose"></i>
+      </div>
 
-        <div class="row" id="row_style">
-          <div class="col-md-10  offset-md-1">
-            <div class="form-group">
-              <input type="text" class="form-control mt-5" placeholder="Title" id="postTitle">
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" id="p_content"></textarea>
-            </div>
-            <br>
-            <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password" id="postPw" autocomplete="on">
-            </div>
-            <div class="form-group">
-              <button class="btn btn-primary" id="priPostSubmit" value="<%= boardnum%>">Post</button>
-              <button class="btn btn-primary" hidden id="postUpdate" type="button"
-                value="board<%= boardnum%>/<%= postnum %>">Update</button>
-            </div>
-          </div>
-        </div>
-      </form>
+      <div class="container text-center">
+        <form id="commentDelForm">
+          <input type="password" id="commentDelPw" name="commentDelPw" data-backdrop="false" placeholder="Password"
+            autocomplete="on" required class="mr-md-3 col-lg-auto" />
+          <!-- <input type="hidden" id="guestModalId"> -->
+          <button class="btn btn-primary col-lg-auto mt-2" id="commentModalDelBtn" type="submit" value="">
+            Delete
+          </button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-
-<!-- Comment Delete Modal-->
-<div class="modal2" id="commentDelModal" tabindex="0">
-  <div class="modal-content2 col-7">
-    <div class="close2">
-      <i class="fas fa-times mr-1" id="commentClose"></i>
-    </div>
-
-    <div class="container text-center">
-      <form id="commentDelForm">
-        <input type="password" id="commentDelPw" name="commentDelPw" data-backdrop="false" placeholder="Password"
-          autocomplete="on" required class="mr-md-3 col-lg-auto" />
-        <!-- <input type="hidden" id="guestModalId"> -->
-        <button class="btn btn-primary col-lg-auto mt-2" id="commentModalDelBtn" type="submit" value="">
-          Delete
-        </button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- Modal 6-->
-<!-- <div class="portfolio-modal modal" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Modal 6-->
+  <!-- <div class="portfolio-modal modal" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
@@ -362,24 +385,26 @@
     </div>
   </div> -->
 
-<!-- Footer-->
-<%- include('./includes/footer'); %>
+  <!-- Footer-->
+  <%- include('./includes/footer'); %>
 
-<h2 style="display:none;" id="postshow"><%= postshow %></h2>
-<input type="hidden" id="currentPageNumber" value="<%= postnum %>" />
+    <h2 style="display:none;" id="postshow">
+      <%= postshow %>
+    </h2>
+    <input type="hidden" id="currentPageNumber" value="<%= postnum %>" />
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script> -->
 
-<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
-<script src="/javascripts/priFunc.js"></script>
-<script type="text/javascript" src="/javascripts/priScroll.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="/javascripts/priFunc.js"></script>
+    <script src="/javascripts/priScroll.js"></script>
 
-<!-- you need to include the shieldui css and js assets in order for the charts to work 게시글 작성 버튼들 동작-->
-<!-- <link rel="stylesheet" type="text/css" href="/public/css/shield.css" />
+    <!-- you need to include the shieldui css and js assets in order for the charts to work 게시글 작성 버튼들 동작-->
+    <!-- <link rel="stylesheet" type="text/css" href="/public/css/shield.css" />
   <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script> -->
 
-</body>
+    </body>
 
-</html>
+    </html>

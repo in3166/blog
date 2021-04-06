@@ -19,7 +19,7 @@
     </div>
   </section>
   <!-- Services-->
-  <section class="page-section" id="">
+  <section class="page-section">
     <div class="container">
       <div class="text-center">
         <h2 class="section-heading text-uppercase">Goals</h2>
@@ -84,7 +84,7 @@
       <ul class="timeline" style="display: none;" id="toc-content">
         <li>
           <div class="timeline-image">
-            <img class="rounded-circle img-fluid" src="/img/about/1.jpg" alt="" />
+            <img class="rounded-circle img-fluid" src="/img/about/1.jpg" alt="list_image1" />
           </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
@@ -102,7 +102,7 @@
         </li>
         <li class="timeline-inverted">
           <div class="timeline-image">
-            <img class="rounded-circle img-fluid" src="/img/about/2.jpg" alt="" />
+            <img class="rounded-circle img-fluid" src="/img/about/2.jpg" alt="list_image2" />
           </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
@@ -119,7 +119,7 @@
         </li>
         <li>
           <div class="timeline-image">
-            <img class="rounded-circle img-fluid" src="/img/about/3.jpg" alt="" />
+            <img class="rounded-circle img-fluid" src="/img/about/3.jpg" alt="list_image3" />
           </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
@@ -137,7 +137,7 @@
         </li>
         <li class="timeline-inverted">
           <div class="timeline-image">
-            <img class="rounded-circle img-fluid" src="/img/about/4.jpg" alt="" />
+            <img class="rounded-circle img-fluid" src="/img/about/4.jpg" alt="list_image4" />
           </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
@@ -156,7 +156,7 @@
         </li>
         <li>
           <div class="timeline-image">
-            <img class="rounded-circle img-fluid" src="/img/about/3.jpg" alt="" />
+            <img class="rounded-circle img-fluid" src="/img/about/3.jpg" alt="list_image5" />
           </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
@@ -175,7 +175,7 @@
         </li>
         <li class="timeline-inverted">
           <div class="timeline-image">
-            <img class="rounded-circle img-fluid" src="/img/about/4.jpg" alt="" />
+            <img class="rounded-circle img-fluid" src="/img/about/4.jpg" alt="list_image6" />
           </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
@@ -214,18 +214,20 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="/img/favicon.ico" alt="" />
+            <img class="mx-auto rounded-circle" src="/img/favicon.ico" alt="list_image7" />
             <h4>Yu InJong</h4>
             <p class="text-muted">1995. 02. 27</p>
 
             <a class="btn btn-dark btn-social mx-2" id="channel-chat-button" href="javascript:;"
               onclick="void chatChannel();">
               <img class="rounded-circle kakao-img" width="40"
-                src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" />
+                src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+                alt="kakao" />
             </a>
-            <a target="_blank" class="btn btn-dark btn-social mx-2" data-href="https://www.facebook.com/in3166"
-              href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fin3166&amp;src=sdkpreparse"
-              class="fb-xfbml-parse-ignore"><i class="fab fa-facebook-f"></i></a>
+            <a target="_blank" class="btn btn-dark btn-social mx-2 fb-xfbml-parse-ignore"
+              data-href="https://www.facebook.com/in3166"
+              href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2Fin3166&amp;src=sdkpreparse"><i
+                class="fab fa-facebook-f"></i></a>
             <a class="btn btn-dark btn-social mx-2"
               href="https://mail.google.com/mail/?view=cm&fs=1&to=in3166@gmail.com" target="_blank"><i
                 class="fab fa-google"></i></a>
@@ -248,7 +250,7 @@
 
 
   <div class="row p-lg-3 border justify-content-center align-content-center">
-    <div class="my-auto"><img src="" alt="Loading..." id="weaImg" class="w-100 ">
+    <div class="my-auto"><img alt="Loading..." id="weaImg" class="w-100 ">
     </div>
     <div class=" row ml-lg-1  my-auto small weaVal">
       <div>
@@ -275,9 +277,6 @@
       </div>
     </div>
   </div>
-  </div>
-  </div>
-
 
   <!-- Contact-->
   <section class="page-section" id="contact">
@@ -332,7 +331,7 @@
   <!-- Footer-->
   <%- include('./includes/footer'); %>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script type="text/javascript">
+    <script>
       Kakao.init('7e41432052c3dc4b8f2da4960c5c4ce7');
       function chatChannel() {
         Kakao.Channel.chat({
@@ -343,7 +342,7 @@
     </script>
     <!-- Font Awesome icons (free version)-->
     <!-- <script data-cfasync="false" type="text/javascript" src="/javascripts/index_mail.js"></script> -->
-    <script data-cfasync="false" type="text/javascript" src="/javascripts/form-submission-handler.js"></script>
+    <script data-cfasync="false" src="/javascripts/form-submission-handler.js"></script>
 
     </body>
 

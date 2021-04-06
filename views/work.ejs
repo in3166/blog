@@ -39,7 +39,7 @@
                             <i class="fas fa-plus fa-3x"></i>
                           </div>
                         </div>
-                        <img class="img-fluid pf-img" src="<%= work[i].cover %>" alt="" />
+                        <img class="img-fluid pf-img" src="<%= work[i].cover %>" alt="cover" />
                       </a>
                       <div class="portfolio-caption">
                         <div class="portfolio-caption-heading">
@@ -144,11 +144,11 @@
       <div class="table-responsive mb-3">
         <table class="table table-hover table-condensed bg-light" id="dataTable0">
           <colgroup>
-            <col class="col1" width="56px" />
-            <col width="22%" />
-            <col width="*" />
-            <col class="col1" width="17%" />
-            <col width="5%" />
+            <col class="col1" style="width:56px" />
+            <col style="width:22%" />
+            <col style="width:\*" />
+            <col class="col1" style="width:17%" />
+            <col style="width:5%" />
           </colgroup>
           <thead>
             <tr>
@@ -184,7 +184,7 @@
                   </tr>
                   <% }; %>
           </tbody>
-          <input type="hidden" value="" id="guestIdHidden">
+          <input type="hidden" value="" id="guestIdHidden" />
         </table>
         <div ID="passDIV" style="DISPLAY: none; position: absolute">
           <table cellpadding="5" cellspacing="0" width="160" style="border: 1 solid #A6A6A6">
@@ -269,7 +269,7 @@
 
                 <div class="table-responsive" id="table-responsive">
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
-                    style="table-layout: fixed;" id="products">
+                    style="table-layout: fixed;">
                     <colgroup>
                       <col class="col1" width="56px" />
                       <col width="23%" />
@@ -358,7 +358,7 @@
                         <p class="item-intro text-muted">
                           <%= work[j].title2 %>
                         </p>
-                        <img class="img-fluid d-block mx-auto" src="<%= work[j].img %>" alt="" />
+                        <img class="img-fluid d-block mx-auto" src="<%= work[j].img %>" alt="title_image" />
                         <p>
                         <h4><strong>설명</strong></h4><br>
 
@@ -393,48 +393,48 @@
                     <i class="fas fa-times mr-2" id="postClose"></i>
                   </div>
                   <div class="container">
-                    <form>
 
+                    <form>
                       <div class="row" id="row_style">
                         <div class="col-md-10  offset-md-1">
-                          <form>
-                            <div class="form-group">
-                              <input type="text" class="form-control mt-5" id="" placeholder="제목" />
-                            </div>
-                            <div class="form-group">
-                              <input type="text" class="form-control " id="" placeholder="이미지 URL" />
-                            </div>
-                            <div class="form-group">
-                              <input type="text" class="form-control " id="" placeholder="커버 이미지 URL" />
-                            </div>
-                            <div class="form-group">
-                              <textarea class="form-control " id="" placeholder="설명" rows="6"></textarea>
-                            </div>
-                            <div class="form-group">
-                              <input type="text" class="form-control " id="" placeholder="카테고리" />
-                            </div>
-                            <div class="form-group">
-                              <input type="text" class="form-control " id="" placeholder="Github URL" />
-                            </div>
-                            <br>
-                            <div class="form-group">
-                              <input type="password" class="form-control" placeholder="Password" id="postPw"
-                                autocomplete="on">
-                            </div>
-                          </form>
+
+                          <div class="form-group">
+                            <input type="text" class="form-control mt-5" placeholder="제목" />
+                          </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control " placeholder="이미지 URL" />
+                          </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control " placeholder="커버 이미지 URL" />
+                          </div>
+                          <div class="form-group">
+                            <textarea class="form-control" placeholder="설명" rows="6"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control " placeholder="카테고리" />
+                          </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control " placeholder="Github URL" />
+                          </div>
+                          <br>
+                          <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" id="postPw"
+                              autocomplete="on">
+                          </div>
 
                           <div class="form-group">
                             <button class="btn btn-primary" id="priPostSubmit" value="">Post</button>
                             <button class="btn btn-primary" hidden id="postUpdate" type="button"
                               value="">Update</button>
                           </div>
+
                         </div>
                       </div>
                     </form>
+
                   </div>
                 </div>
               </div>
-
               <script>
                 var stars = [];
 
