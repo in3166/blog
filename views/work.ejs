@@ -146,7 +146,7 @@
           <colgroup>
             <col class="col1" style="width:56px" />
             <col style="width:22%" />
-            <col style="width:\*" />
+            <col style="width:auto" />
             <col class="col1" style="width:17%" />
             <col style="width:5%" />
           </colgroup>
@@ -177,21 +177,21 @@
                       <%= guest[i].date %>
                     </td>
                     <!-- <th><a href="/work/delete/<%= i+1 %>">삭제</a></th> -->
-                    <th><button id="guestDel" class="btn2" value="<%=guest[i].id %>" name="guestDel"><i
+                    <th><button class="btn2" value="<%=guest[i].id %>" name="guestDel"><i
                           class="fas fa-trash-alt"></i></button></th>
                     <!-- <a class="portfolio-link" data-toggle="modal" href="#guestDelModal" id="guestDel"
                     value="<%= i+1 %>">삭제</a></th> -->
                   </tr>
                   <% }; %>
           </tbody>
-          <input type="hidden" value="" id="guestIdHidden" />
+          <!-- <input type="hidden" value="" id="guestIdHidden" /> -->
         </table>
         <div ID="passDIV" style="DISPLAY: none; position: absolute">
-          <table cellpadding="5" cellspacing="0" width="160" style="border: 1 solid #A6A6A6">
+          <table style="border: 1px solid #A6A6A6; border-spacing: 5px; padding:0; width:160px;">
             <tr>
-              <td width="40" align="right">PW</td>
-              <td align="middle" valign="middle"><input id="password1" name="passwd" type="password" size="10"
-                  maxlength="10" class="form1">
+              <td style="width: 40px; text-align: right;">PW</td>
+              <td style="text-align: right; vertical-align: middle;"><input id="password1" name="passwd" type="password"
+                  size="10" maxlength="10" class="form1">
                 <a href=""> </a> <a href=" javascript:closeSub();">x</a>
               </td>
             </tr>
@@ -268,14 +268,14 @@
                 </p>
 
                 <div class="table-responsive" id="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
-                    style="table-layout: fixed;">
+                  <table class="table table-bordered" id="dataTable"
+                    style="table-layout: fixed; width: 100%; border-spacing:0;">
                     <colgroup>
-                      <col class="col1" width="56px" />
-                      <col width="23%" />
-                      <col width="*" />
-                      <col class="col1" width="13%" />
-                      <col width="13%" />
+                      <col class="col1" style="width:57px" />
+                      <col style="width:22%" />
+                      <col style="width:auto" />
+                      <col class="col1" style="width:17%" />
+                      <col style="width:5%" />
                     </colgroup>
                     <thead>
                       <tr>
@@ -303,7 +303,7 @@
                               <%= guest[i].date %>
                             </td>
                             <!-- <th><a href="/work/delete/<%= i+1 %>">삭제</a></th> -->
-                            <th><button id="guestDel" class="btn2" value="<%= guest[i].id %>" name="guestDel"><i
+                            <th><button class="btn2" value="<%= guest[i].id %>" name="guestDel"><i
                                   class="fas fa-trash-alt"></i></button>
                             </th>
                             <!-- <a class="portfolio-link" data-toggle="modal" href="#guestDelModal" id="guestDel"

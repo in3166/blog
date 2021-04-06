@@ -92,6 +92,7 @@
               <% } %>
           </div>
         </div>
+
         <!-- Comments Form -->
         <div class="card my-4">
           <h5 class="card-header">Leave a Comment:</h5>
@@ -102,12 +103,13 @@
               </div>
               <input type="text" class="form-control col-3 d-inline" placeholder="Name" id="commentName">
               <input type="password" class="form-control col-3 d-inline" placeholder="Password" id="commentPw"
-                type="button" autocomplete="on">
+                autocomplete="on">
               <button class="btn btn-primary float-right commentSubmit" id="commentSubmit"
                 value="<%= boardnum%>/<%= postnum%>">Submit</button>
             </div>
           </form>
         </div>
+
         <!-- Comment with nested comments -->
         <!-- <div class="media mb-4">
           <div class="media-body">
@@ -137,6 +139,7 @@
             </div>
           </div>
         </div> -->
+
         <div id="paging">
           <nav>
             <ul class="pager list-unstyled">
@@ -168,8 +171,8 @@
             </ul>
           </nav>
         </div>
-
       </div>
+
       <ul class="article-list__pagination article-list__pagination--inactive" id="article-list-pagination"></ul>
       <!-- Sidebar Widgets Column -->
       <div class="col-xl-4 pl-lg-5">
@@ -180,9 +183,9 @@
           <div class="card-body">
             <div class="">
               <ul class="list-unstyled mb-0">
-                <dl>
+                <li>
                   <div class="text-gray small">Language</div>
-                </dl>
+                </li>
                 <li class="list-item list-group-item-action active ml-2 mt-1"><a class="" href="/private/board/1/1"
                     id="1">
                     <h5>Javascript</h5>
@@ -192,17 +195,17 @@
                 <!-- <li class="list-item list-group-item-action active ml-2 mt-1"><a class="" href="" id="1">
                   <h5>Java</h5>
                 </a></li> -->
-                <dl>
+                <li>
                   <div class="text-gray small">Programming</div>
-                </dl>
+                </li>
                 <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/2/1" id="2">
                     <h5>Algorithm</h5>
                   </a>
                   <hr />
                 </li>
-                <dl>
+                <li>
                   <div class="text-gray small">Etc.</div>
-                </dl>
+                </li>
                 <li class="list-item list-group-item-action ml-2 mt-1"><a href="/private/board/3/1" id="3">
                     <h5>Photo</h5>
                   </a></li>
@@ -301,7 +304,6 @@
       <!-- /.row -->
     </div>
   </div>
-  </div>
   <!-- /.container -->
 
 
@@ -313,7 +315,6 @@
       </div>
       <div class="container">
         <form>
-
           <div class="row" id="row_style">
             <div class="col-md-10  offset-md-1">
               <div class="form-group">
@@ -358,32 +359,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Modal 6-->
-  <!-- <div class="portfolio-modal modal" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="close-modal" data-dismiss="modal">
-          <img src="/img/close-icon.svg" alt="Close modal" />
-        </div>
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-8">
-              <div class="modal-body">
-                <form id="postForm">
-                  <input type="text" id="title" name="title" placeholder="제목" required />
-                  <textarea id="content" name="content" placeholder="내용" required class="mr-md-3" rows="10"></textarea>
-                  <button class="btn btn-primary" id="postModalBtn" type="button">
-                    Post
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
 
   <!-- Footer-->
   <%- include('./includes/footer'); %>
