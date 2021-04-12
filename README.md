@@ -19,7 +19,10 @@
   - 자기 소개
   - Weather (기상청 API)
   - Contact Me (using https://github.com/dwyl/learn-to-send-email-via-google-script-html-no-server)
+
+
 <img src="https://github.com/in3166/blog/blob/master/img/blog1.JPG" width="70%" />
+<hr>
 <br>
 
 2. WORK
@@ -29,6 +32,7 @@
     - 글이 50개 이상 넘어갈 때 오래된 순으로 자동 삭제
     - 클라이언트 사이드 페이지네이션 구현
 <img src="https://github.com/in3166/blog/blob/master/img/blog2.png" width="70%" />
+<hr>
 <br>
 
 3. PRIVATE
@@ -38,4 +42,5 @@
   - Algorithm
   - Photo (무한 스크롤로 구현)
 <img src="https://github.com/in3166/blog/blob/master/img/blog3.JPG" width="70%" />
+<hr>
 <br>
