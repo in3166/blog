@@ -25,12 +25,16 @@
 2. WORK
   - My works
   - Guest
+    - 방명록 기능
+    - 글이 50개 이상 넘어갈 때 오래된 순으로 자동 삭제
+    - 클라이언트 사이드 페이지네이션 구현
 <img src="https://github.com/in3166/blog/blob/master/img/blog2.png" width="70%" />
 <br>
 
 3. PRIVATE
 - 게시판
   - Javascript
+    - 서버 사이드 페이지네이션 구현
   - Algorithm
   - Photo (무한 스크롤로 구현)
 <img src="https://github.com/in3166/blog/blob/master/img/blog3.JPG" width="70%" />
