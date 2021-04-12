@@ -42,3 +42,7 @@ select @ROWNUM := @ROWNUM + 1 AS ROWNUM, T.* from board3 T, (SELECT @ROWNUM := 0
 - 이름, 내용, 날짜는 추가 가능
 - 삭제, 수정 시 value에 ID 추가를 어떻게 할 것인지 -> INSERT 후 SELECT로 ID 받아와서 JS에서 APPEND?
 
+<br><br>
+# 개선할 사항
+- 코드 중복 -> Module 패턴 적용 (class.?)
+- 
