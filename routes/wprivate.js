@@ -185,7 +185,7 @@ router.use("/board/:bn/:pn", function (req, res, next) {
     let endPage = startPage + countPage - 1;
     console.log("startPage: " + startPage);
     console.log("endPage: " + totalPage);
-    //  여기서 마지막 페이지를 보정해줍니다.
+    //  여기서 마지막 페이지를 보정
     if (endPage > totalPage) {
       endPage = totalPage;
     }

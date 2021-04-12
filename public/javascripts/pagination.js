@@ -106,6 +106,7 @@ function pagination(a) {
 
         chkDisabled(temp);
     });
+
     //last 버튼 클릭
     jQuery('.last').click(function (e) {
         $tr.hide(); //요소 사라짐
